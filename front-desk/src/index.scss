@@ -1,0 +1,27 @@
+html {
+  font-family: 'OptimaLTStd','Arial',"Microsoft JhengHei";
+  font-size: 90%;
+  body {
+    overflow-x: hidden;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+}
+
+// 根容器
+#root {
+  transition: transform .3s ease;
+  // 移动端菜单显示触发
+  &.mobile-active {
+    height: 100%;
+    transform: translateX(250px);
+  }
+}
+
+// 重写 antd
+.ant-select-dropdown {
+  border-radius: 0 !important;
+  .ant-select-dropdown-menu-item {
+    border-radius: 0 !important;
+  }
+}
