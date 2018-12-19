@@ -1,10 +1,14 @@
 html {
   font-family: 'OptimaLTStd','Arial',"Microsoft JhengHei";
   font-size: 90%;
+  overflow: hidden;
   body {
     overflow-x: hidden;
     font-size: 1rem;
     background-color: #fff;
+    &.mobile-active {
+      overflow: hidden;
+    }
   }
 }
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 
-import LayoutMaster from '../page/layout/master';
+import LayoutMaster from '../page/_layout/master';
 import home from '../page/home';
 
 export default connect(

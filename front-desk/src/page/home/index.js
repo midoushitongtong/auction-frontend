@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import './index.scss';
-import Header from '../../component/header';
+import Header from '../../component/_layout/header';
+import HomeCarousel from '../../component/home/carousel';
 
 export default connect(
   // mapStateToProps
@@ -16,6 +17,12 @@ export default connect(
       return (
         <section className="home-container">
           <Header/>
+          <section className="home-wrapper-container">
+            <section className="home-wrapper-inner-container">
+              {/* 轮播图 */}
+              <HomeCarousel/>
+            </section>
+          </section>
         </section>
       );
     }

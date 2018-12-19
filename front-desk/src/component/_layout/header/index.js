@@ -12,7 +12,7 @@ export default connect(
   {}
 )(
   Form.create()(
-    class Header extends React.Component {
+    class LayoutHeader extends React.Component {
       state = {
         headerNavMode: 'horizontal',
         headerNavSelectKeys: '1',
@@ -54,7 +54,8 @@ export default connect(
               headerNavMode: 'horizontal'
             });
             // 移除移动端样式
-            this.toggleHeaderNavContainer(false);
+            this.toggleMobileHeaderNavContainer(false);
+            this.toggleMobileSearchContainer(false);
           } else {
             // 客户端的可视区域小于 768 手机端
             this.setState({
@@ -105,13 +106,16 @@ export default connect(
        * 隐藏 / 显示顶部菜单事件
        *
        */
-      toggleHeaderNavContainer = (isShow) => {
+      toggleMobileHeaderNavContainer = (isShow) => {
+        const bodyElem = document.querySelector('body');
         const rootElem = document.querySelector('#root');
         const headerContainerElem = this.refs['headerContainerElem'];
         if (isShow) {
+          bodyElem.classList.add('mobile-active');
           rootElem.classList.add('mobile-active');
           headerContainerElem.classList.add('mobile-active');
         } else {
+          bodyElem.classList.remove('mobile-active');
           rootElem.classList.remove('mobile-active');
           headerContainerElem.classList.remove('mobile-active');
         }
@@ -121,7 +125,7 @@ export default connect(
        * 隐藏 / 显示搜索框事件
        *
        */
-      toggleSearchContainer = (isShow) => {
+      toggleMobileSearchContainer = (isShow) => {
         const operationContainerElem = this.refs['operationContainerElem'];
         if (isShow) {
           operationContainerElem.classList.add('mobile-active');
@@ -137,15 +141,22 @@ export default connect(
 
         }
         return (
-          <section className="header-container" ref="headerContainerElem">
+          <section className="layout-header-container" ref="headerContainerElem">
+            <section className="header-action-container">
+              <section className="header-action-inner-container">
+                <section className="hello">
+                  Hi, 欢迎来到新创文化艺术品
+                </section>
+                <section className="action-tooltip">
+                  <span>登陆</span>
+                  <span>注册</span>
+                </section>
+              </section>
+            </section>
             <section className="header-top-container">
               <section className="header-top-inner-container">
                 <img src="http://www.cguardian.com.hk/images/logo.png" className="logo" alt="logo"/>
                 <section className="operation-container" ref="operationContainerElem">
-                  <section className="account-tooltip">
-                    <span>登陆</span>
-                    <span>注册</span>
-                  </section>
                   <section className="search-container">
                     <Form onSubmit={this.handleSearchSubmit}>
                       <Form.Item>
@@ -171,15 +182,15 @@ export default connect(
                     </Form>
                   </section>
                   {/* 手机端搜索框画布容器 */}
-                  <section className="mobile-search-container-mask" onClick={() => this.toggleSearchContainer(false)}/>
+                  <section className="mobile-search-container-mask" onClick={() => this.toggleMobileSearchContainer(false)}/>
                 </section>
                 {/* 手机端操作容器 */}
                 <section className="mobile-header-top-action-container">
                   <span className="show-header-nav-container">
-                    <Icon type="menu" onClick={() => this.toggleHeaderNavContainer(true)}/>
+                    <Icon type="menu" onClick={() => this.toggleMobileHeaderNavContainer(true)}/>
                   </span>
                   <span className="show-search-container">
-                    <Icon type="search" onClick={() => this.toggleSearchContainer(true)}/>
+                    <Icon type="search" onClick={() => this.toggleMobileSearchContainer(true)}/>
                   </span>
                 </section>
               </section>
@@ -219,7 +230,7 @@ export default connect(
               </section>
               {/* 手机端菜单画布容器 */}
               <section className="mobile-header-nav-container-mask"
-                       onClick={() => this.toggleHeaderNavContainer(false)}/>
+                       onClick={() => this.toggleMobileHeaderNavContainer(false)}/>
             </section>
           </section>
         );
