@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.6.1",
     "antd": "^3.11.2",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",

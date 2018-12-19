@@ -1,0 +1,105 @@
+.layout-footer-container {
+  margin-top: 3rem;
+  border-top: 1px solid #ccc;
+  // 底部上半部分
+  .footer-top-container {
+    display: flex;
+    justify-content: center;
+    .footer-top-inner-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      padding: 3rem 2rem;
+      .action-left-container {
+        display: flex;
+        .action-item-group {
+          margin-right: 100px;
+          &:last-child {
+            margin-right: 0;
+          }
+          &.contact-action-item-group {
+            ul {
+              li:hover {
+                color: inherit;
+                cursor: auto;
+              }
+            }
+          }
+          p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+          }
+          ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            li {
+              line-height: 2rem;
+              &:hover {
+                color: #000;
+                cursor: pointer;
+              }
+              .fa {
+                min-width: 1.5rem;
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+      }
+      .action-right-container {
+        padding-left: 100px;
+        border-left: 1px solid #ccc;
+        p {
+          margin-bottom: 1rem;
+          font-size: 1.1rem;
+          font-weight: bold;
+        }
+        img {
+          width: 115px;
+          height: 115px;
+        }
+      }
+    }
+  }
+  // 底部下半部分
+  .footer-bottom-container {
+    display: flex;
+    justify-content: center;
+    background-color: #3d3d3d;
+    .footer-bottom-inner-container {
+      width: 100%;
+      max-width: 1200px;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      p {
+        margin: .5rem 0;
+        padding: 0;
+        text-align: center;
+        color: #b1b1b1;
+      }
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .layout-footer-container {
+    .footer-top-container {
+      .footer-top-inner-container {
+        .action-left-container {
+          width: 100%;
+          .action-item-group {
+            flex: 1;
+            margin-right: 0;
+          }
+        }
+        .action-right-container {
+          display: none;
+        }
+      }
+    }
+  }
+}

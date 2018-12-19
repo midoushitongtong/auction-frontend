@@ -7,6 +7,8 @@ import Router from "./router";
 import 'normalize.css';
 // index.css
 import './index.scss';
+// font-awesome
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 ReactDOM.render(
   <Provider store={store}>

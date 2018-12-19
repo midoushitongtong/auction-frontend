@@ -12,6 +12,15 @@ html {
   }
 }
 
+// 移动端适配
+@media (max-width: 767px) {
+  html {
+    body {
+      font-size: .8rem;
+    }
+  }
+}
+
 // 根容器
 #root {
   transition: transform .3s ease;

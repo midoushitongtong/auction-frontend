@@ -136,16 +136,12 @@ export default connect(
 
       render() {
         const { props, state } = this;
-        const clientWidth = document.body.clientWidth;
-        if (clientWidth) {
-
-        }
         return (
           <section className="layout-header-container" ref="headerContainerElem">
             <section className="header-action-container">
               <section className="header-action-inner-container">
                 <section className="hello">
-                  Hi, 欢迎来到新创文化艺术品
+                  欢迎来到 新创文化艺术品
                 </section>
                 <section className="action-tooltip">
                   <span>登陆</span>
