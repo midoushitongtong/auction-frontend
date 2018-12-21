@@ -141,6 +141,7 @@
 // 移动端适配
 @media (max-width: 767px) {
   .layout-header-container {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     // 激活
     &.mobile-active {
       .header-nav-container {
@@ -154,6 +155,9 @@
         width: 100%;
         border-top: 0;
         border-bottom: 0;
+        .header-nav-inner-container {
+          transform: translateX(0);
+        }
         .mobile-header-nav-container-mask {
           z-index: 102;
           position: fixed;
@@ -176,12 +180,13 @@
     // 顶部上半部分
     .header-top-container {
       .header-top-inner-container {
+        width: 100%;
         height: 100px;
         .logo {
           left: 50%;
-          top: 55%;
+          top: 50%;
           transform: translateX(-50%) translateY(-50%);
-          max-width: 75px;
+          max-width: 69px;
         }
         .operation-container {
           z-index: 101;
@@ -268,12 +273,9 @@
         left: 0;
         width: 250px;
         transform: translateX(-250px);
-        transition: transform .5s ease;
+        transition: transform .3s ease;
         .ant-menu-inline {
           height: 100%;
-          .ant-menu-item {
-            margin-top: 0;
-          }
         }
       }
     }

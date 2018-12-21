@@ -52,6 +52,8 @@
         }
       }
       .action-right-container {
+        align-self: flex-start;
+        height: 100%;
         padding-left: 100px;
         border-left: 1px solid #ccc;
         p {

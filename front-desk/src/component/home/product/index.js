@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'antd';
+import LazyLoad from 'react-lazyload';
+import { CSSTransition } from 'react-transition-group';
 import './index.scss';
 
 export default connect(
@@ -50,7 +52,8 @@ export default connect(
           name: '赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         }
-      ]
+      ],
+      showBox: true
     };
 
     render() {
@@ -60,17 +63,32 @@ export default connect(
           <h5 className="title">
             <span>热门收藏品</span>
           </h5>
-          <Row className="product-list-container">
+          <Row className="product-list-container" type="flex">
             {state.productList.map((productListItem, index) => (
-              <Col className="col" key={index} span={12} lg={6} md={8} sm={12}>
-                <Link to="/qqq" className="product-list-item">
+              <Col
+                className="col"
+                key={index}
+                span={12}
+                lg={6}
+                md={8}
+                sm={12}
+              >
+                <Link to="/home" className="product-list-item">
+                  {/* 商品的图片 */}
                   <section className="product-image">
-                    <img
-                      src={productListItem.imagePath}
-                      alt={productListItem.name}
-                    />
+                    {/* 图片懒加载 */}
+                    <LazyLoad offset={20} height={200}>
+                      <CSSTransition
+                        in={true}
+                        classNames="image-fade"
+                        appear
+                      >
+                        <img src={productListItem.imagePath} alt={productListItem.name}/>
+                      </CSSTransition>
+                    </LazyLoad>
                   </section>
-                  <section className="product-detail">
+                  {/* 产品的描述 */}
+                  <section className="product-description">
                     <p className="product-name">{productListItem.name}</p>
                     <p className="product-expect-price">
                       <span>估价: </span>

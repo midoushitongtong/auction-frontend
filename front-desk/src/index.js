@@ -5,10 +5,12 @@ import store from './store';
 import Router from "./router";
 // normal
 import 'normalize.css';
+// nprogress
+import 'nprogress/nprogress.css';
+// // font-awesome
+// import '@fortawesome/fontawesome-free/css/all.min.css';
 // index.css
 import './index.scss';
-// font-awesome
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 ReactDOM.render(
   <Provider store={store}>

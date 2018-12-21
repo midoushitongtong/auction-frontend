@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Form, Input, Select, Menu, Icon } from 'antd';
+import { Link, withRouter } from 'react-router-dom';
+import NProgress from 'nprogress';
 import './index.scss';
 
 export default connect(
@@ -11,26 +13,19 @@ export default connect(
   // mapDispatchToProps
   {}
 )(
-  Form.create()(
+  withRouter(Form.create()(
     class LayoutHeader extends React.Component {
       state = {
         headerNavMode: 'horizontal',
-        headerNavSelectKeys: '1',
+        headerNavSelectKeys: null,
         headerNavList: [
-          { key: '1', name: '首页', path: '/' },
+          { key: '1', name: '首页', path: '/home' },
+          { key: '3', name: '收藏品查询', path: '/collection' },
           {
-            key: '2', name: '拍卖', path: '/',
+            key: '4', name: '拍卖指南',
             children: [
-              { key: '2-1', name: '拍卖预告', path: '/' },
-              { key: '2-2', name: '拍卖结果', path: '/' }
-            ]
-          },
-          { key: '3', name: '拍品查询', path: '/' },
-          {
-            key: '4', name: '拍卖指南', path: '/',
-            children: [
-              { key: '4-1', name: '卖家指南', path: '/' },
-              { key: '4-2', name: '买家指南', path: '/' }
+              { key: '4-1', name: '卖家指南', path: '/home' },
+              { key: '4-2', name: '买家指南', path: '/home' }
             ]
           }
         ]
@@ -38,6 +33,7 @@ export default connect(
 
       componentDidMount = () => {
         this.watchWindowReSize();
+        this.watchUrl();
       };
 
       /**
@@ -76,6 +72,40 @@ export default connect(
       }
 
       /**
+       * 监听 url 改变当前状态key
+       *
+       */
+      watchUrl = () => {
+        const { state, props } = this;
+        // 顶部加载动画
+        NProgress.start();
+
+        // 更新菜单激活样式 =====
+        // 当前 url 的路径匹配的菜单
+        let headerNavItem = null;
+        // 当前 url 的路径
+        const currentPathName = props.location.pathname.split('/')[1];
+        // 遍历所有菜单, 获取与当前 url 的路径匹配的菜单
+        props.location && state.headerNavList.forEach(item => {
+          if (headerNavItem) return false;
+          // 无二级菜单, 匹配一级菜单
+          if (!item.children) {
+            const navPathName = item.path.split('/')[1];
+            if (navPathName === currentPathName) {
+              headerNavItem = item;
+            }
+          }
+        });
+        // 更新菜单的 key
+        this.setState({
+          headerNavSelectKeys: headerNavItem.key,
+        });
+
+        // 顶部加载动画
+        NProgress.done();
+      };
+
+      /**
        * 搜索表单提交事件
        *
        * @param e
@@ -96,7 +126,13 @@ export default connect(
        * @param e
        */
       handleHeaderNavClick = (e) => {
-        console.log('click ', e);
+        const { state } = this;
+        // 如果是手机端点击菜单 收起菜单
+        if (state.headerNavMode === 'inline') {
+          this.toggleMobileHeaderNavContainer(false);
+        }
+
+        // 更新菜单的 key
         this.setState({
           headerNavSelectKeys: e.key,
         });
@@ -199,28 +235,37 @@ export default connect(
                   selectedKeys={[state.headerNavSelectKeys]}
                   mode={state.headerNavMode}
                 >
-                  {state.headerNavList.map(nav => (
-                    nav.children && nav.children.length > 0
+                  {/* 渲染一级菜单 */}
+                  {state.headerNavList.map(item => (
+                    item.children && item.children.length > 0
                       // 有二级菜单
                       ? (
                         <Menu.SubMenu
-                          key={nav.key}
+                          key={item.key}
                           title={
                             <span>
-                              {nav.name}
+                              {item.name}
                               <Icon type="down"/>
                             </span>
                           }
                         >
-                          {/* 二级菜单 */}
-                          {nav.children.map(navChildren => (
-                            <Menu.Item key={navChildren.key}>{navChildren.name}</Menu.Item>
+                          {/* 渲染二级菜单 */}
+                          {item.children.map(itemChild => (
+                            <Menu.Item key={itemChild.key}>
+                              <Link to={itemChild.path}>
+                                {itemChild.name}
+                              </Link>
+                            </Menu.Item>
                           ))}
                         </Menu.SubMenu>
                       )
                       // 无二级菜单
                       : (
-                        <Menu.Item key={nav.key}>{nav.name}</Menu.Item>
+                        <Menu.Item key={item.key}>
+                          <Link to={item.path}>
+                            {item.name}
+                          </Link>
+                        </Menu.Item>
                       )
                   ))}
                 </Menu>
@@ -233,5 +278,6 @@ export default connect(
         );
       }
     }
+    )
   )
 );

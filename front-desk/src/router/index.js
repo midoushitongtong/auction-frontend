@@ -3,7 +3,8 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 
 import LayoutMaster from '../page/_layout/master';
-import home from '../page/home';
+import Home from '../page/home';
+import Collection from '../page/collection';
 
 export default class Router extends React.Component {
   state = {
@@ -16,7 +17,12 @@ export default class Router extends React.Component {
           {
             // 首页
             path: '/home',
-            component: home
+            component: Home
+          },
+          {
+            // 收藏品查询页
+            path: '/collection',
+            component: Collection
           },
           {
             path: '',
