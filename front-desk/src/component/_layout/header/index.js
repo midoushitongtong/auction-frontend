@@ -47,7 +47,7 @@ export default connect(
       watchWindowReSize() {
         const handlerReSize = () => {
           // 获取客户端的可视区域
-          const clientWidth = document.body.clientWidth;
+          const clientWidth = document.body.offsetWidth;
           if (clientWidth >= 768) {
             // 客户端的可视区域大于 768 电脑端
             this.setState({
@@ -178,7 +178,8 @@ export default connect(
                     </Form>
                   </section>
                   {/* 手机端搜索框画布容器 */}
-                  <section className="mobile-search-container-mask" onClick={() => this.toggleMobileSearchContainer(false)}/>
+                  <section className="mobile-search-container-mask"
+                           onClick={() => this.toggleMobileSearchContainer(false)}/>
                 </section>
                 {/* 手机端操作容器 */}
                 <section className="mobile-header-top-action-container">

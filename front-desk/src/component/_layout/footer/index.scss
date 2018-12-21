@@ -1,6 +1,6 @@
 .layout-footer-container {
   margin-top: 3rem;
-  border-top: 1px solid #ccc;
+  box-shadow: 0 0 3px rgba(0, 0, 0, .5);
   // 底部上半部分
   .footer-top-container {
     display: flex;
@@ -8,6 +8,7 @@
     .footer-top-inner-container {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       width: 100%;
       max-width: 1200px;
       padding: 3rem 2rem;
@@ -41,8 +42,9 @@
                 color: #000;
                 cursor: pointer;
               }
-              .fa {
+              .anticon {
                 min-width: 1.5rem;
+                text-align: left;
                 font-size: 1rem;
               }
             }
@@ -72,8 +74,8 @@
     .footer-bottom-inner-container {
       width: 100%;
       max-width: 1200px;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      padding-top: 5rem;
+      padding-bottom: 5rem;
       p {
         margin: .5rem 0;
         padding: 0;
