@@ -72,7 +72,7 @@ export default connect(
       }
 
       /**
-       * 监听 url 改变当前状态key
+       * 监听 url 改变当前状态 key
        *
        */
       watchUrl = () => {
@@ -81,10 +81,10 @@ export default connect(
         NProgress.start();
 
         // 更新菜单激活样式 =====
-        // 当前 url 的路径匹配的菜单
-        let headerNavItem = null;
         // 当前 url 的路径
         const currentPathName = props.location.pathname.split('/')[1];
+        // 当前 url 的路径匹配的菜单
+        let headerNavItem = null;
         // 遍历所有菜单, 获取与当前 url 的路径匹配的菜单
         props.location && state.headerNavList.forEach(item => {
           if (headerNavItem) return false;

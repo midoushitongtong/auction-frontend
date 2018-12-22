@@ -1,0 +1,13 @@
+.collection-operation-container {
+  .update-form-item {
+    .avatar-uploader {
+      .ant-upload {
+        width: 128px;
+        height: 128px;
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}

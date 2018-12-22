@@ -1,0 +1,16 @@
+.layout-master-system-container {
+  width: 100%;
+  .main-container {
+    min-height: 100vh;
+    background: #f0f2f5;
+    .content-container {
+      & > section:last-child {
+        padding: 24px;
+        & > section:first-child {
+          padding: 24px;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}

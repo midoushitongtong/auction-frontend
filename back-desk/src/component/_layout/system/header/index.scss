@@ -1,0 +1,43 @@
+.layout-header-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 112px;
+  background: #fff;
+  box-shadow: 0 5px 6px rgba(0, 21, 31, 0.1);
+  .nav-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0;
+    height: 65px;
+    list-style-type: none;
+    box-shadow: 0 1px 3px rgba(0, 21, 31, .1);
+    .nav-item {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      transition: background-color .3s;
+      &:hover {
+        background-color: rgba(0, 0, 0, .025);
+        cursor: pointer;
+      }
+    }
+    .current-sign-in-user {
+      span {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+    }
+  }
+  .ant-breadcrumb {
+    display: flex;
+    align-items: center;
+    height: 47px;
+    padding-left: 32px;
+  }
+}

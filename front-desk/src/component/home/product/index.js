@@ -24,7 +24,7 @@ export default connect(
         },
         {
           imagePath: 'https://assets.catawiki.nl/assets/2016/2/27/b/f/1/bf1e09a6-dd99-11e5-8ff1-3c3bc58eadde.jpg',
-          name: '赵春翔 ',
+          name: '赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         },
         {
@@ -82,6 +82,7 @@ export default connect(
                         in={true}
                         classNames="image-fade"
                         appear
+                        timeout={1000}
                       >
                         <img src={productListItem.imagePath} alt={productListItem.name}/>
                       </CSSTransition>

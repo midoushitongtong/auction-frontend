@@ -1,28 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import Router from './router';
+import { asyncUpdateUserInfo } from './store/account';
+import './App.scss';
+import 'nprogress/nprogress.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+export default connect(
+  // mapStateToProps
+  state => {
+    return {};
+  },
+  // mapDispatchToProps
+  {
+    asyncUpdateUserInfo
   }
-}
+)(
+  class App extends Component {
+    state = {
+      isRender: false
+    };
 
-export default App;
+    componentDidMount = async () => {
+      // const { props } = this;
+      // 更新当前用户登陆状态
+      // await props.asyncUpdateUserInfo();
+      this.setState({
+        isRender: true
+      });
+    };
+
+    render() {
+      const { state } = this;
+      if (state.isRender) {
+        return (
+          <main className='app-container'>
+            <Router/>
+          </main>
+        );
+      } else {
+        return <section>加载中!</section>;
+      }
+    }
+  }
+);

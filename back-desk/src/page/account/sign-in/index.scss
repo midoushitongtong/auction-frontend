@@ -1,0 +1,39 @@
+.account-sign-in-container {
+  height: 100vh;
+  background-image: url(../../../assets/account-sign-in-bg.svg);
+  background-repeat: no-repeat;
+  background-position: center 110px;
+  background-size: 100%;
+  background-color: #f0f2f5;
+  padding-top: 15vh;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  .header-container {
+    max-width: 368px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    text-align: center;
+    span {
+      font-size: 33px;
+      font-weight: 600;
+      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+      color: rgba(0, 0, 0, .85);
+    }
+  }
+  .sign-in-form-container {
+    max-width: 368px;
+    margin-left: auto;
+    margin-right: auto;
+    .ant-form-item {
+      height: 75px;
+      margin-bottom: 0 !important;
+      .anticon {
+        color: rgba(0, 0, 0, .25);
+      }
+      input {
+        height: 40px;
+      }
+    }
+  }
+}
