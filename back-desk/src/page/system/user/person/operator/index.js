@@ -64,6 +64,13 @@ export default connect(
         const { state, props } = this;
         props.form.validateFields(async (error, valueList) => {
           if (!error) {
+            // 封装请求数据
+            const requestData = {
+              gender: valueList.gender,
+              username: valueList.username
+            };
+            console.log(requestData);
+
             // 保存数据
             if (state.actionType === 'update') {
               // 修改操作
@@ -93,7 +100,6 @@ export default connect(
             md: { span: 10 }
           }
         };
-
         const tailFormItemLayout = {
           wrapperCol: {
             xs: { span: 24, offset: 0 },
@@ -104,38 +110,42 @@ export default connect(
 
         return (
           <section className="person-operation-container">
-            <Form onSubmit={this.handleSubmit}>
-              <Form.Item {...baseFormItemLayout} label="用户名">
-                {props.form.getFieldDecorator('username', {
-                  initialValue: state.formInitialValue.username,
-                  rules: [
-                    { required: true, message: '请输入用户名' },
-                    { min: 2, max: 20, message: '用户名由2~20个字符组成！' }
-                  ]
-                })(
-                  <Input type="text" placeholder="请输入用户名"/>
-                )}
-              </Form.Item>
+            <section className="operation-container">
+              <Form onSubmit={this.handleSubmit}>
+                {/* 用户名 */}
+                <Form.Item {...baseFormItemLayout} label="用户名">
+                  {props.form.getFieldDecorator('username', {
+                    initialValue: state.formInitialValue.username,
+                    rules: [
+                      { required: true, message: '请输入用户名' },
+                      { min: 2, max: 20, message: '用户名由2~20个字符组成！' }
+                    ]
+                  })(
+                    <Input type="text" placeholder="请输入用户名"/>
+                  )}
+                </Form.Item>
 
-              <Form.Item {...baseFormItemLayout} label="性别">
-                {props.form.getFieldDecorator('gender', {
-                  initialValue: state.formInitialValue.gender,
-                  rules: [
-                    { required: true, message: '请选择性别！' },
-                  ]
-                })(
-                  <Radio.Group>
-                    <Radio value={1}>男</Radio>
-                    <Radio value={2}>女</Radio>
-                  </Radio.Group>
-                )}
-              </Form.Item>
+                {/* 性别 */}
+                <Form.Item {...baseFormItemLayout} label="性别">
+                  {props.form.getFieldDecorator('gender', {
+                    initialValue: state.formInitialValue.gender,
+                    rules: [
+                      { required: true, message: '请选择性别！' },
+                    ]
+                  })(
+                    <Radio.Group>
+                      <Radio value={1}>男</Radio>
+                      <Radio value={2}>女</Radio>
+                    </Radio.Group>
+                  )}
+                </Form.Item>
 
-              {/* 提交 */}
-              <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">保存</Button>
-              </Form.Item>
-            </Form>
+                {/* 提交 */}
+                <Form.Item {...tailFormItemLayout}>
+                  <Button type="primary" htmlType="submit">保存</Button>
+                </Form.Item>
+              </Form>
+            </section>
           </section>
         );
       }

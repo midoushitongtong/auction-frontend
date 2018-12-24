@@ -1,0 +1,23 @@
+.tinymce-container {
+  position: relative;
+
+  & >>> .mce-fullscreen {
+    z-index: 10000;
+  }
+
+  .fullscreen .editor-custom-btn-container {
+    z-index: 10000;
+    position: fixed;
+  }
+
+  .editor-custom-btn-container {
+    position: absolute;
+    right: 3px;
+    top: -2px;
+    /*z-index: 2005;*/
+    .editor-upload-btn {
+      display: inline-block;
+      height: 28px;
+    }
+  }
+}

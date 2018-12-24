@@ -93,7 +93,7 @@ export default withRouter(connect(
     render() {
       const { state, props } = this;
       return (
-        <section className="layout-sidebar-container">
+        <section className="layout-system-sidebar-container">
           <section className="logo-container">
             <NavLink to="/">新创文化艺术品</NavLink>
           </section>

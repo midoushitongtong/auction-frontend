@@ -1,4 +1,4 @@
-.layout-header-container {
+.layout-system-header-container {
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -9,7 +9,7 @@
     display: flex;
     justify-content: flex-end;
     margin: 0;
-    padding: 0;
+    padding: 0 9px 0 0;
     height: 65px;
     list-style-type: none;
     box-shadow: 0 1px 3px rgba(0, 21, 31, .1);

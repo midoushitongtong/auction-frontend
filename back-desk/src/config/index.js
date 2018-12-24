@@ -5,7 +5,10 @@ export default {
   API_ROOT: process.env.NODE_ENV === 'development'
     ? dev.API_ROOT
     : prod.API_ROOT,
-  HOME_CHAT_SOCKET_API_ROOT: process.env.NODE_ENV === 'development'
-    ? dev.HOME_CHAT_SOCKET_API_ROOT
-    : prod.HOME_CHAT_SOCKET_API_ROOT
+  TINYMCE_PLUGINS: process.env.NODE_ENV === 'development'
+    ? dev.TINYMCE_PLUGINS
+    : prod.TINYMCE_PLUGINS,
+  TINYMCE_TOOLBAR: process.env.NODE_ENV === 'development'
+    ? dev.TINYMCE_TOOLBAR
+    : prod.TINYMCE_TOOLBAR
 };

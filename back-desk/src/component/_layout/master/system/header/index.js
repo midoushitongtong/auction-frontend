@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import { Dropdown, Menu, Breadcrumb } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import NProgress from 'nprogress';
-import { clearAccountState } from "../../../../store/account/index";
-import api from '../../../../api/index';
+import { clearAccountState } from "../../../../../store/account/index";
+import api from '../../../../../api/index';
 import './index.scss';
 
 export default withRouter(connect(
@@ -70,7 +70,7 @@ export default withRouter(connect(
       // 跳转
       setTimeout(() => {
         NProgress.done();
-        props.history.push('/');
+        props.history.push('/account/signIn');
       }, 500);
     };
 
@@ -78,7 +78,7 @@ export default withRouter(connect(
       const { props, state } = this;
       props.location.pathname && this.refreshBreadcrumb();
       return (
-        <section className="layout-header-container">
+        <section className="layout-system-header-container">
 
           {/* 顶部操作栏 */}
           <section className="nav-container">
@@ -88,7 +88,7 @@ export default withRouter(connect(
                   <Menu.Item key="1" onClick={this.signOut}>退出登录</Menu.Item>
                 </Menu>
               )}>
-                <span>{props.userInfo.username}</span>
+                <span>{props.userInfo.username || 'admin'}</span>
               </Dropdown>
             </div>
           </section>

@@ -1,11 +1,15 @@
-.layout-sidebar-container {
+.layout-system-sidebar-container {
+  z-index: 1;
   position: fixed;
   top: 0;
+  right: 0;
   left: 0;
+  bottom: 0;
   width: 256px;
   min-height: 100vh;
   background-color: #001529;
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  overflow: hidden;
   .logo-container {
     display: flex;
     align-items: center;

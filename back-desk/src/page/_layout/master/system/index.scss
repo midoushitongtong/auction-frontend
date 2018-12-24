@@ -1,14 +1,54 @@
 .layout-master-system-container {
-  width: 100%;
   .main-container {
     min-height: 100vh;
     background: #f0f2f5;
     .content-container {
-      & > section:last-child {
+      width: 100%;
+      padding-left: 256px;
+      & > section:nth-child(2) {
         padding: 24px;
         & > section:first-child {
           padding: 24px;
           background-color: #fff;
+        }
+        // 列表顶部操作容器
+        .data-operation-container {
+          .search-container {
+            margin-bottom: 24px;
+            .search-field-container {
+              .ant-form-item {
+                display: flex;
+                .ant-form-item-label {
+                  width: auto;
+                  padding-right: 8px;
+                  line-height: 39.9999px;
+                }
+                .ant-form-item-control-wrapper {
+                  flex: 1;
+                }
+              }
+              .search-action-container {
+                line-height: 39.9999px;
+                button {
+                  margin-left: 8px;
+                }
+              }
+            }
+          }
+          .data-action-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 24px;
+          }
+        }
+        // 列表操作容器
+        .data-container {
+          .table-data-action-container {
+            a, span {
+              color: #1890ff;
+              cursor: pointer;
+            }
+          }
         }
       }
     }

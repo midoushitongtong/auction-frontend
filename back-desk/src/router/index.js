@@ -2,21 +2,37 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import Loadable from 'react-loadable';
 import ErrorNotFound from '../component/error/not-found';
+import Loading from '../component/loading';
 import LayoutMaster from '../page/_layout/master';
 import LayoutMasterAccount from '../page/_layout/master/account';
 import LayoutMasterSystem from '../page/_layout/master/system';
 import AccountSignIn from '../page/account/sign-in';
 import SystemHome from '../page/system/home';
 import SystemHomeWelcome from '../page/system/home/welcome';
-import SystemUser from '../page/system/user';
 import SystemUserPerson from '../page/system/user/person';
 import SystemUserPersonList from '../page/system/user/person/list';
 import SystemUserPersonOperator from '../page/system/user/person/operator';
-import SystemProduct from '../page/system/product';
 import SystemProductCollection from '../page/system/product/collection';
 import SystemProductCollectionList from '../page/system/product/collection/list';
 import SystemProductCollectionOperator from '../page/system/product/collection/operator';
+
+// 懒加载用户模块
+const SystemUser = Loadable({
+  loader: () => import('../page/system/user'),
+  loading: () => {
+    return <Loading/>
+  }
+});
+
+// 懒加载产品模块
+const SystemProduct = Loadable({
+  loader: () => import('../page/system/product'),
+  loading: () => {
+    return <Loading/>
+  }
+});
 
 export default connect(
   // mapStateToProps

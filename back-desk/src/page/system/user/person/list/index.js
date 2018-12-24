@@ -26,7 +26,7 @@ export default connect(
           { title: '最后修改日期', dataIndex: 'updatedAt' },
           {
             title: '操作', dataIndex: 'action', render: (text, record) => (
-              <div className="data-source-operation-container">
+              <div className="table-data-action-container">
                 <Link to={`/system/user/person/operator/${record.id}`}>编辑</Link>
                 <Divider type="vertical"/>
                 <span onClick={() => this.deleteData(record)}>删除</span>
@@ -188,10 +188,10 @@ export default connect(
       getOperationContainer = () => {
         const { props } = this;
         return (
-          <section className="operation-container">
+          <section className="data-operation-container">
             <section className="search-container">
               <Form onSubmit={this.handleSearch}>
-                <Row gutter={24} className="search-field-container">
+                <Row className="search-field-container">
                   <Col md={8}>
                     <Form.Item label="用户名称">
                       {props.form.getFieldDecorator('username', {

@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { renderRoutes, matchRoutes } from 'react-router-config';
+import { connect } from 'react-redux';
 import { updateUserInfo } from "../../../../store/account/index";
-import LayoutSystemSidebar from "../../../../component/_layout/sidebar/index";
-import LayoutSystemHeader from "../../../../component/_layout/system/header/index";
+import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar/index";
+import LayoutSystemHeader from "../../../../component/_layout/master/system/header/index";
 
 import './index.scss';
 
