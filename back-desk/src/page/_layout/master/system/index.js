@@ -19,7 +19,7 @@ export default connect(
     updateUserInfo
   }
 )(
-  class LayoutSystem extends React.Component {
+  class LayoutMasterSystem extends React.Component {
     state = {
       // 控制是否可以渲染
       isRender: false
@@ -47,7 +47,7 @@ export default connect(
         return (
           <section className="layout-master-system-container">
             <section className="main-container">
-              <LayoutSystemSidebar routeLocationPathName={props.history.location.pathname}/>
+              <LayoutSystemSidebar/>
               <section className="content-container">
                 <LayoutSystemHeader routeMatchList={matchRoutes(props.route.routes, props.location.pathname)}/>
                 {renderRoutes(props.route.routes)}

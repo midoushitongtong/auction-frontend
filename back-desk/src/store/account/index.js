@@ -1,33 +1,16 @@
 import api from '../../api';
 
-// action type
-const UPDATE_USER_INFO = 'updateUserInfo';
-const CLEAR_ACCOUNT_STATE = 'clearAccountState';
-
 // state
 const initState = {
   // 已登录用户信息
   userInfo: {}
 };
 
-// reducer
-export default (state = initState, action = {}) => {
-  switch (action.type) {
-    case UPDATE_USER_INFO:
-      return {
-        ...state,
-        ...action.data
-      };
-    case CLEAR_ACCOUNT_STATE:
-      return initState;
-    default:
-      return {
-        ...state
-      };
-  }
-}
+// action type
+const UPDATE_USER_INFO = 'updateUserInfo';
+const CLEAR_ACCOUNT_STATE = 'clearAccountState';
 
-// Action
+// action
 export const updateUserInfo = (userInfo) => {
   return {
     type: UPDATE_USER_INFO,
@@ -57,3 +40,20 @@ export const clearAccountState = () => {
     type: CLEAR_ACCOUNT_STATE
   };
 };
+
+// reducer
+export default (state = initState, action = {}) => {
+  switch (action.type) {
+    case UPDATE_USER_INFO:
+      return {
+        ...state,
+        ...action.data
+      };
+    case CLEAR_ACCOUNT_STATE:
+      return initState;
+    default:
+      return {
+        ...state
+      };
+  }
+}

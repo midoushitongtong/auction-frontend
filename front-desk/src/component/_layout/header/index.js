@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import NProgress from 'nprogress';
 import './index.scss';
 
-export default connect(
+export default withRouter(connect(
   // mapStateToProps
   state => {
     return {};
@@ -13,19 +13,18 @@ export default connect(
   // mapDispatchToProps
   {}
 )(
-  withRouter(Form.create()(
+  Form.create()(
     class LayoutHeader extends React.Component {
       state = {
         headerNavMode: 'horizontal',
-        headerNavSelectKeys: null,
         headerNavList: [
           { key: '1', name: '首页', path: '/home' },
-          { key: '3', name: '收藏品查询', path: '/collection' },
+          { key: '2', name: '收藏品查询', path: '/collection' },
           {
-            key: '4', name: '拍卖指南',
+            key: '3', name: '拍卖指南',
             children: [
-              { key: '4-1', name: '卖家指南', path: '/home' },
-              { key: '4-2', name: '买家指南', path: '/home' }
+              { key: '3-1', name: '卖家指南', path: '/home' },
+              { key: '3-2', name: '买家指南', path: '/home' }
             ]
           }
         ]
@@ -33,7 +32,6 @@ export default connect(
 
       componentDidMount = () => {
         this.watchWindowReSize();
-        this.watchUrl();
       };
 
       /**
@@ -72,10 +70,10 @@ export default connect(
       }
 
       /**
-       * 监听 url 改变当前状态 key
+       * 获取当前的 url 对应的菜单 key
        *
        */
-      watchUrl = () => {
+      getHeaderNavSelectKey = () => {
         const { state, props } = this;
         // 顶部加载动画
         NProgress.start();
@@ -83,26 +81,33 @@ export default connect(
         // 更新菜单激活样式 =====
         // 当前 url 的路径
         const currentPathName = props.location.pathname.split('/')[1];
+
         // 当前 url 的路径匹配的菜单
-        let headerNavItem = null;
+        let currentRouteNav = null;
         // 遍历所有菜单, 获取与当前 url 的路径匹配的菜单
-        props.location && state.headerNavList.forEach(item => {
-          if (headerNavItem) return false;
+        state.headerNavList.forEach(navItem => {
+          if (currentRouteNav) return false;
           // 无二级菜单, 匹配一级菜单
-          if (!item.children) {
-            const navPathName = item.path.split('/')[1];
-            if (navPathName === currentPathName) {
-              headerNavItem = item;
+          if (!navItem.children) {
+            const navItemPathName = navItem.path.split('/')[1];
+            if (navItemPathName === currentPathName) {
+              currentRouteNav = navItem;
             }
+          } else {
+            // 有二级菜单, 匹配二级菜单
+            navItem.children.forEach(navItemChildrenItem => {
+              if (currentRouteNav) return false;
+              const navItemChildrenItemPathName = navItemChildrenItem.path.split('/')[1];
+              if (navItemChildrenItemPathName === currentPathName) {
+                currentRouteNav = navItemChildrenItem;
+              }
+            });
           }
-        });
-        // 更新菜单的 key
-        this.setState({
-          headerNavSelectKeys: headerNavItem.key,
         });
 
         // 顶部加载动画
         NProgress.done();
+        return currentRouteNav != null ? currentRouteNav.key : '3';
       };
 
       /**
@@ -131,11 +136,6 @@ export default connect(
         if (state.headerNavMode === 'inline') {
           this.toggleMobileHeaderNavContainer(false);
         }
-
-        // 更新菜单的 key
-        this.setState({
-          headerNavSelectKeys: e.key,
-        });
       };
 
       /**
@@ -214,8 +214,10 @@ export default connect(
                     </Form>
                   </section>
                   {/* 手机端搜索框画布容器 */}
-                  <section className="mobile-search-container-mask"
-                           onClick={() => this.toggleMobileSearchContainer(false)}/>
+                  <section
+                    className="mobile-search-container-mask"
+                    onClick={() => this.toggleMobileSearchContainer(false)}
+                  />
                 </section>
                 {/* 手机端操作容器 */}
                 <section className="mobile-header-top-action-container">
@@ -232,7 +234,7 @@ export default connect(
               <section className="header-nav-inner-container">
                 <Menu
                   onClick={this.handleHeaderNavClick}
-                  selectedKeys={[state.headerNavSelectKeys]}
+                  selectedKeys={[this.getHeaderNavSelectKey()]}
                   mode={state.headerNavMode}
                 >
                   {/* 渲染一级菜单 */}
@@ -271,13 +273,14 @@ export default connect(
                 </Menu>
               </section>
               {/* 手机端菜单画布容器 */}
-              <section className="mobile-header-nav-container-mask"
-                       onClick={() => this.toggleMobileHeaderNavContainer(false)}/>
+              <section
+                className="mobile-header-nav-container-mask"
+                onClick={() => this.toggleMobileHeaderNavContainer(false)}
+              />
             </section>
           </section>
         );
       }
     }
-    )
   )
-);
+));

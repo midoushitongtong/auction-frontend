@@ -7,6 +7,7 @@
     "antd": "^3.11.5",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",
+    "babel-polyfill": "^6.26.0",
     "js-base64": "^2.5.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
@@ -41,5 +42,6 @@
     "react-app-rewire-scss": "^1.0.2",
     "react-app-rewired": "^1.6.2",
     "redux-devtools-extension": "^2.13.7"
-  }
+  },
+  "homepage": "/auction-frontend-back-desk"
 }

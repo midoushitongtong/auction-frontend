@@ -9,6 +9,22 @@ html {
     &.mobile-active {
       overflow: hidden;
     }
+
+    #root {
+      transition: transform .3s ease;
+      // 移动端菜单显示触发
+      &.mobile-active {
+        height: 100%;
+      }
+    }
+
+    // antd
+    .ant-select-dropdown {
+      border-radius: 0 !important;
+      .ant-select-dropdown-menu-item {
+        border-radius: 0 !important;
+      }
+    }
   }
 }
 
@@ -18,22 +34,5 @@ html {
     body {
       font-size: .8rem;
     }
-  }
-}
-
-// 根容器
-#root {
-  transition: transform .3s ease;
-  // 移动端菜单显示触发
-  &.mobile-active {
-    height: 100%;
-  }
-}
-
-// 重写 antd
-.ant-select-dropdown {
-  border-radius: 0 !important;
-  .ant-select-dropdown-menu-item {
-    border-radius: 0 !important;
   }
 }

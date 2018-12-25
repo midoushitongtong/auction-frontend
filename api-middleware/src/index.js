@@ -18,5 +18,5 @@ app
   .use(router.allowedMethods());
 
 // 启动服务器
-app.listen(3003);
-console.log('Server running on port 3003');
+app.listen(3004);
+console.log('Server running on port 3004');

@@ -14,11 +14,11 @@ export default connect(
   // mapDispatchToProps
   {}
 )(
-  class HomeCarousel extends React.Component {
+  class HomeProduct extends React.Component {
     state = {
       productList: [
         {
-          imagePath: 'http://www.cguardian.com.hk/upload/image/127/s/0001.jpg',
+          imagePath: 'https://assets.catawiki.nl/assets/2018/12/13/5/0/3/thumb5_503b1e53-5adb-4185-91de-793628be934b.jpg',
           name: '赵春翔赵春翔赵春翔赵春翔赵春翔赵春翔赵春翔赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         },
@@ -33,22 +33,32 @@ export default connect(
           expectPrice: 'RMB: 2000 - 3000'
         },
         {
-          imagePath: 'http://www.cguardian.com.hk/upload/image/127/s/0011.jpg',
+          imagePath: 'https://assets.catawiki.nl/assets/2018/12/17/a/8/5/thumb5_a8549d84-ae86-4ad8-ae59-251faf94c763.jpg',
           name: '赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         },
         {
-          imagePath: 'http://www.cguardian.com.hk/upload/image/127/s/0010.jpg',
+          imagePath: 'https://assets.catawiki.nl/assets/2017/9/5/a/e/2/thumb5_ae219cf8-451b-44d2-aa1f-b8c6919aca4c.jpg',
           name: '赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         },
         {
-          imagePath: require('../../../assets/images/product01.jpg'),
+          imagePath: 'https://assets.catawiki.nl/assets/2018/12/20/0/a/3/thumb5_0a3ab062-adca-436e-bb51-3aba93e45f0a.jpg',
           name: '赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         },
         {
-          imagePath: require('../../../assets/images/product02.jpg'),
+          imagePath: 'https://assets.catawiki.nl/assets/2018/12/12/e/3/9/thumb2_e39d7772-b828-4e13-b4b6-f9928386ca8b.jpg',
+          name: '赵春翔',
+          expectPrice: 'RMB: 2000 - 3000'
+        },
+        {
+          imagePath: 'https://assets.catawiki.nl/assets/2018/12/7/6/a/9/thumb5_6a9c1a1a-e1a9-45a5-829b-955a0206008c.jpg',
+          name: '赵春翔',
+          expectPrice: 'RMB: 2000 - 3000'
+        },
+        {
+          imagePath: 'https://assets.catawiki.nl/assets/2017/5/5/f/f/b/thumb2_ffb08d12-3186-11e7-97bc-30f90be54905.jpg',
           name: '赵春翔',
           expectPrice: 'RMB: 2000 - 3000'
         }

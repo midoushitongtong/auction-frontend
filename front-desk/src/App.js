@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Router from './router';
 import { asyncUpdateUserInfo } from './store/account';
@@ -14,7 +14,7 @@ export default connect(
     asyncUpdateUserInfo
   }
 )(
-  class App extends Component {
+  class App extends React.Component {
     state = {
       isRender: false
     };

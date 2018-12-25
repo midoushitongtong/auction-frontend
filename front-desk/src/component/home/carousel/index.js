@@ -18,10 +18,10 @@ export default connect(
     state = {
       carouselList: [
         {
-          imagePath: require('../../../assets/images/banner01.png')
+          imagePath: 'https://yyccyy-01.oss-cn-shenzhen.aliyuncs.com/collection/banner/banner01.png'
         },
         {
-          imagePath: require('../../../assets/images/banner02.png')
+          imagePath: 'https://yyccyy-01.oss-cn-shenzhen.aliyuncs.com/collection/banner/banner02.png'
         }
       ]
     };

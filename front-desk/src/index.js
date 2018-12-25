@@ -1,21 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import Promise from 'babel-polyfill';
 import store from './store';
-import Router from "./router";
-// normal
+// 全局 css
 import 'normalize.css';
-// nprogress
 import 'nprogress/nprogress.css';
-// // font-awesome
 // import '@fortawesome/fontawesome-free/css/all.min.css';
-// index.css
-import './index.scss';
+// 根组件
+import App from './App';
+// ie11 promise 兼容
+if (!window.Promise) {
+  window.Promise = Promise;
+}
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* 渲染路由组件 */}
-    <Router/>
+    <App/>
   </Provider>,
   document.getElementById('root')
 );

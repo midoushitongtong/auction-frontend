@@ -6,7 +6,7 @@ import { Dropdown, Menu, Breadcrumb } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import NProgress from 'nprogress';
 import { clearAccountState } from "../../../../../store/account/index";
-import api from '../../../../../api/index';
+// import api from '../../../../../api/index';
 import './index.scss';
 
 export default withRouter(connect(
@@ -64,7 +64,7 @@ export default withRouter(connect(
     signOut = async () => {
       const { props } = this;
       NProgress.start();
-      await api.account.signOut();
+      // await api.account.signOut();
       // 清空用户状态
       props.clearAccountState({});
       // 跳转

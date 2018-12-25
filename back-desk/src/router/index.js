@@ -157,7 +157,8 @@ export default connect(
     render() {
       const { state } = this;
       return (
-        <BrowserRouter basename='/'>
+        <BrowserRouter basename='/auction-frontend-back-desk'>
+          {/* 分发所有路由组件的入口 */}
           {renderRoutes(state.routeList)}
         </BrowserRouter>
       );

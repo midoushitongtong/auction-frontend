@@ -13,7 +13,7 @@ export default connect(
   {}
 )(
   Form.create()(
-    class SystemUserPersonList extends React.Component {
+    class SystemProductCollectionList extends React.Component {
       state = {
         columns: [
           { title: '收藏品名称', dataIndex: 'name' },

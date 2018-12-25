@@ -59,7 +59,7 @@ export default withRouter(connect(
      * 获取当前的 url 对应的菜单 key
      *
      */
-    getSelectKey = () => {
+    getSidebarMenuSelectKey = () => {
       NProgress.start();
       const { state, props } = this;
       let currentMenuPathName = '';
@@ -67,9 +67,9 @@ export default withRouter(connect(
       currentMenuPathName += currentMenuPathNameArr[2];
       currentMenuPathName += currentMenuPathNameArr[3];
 
-      let selectKey = null;
+      let currentRouteMenu = null;
       state.sideBarMenuList.forEach(menuItem => {
-        if (selectKey) {
+        if (currentRouteMenu) {
           // 已找到对应的菜单退出循环
           return false;
         }
@@ -79,7 +79,7 @@ export default withRouter(connect(
           menuPathName += menuPathNameArr[2];
           menuPathName += menuPathNameArr[3];
           if (currentMenuPathName === menuPathName) {
-            selectKey = menuItemChildItem;
+            currentRouteMenu = menuItemChildItem;
             // 已找到对应的菜单退出循环
             return false;
           }
@@ -87,7 +87,7 @@ export default withRouter(connect(
       });
 
       NProgress.done();
-      return selectKey != null ? selectKey.key : '1';
+      return currentRouteMenu != null ? currentRouteMenu.key : '1';
     };
 
     render() {
@@ -99,7 +99,7 @@ export default withRouter(connect(
           </section>
           <Menu
             defaultOpenKeys={['1', '2', '3']}
-            selectedKeys={[this.getSelectKey()]}
+            selectedKeys={[this.getSidebarMenuSelectKey()]}
             mode="inline"
             theme="dark"
           >
