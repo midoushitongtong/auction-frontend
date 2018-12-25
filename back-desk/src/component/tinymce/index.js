@@ -26,15 +26,11 @@ export default class Tinymce extends React.Component {
    * 文件上传成功回调
    *
    */
-  uploadImageSuccess = (result) => {
+  appendValue = (imgHTML) => {
     const { state } = this;
-    // 遍历上传成功的图片获取 img 标签
-    const imgHTML = result.map(item => {
-      return `<img className="tinymce-upload-image" src="${item.response.files.previewImage}">`;
-    });
     // 拼接 img 标签到富文本值得后方
     this.setState({
-      value: state.value += imgHTML.join('')
+      value: state.value += imgHTML
     });
   };
 
@@ -70,7 +66,7 @@ export default class Tinymce extends React.Component {
         />
         {/* 图片上传组件 */}
         <div className="editor-custom-btn-container">
-          <TinymceUploadImage className="editor-upload-btn" uploadImageSuccess={this.uploadImageSuccess}/>
+          <TinymceUploadImage className="editor-upload-btn" appendValue={this.appendValue}/>
         </div>
       </section>
     );

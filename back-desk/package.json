@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "@tinymce/tinymce-react": "^2.4.0",
-    "antd": "^3.11.2",
+    "antd": "^3.11.5",
     "axios": "^0.18.0",
     "babel-plugin-import": "^1.11.0",
+    "js-base64": "^2.5.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.6.2",

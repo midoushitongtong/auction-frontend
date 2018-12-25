@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal, Upload, Icon, message } from 'antd';
+import oss from '../../../util/oss';
 
 export default class TinymceUploadImage extends React.Component {
   static propTypes = {
-    uploadImageSuccess: PropTypes.func.isRequired
+    appendValue: PropTypes.func.isRequired
   };
 
   state = {
-    visible: false,
-    fileList: []
+    // 控制模态款是否显示
+    visibleUploadModel: false,
+    // 图片可上传的类型
+    imageUploadFileType: 'image/jpg,image/jpeg,image/png,image/bmp',
+    // 已上传成功的文件列表
+    successUploadFileList: []
   };
 
   /**
@@ -18,7 +23,7 @@ export default class TinymceUploadImage extends React.Component {
    */
   visibleUploadModel = () => {
     this.setState({
-      visible: true
+      visibleUploadModel: true
     });
   };
 
@@ -27,33 +32,53 @@ export default class TinymceUploadImage extends React.Component {
    *
    */
   uploadFileCheck = (file) => {
-    if (file.type !== 'image/jpeg') {
-      message.error('文件类型必须为 jpg 格式!');
+    const { state } = this;
+    const imageUploadFileTypeList = state.imageUploadFileType.split(',');
+    if (imageUploadFileTypeList.indexOf(file.type) < 0) {
+      message.error('文件类型必须为 ' + imageUploadFileTypeList + ' 格式!');
       return false;
     }
     if (file.size / 1024 / 1024 > 2) {
       message.error('文件大小不能超过 2MB!');
       return false;
     }
+    return true;
   };
 
   /**
    * 上传文件发送改变
    *
    */
-  uploadFileChange = (changeInfo) => {
-    this.setState({
-      fileList: changeInfo.fileList
-    });
-    switch (changeInfo.file.status) {
-      case 'uploading':
-        console.log('uploading...');
-        break;
-      case 'done':
-        console.log('done...');
-        break;
-      default:
+  uploadFileChange = async (changeInfo) => {
+    const { file } = changeInfo;
+
+    // 不是删除操作 上传图片
+    if (file.status !== 'removed') {
+      if (this.uploadFileCheck(file)) {
+        // 获取 sts oss token
+        const stsToken = await oss.selectOssSTSToken();
+
+        // 实例化 oss SDK
+        const client = new window.OSS({
+          region: stsToken.region,
+          bucket: stsToken.bucket,
+          accessKeyId: stsToken.accessKeyId,
+          accessKeySecret: stsToken.accessKeySecret,
+          stsToken: stsToken.securityToken,
+        });
+
+        // 将 file 对象, 上传到 oss
+        const result = await client.put('collection/description-image/' + file.uid, file);
+
+        // 保存 oss 结果集到已上传的文件列表
+        changeInfo.fileList[changeInfo.fileList.length - 1].ossResult = result;
+      }
     }
+
+    // 更新已上传的文件列表
+    this.setState({
+      successUploadFileList: changeInfo.fileList
+    });
   };
 
   /**
@@ -62,12 +87,16 @@ export default class TinymceUploadImage extends React.Component {
    */
   handleOk = () => {
     const { props, state } = this;
+    // 拼接已上传成功的 img 标签
+    const imageHTML = state.successUploadFileList.map(item => {
+      return `<img src="${item.ossResult.url}" class="tinymce-upload-image"/>`;
+    });
     // 回调上传图片成功
-    props.uploadImageSuccess(state.fileList.filter(item => item.status === 'done'));
+    props.appendValue(imageHTML.join(''));
     // 隐藏上传模态框, 清空已上传文件
     this.setState({
-      visible: false,
-      fileList: []
+      visibleUploadModel: false,
+      successUploadFileList: []
     });
   };
 
@@ -78,8 +107,8 @@ export default class TinymceUploadImage extends React.Component {
   handleCancel = () => {
     // 隐藏上传模态框, 清空已上传文件
     this.setState({
-      visible: false,
-      fileList: []
+      visibleUploadModel: false,
+      successUploadFileList: []
     });
   };
 
@@ -97,21 +126,19 @@ export default class TinymceUploadImage extends React.Component {
           title="上传图片"
           okText="保存"
           cancelText="取消"
-          visible={state.visible}
+          visible={state.visibleUploadModel}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
           maskClosable={false}
         >
           <Upload
-            action="https://httpbin.org/post"
-            className="avatar-uploader"
-            name="previewImage"
+            accept={state.imageUploadFileType}
             listType="picture-card"
-            fileList={state.fileList}
+            fileList={state.successUploadFileList}
             showUploadList={{
               showPreviewIcon: false
             }}
-            beforeUpload={this.uploadFileCheck}
+            beforeUpload={() => false}
             onChange={this.uploadFileChange}
           >
             <div>
