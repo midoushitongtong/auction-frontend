@@ -1,9 +1,15 @@
 ## 可用脚本
 
-- 安装工程所需依赖
+- 安装所需依赖包
 
   ```shell
   npm i
+  ```
+
+- 安装热部署工具
+
+  ```shell
+  npm i nodemon
   ```
 
 - 运行开发环境
@@ -12,7 +18,7 @@
   npm run start
   ```
 
-- 打包工程
+- 运行生产环境
 
   ```shell
   npm run build

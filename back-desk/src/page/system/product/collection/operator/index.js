@@ -270,6 +270,7 @@ export default connect(
                       <Form.Item {...baseFormItemLayout} label="收藏品描述信息" className="description-form-item">
                         {props.form.getFieldDecorator('description', {})(
                           <TinyMce
+                            id={new Date().getTime() + ''}
                             initialValue={state.formInitialValue.description || ''}
                             onEditorChange={value => this.handlerDescriptionChange(value)}
                           />
