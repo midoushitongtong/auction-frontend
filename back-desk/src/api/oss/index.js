@@ -7,7 +7,7 @@ import config from '../../config';
  */
 export default {
   // 查询 oss sts token
-  selectOssSTSToken(data) {
+  selectOssStsToken(data) {
     return ajax(
       'GET',
       `${config.API_OSS_ROOT}/oss/stsToken`,

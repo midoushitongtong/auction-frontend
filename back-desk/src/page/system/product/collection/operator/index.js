@@ -107,7 +107,7 @@ export default connect(
 
         if (this.uploadFileCheck(file)) {
           // 获取 sts oss token
-          const stsToken = await oss.selectOssSTSToken();
+          const stsToken = await oss.selectOssStsToken();
 
           // 实例化 oss SDK
           const client = new window.OSS({
