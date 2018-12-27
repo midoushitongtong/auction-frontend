@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderRoutes, matchRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
-import { updateUserInfo } from "../../../../store/account/index";
+import PropTypes from 'prop-types';
 import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar/index";
 import LayoutSystemHeader from "../../../../component/_layout/master/system/header/index";
 
@@ -11,15 +11,21 @@ export default connect(
   // mapStateToProps
   state => {
     return {
+      systemSidebarIsCollapse: state.systemStyle.systemSidebarIsCollapse,
       userInfo: state.account.userInfo
     };
   },
   // mapDispatchToProps
-  {
-    updateUserInfo
-  }
+  {}
 )(
   class LayoutMasterSystem extends React.Component {
+    static propTypes = {
+      // 当前登陆状态
+      userInfo: PropTypes.object.isRequired,
+      // 侧边栏是否折叠
+      systemSidebarIsCollapse: PropTypes.bool.isRequired
+    };
+
     state = {
       // 控制是否可以渲染
       isRender: false
@@ -45,7 +51,7 @@ export default connect(
       const { state, props } = this;
       if (state.isRender) {
         return (
-          <section className="layout-master-system-container">
+          <section className={`layout-master-system-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
             <section className="main-container">
               <LayoutSystemSidebar/>
               <section className="content-container">

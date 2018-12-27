@@ -1,6 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Menu, Icon } from 'antd';
 import NProgress from 'nprogress';
 import './index.scss';
@@ -8,12 +9,19 @@ import './index.scss';
 export default withRouter(connect(
   state => {
     // mapStateToProps
-    return {};
+    return {
+      systemSidebarIsCollapse: state.systemStyle.systemSidebarIsCollapse
+    };
   },
   // mapDispatchToProps
   {}
 )(
   class LayoutSystemSidebar extends React.Component {
+    static propTypes = {
+      // 侧边栏是否折叠
+      systemSidebarIsCollapse: PropTypes.bool.isRequired
+    };
+
     state = {
       sideBarMenuList: [
         {
@@ -93,15 +101,19 @@ export default withRouter(connect(
     render() {
       const { state, props } = this;
       return (
-        <section className="layout-system-sidebar-container">
+        <section
+          className={`layout-system-sidebar-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
           <section className="logo-container">
             <NavLink to="/">新创文化艺术品</NavLink>
           </section>
           <Menu
-            defaultOpenKeys={['1', '2', '3']}
+            // 折叠状态默认不展开菜单
+            defaultOpenKeys={props.systemSidebarIsCollapse ? [] : ['1', '2', '3']}
+            // 监听路由变化更新当前选中的菜单
             selectedKeys={[this.getSidebarMenuSelectKey()]}
             mode="inline"
             theme="dark"
+            inlineCollapsed={props.systemSidebarIsCollapse}
           >
             {state.sideBarMenuList.map(sideBarMenuListItem => {
               return (

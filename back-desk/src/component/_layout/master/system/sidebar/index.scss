@@ -1,15 +1,18 @@
 .layout-system-sidebar-container {
+  overflow: hidden;
   z-index: 1;
   position: fixed;
   top: 0;
-  right: 0;
   left: 0;
   bottom: 0;
-  width: 256px;
   min-height: 100vh;
   background-color: #001529;
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
-  overflow: hidden;
+  &.collapse {
+    .logo-container {
+      display: none;
+    }
+  }
   .logo-container {
     display: flex;
     align-items: center;
@@ -23,6 +26,16 @@
       font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
       font-weight: 600;
       color: #fff;
+    }
+  }
+  .ant-menu {
+    width: 256px;
+    transition: width .3s ease;
+    &.ant-menu-inline-collapsed {
+      width: 80px;
+      .logo-container {
+        display: none;
+      }
     }
   }
 }

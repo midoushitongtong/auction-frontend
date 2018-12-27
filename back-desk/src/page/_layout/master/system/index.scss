@@ -1,10 +1,18 @@
 .layout-master-system-container {
+  &.collapse {
+    .main-container {
+      .content-container {
+        padding-left: 80px;
+      }
+    }
+  }
   .main-container {
     min-height: 100vh;
     background: #f0f2f5;
     .content-container {
       width: 100%;
       padding-left: 256px;
+      transition: padding-left .3s ease;
       & > section:nth-child(2) {
         padding: 24px;
         & > section:first-child {
