@@ -29,7 +29,6 @@ export default (state = initState, action = {}) => {
   switch (action.type) {
     case TOGGLE_SYSTEM_SIDEBAR_IS_COLLAPSE:
       const systemSidebarIsCollapse = !state.systemSidebarIsCollapse;
-      console.log(systemSidebarIsCollapse);
       window.localStorage.setItem('systemSidebarIsCollapse', systemSidebarIsCollapse);
       return {
         ...state,
