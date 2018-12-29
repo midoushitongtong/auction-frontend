@@ -53,10 +53,14 @@ export default connect(
         return (
           <section className={`layout-master-system-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
             <section className="main-container">
+              {/* 侧边菜单栏 */}
               <LayoutSystemSidebar/>
               <section className="content-container">
+                {/* 操作栏 */}
                 <LayoutSystemHeader routeMatchList={matchRoutes(props.route.routes, props.location.pathname)}/>
-                {renderRoutes(props.route.routes)}
+                <section className="main-content-container">
+                  {renderRoutes(props.route.routes)}
+                </section>
               </section>
             </section>
           </section>

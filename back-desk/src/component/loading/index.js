@@ -12,6 +12,10 @@ export default class Loading extends React.Component {
   }
 
   render() {
-    return null;
+    return (
+      <section className="loading-container">
+        loading...
+      </section>
+    );
   }
 }
