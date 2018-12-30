@@ -23,6 +23,7 @@ export default withRouter(connect(
     };
 
     state = {
+      systemSidebarIsCollapse: false,
       sideBarMenuList: [
         {
           key: '1',
@@ -62,6 +63,29 @@ export default withRouter(connect(
         }
       ]
     };
+
+    componentDidMount = () => {
+      const { props } = this;
+      setTimeout(() => {
+        this.setState({
+          systemSidebarIsCollapse: props.systemSidebarIsCollapse
+        })
+      }, 1);
+    }
+    
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+      const {state } = this;
+      if (state.systemSidebarIsCollapse !== nextProps.systemSidebarIsCollapse) {
+        setTimeout(() => {
+          this.setState({
+            systemSidebarIsCollapse: nextProps.systemSidebarIsCollapse
+          })
+        }, 1);
+      }
+      return true;
+    }
+
 
     /**
      * 获取当前的 url 对应的菜单 key
@@ -108,12 +132,12 @@ export default withRouter(connect(
           </section>
           <Menu
             // 折叠状态默认不展开菜单
-            defaultOpenKeys={props.systemSidebarIsCollapse ? [] : ['1', '2', '3']}
+            defaultOpenKeys={props.systemSidebarIsCollapse ? ['1', '2', '3'] : ['1', '2', '3']}
             // 监听路由变化更新当前选中的菜单
             selectedKeys={[this.getSidebarMenuSelectKey()]}
             mode="inline"
             theme="dark"
-            inlineCollapsed={props.systemSidebarIsCollapse}
+            inlineCollapsed={state.systemSidebarIsCollapse}
           >
             {state.sideBarMenuList.map(sideBarMenuListItem => {
               return (
@@ -122,7 +146,7 @@ export default withRouter(connect(
                   key={sideBarMenuListItem.key}
                   title={
                     <span>
-                      <Icon type={sideBarMenuListItem.icon}/>
+                      <Icon type={sideBarMenuListItem.icon} />
                       <span>{sideBarMenuListItem.name}</span>
                     </span>
                   }
