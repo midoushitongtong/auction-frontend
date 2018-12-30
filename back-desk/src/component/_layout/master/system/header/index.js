@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Dropdown, Menu, Breadcrumb, Icon } from 'antd';
 import NProgress from 'nprogress';
-import QueueAnim from 'rc-queue-anim';
 import { toggleSystemSidebarIsCollapse } from "../../../../../store/system-style";
 import { clearAccountState } from "../../../../../store/account/index";
 import './index.scss';
@@ -34,45 +34,6 @@ export default withRouter(connect(
       clearAccountState: PropTypes.func.isRequired
     };
 
-    state = {
-      routeMatchList: [],
-      showBreadcrumb: true
-    };
-
-    componentDidMount = () => {
-      const { props } = this;
-      this.refreshBreadcrumb(props.routeMatchList);
-    };
-
-    shouldComponentUpdate = (nextProps, nextState) => {
-      // 防止重复刷新
-      if (this.props.location !== nextProps.location) {
-        // 刷新面包屑
-        this.refreshBreadcrumb(nextProps.routeMatchList);
-      }
-      return true;
-    };
-
-    /**
-     * 刷新面包屑导航
-     *
-     */
-    refreshBreadcrumb = (routeMatchList) => {
-      // 每次刷新(隐藏面包屑, 等待 200 毫秒在显示(触发动画效果))
-      setTimeout(() => {
-        this.setState({
-          // 改变面包屑为当前路由对应的数据
-          showBreadcrumb: false
-        });
-      }, 0);
-      setTimeout(() => {
-        this.setState({
-          showBreadcrumb: true,
-          routeMatchList
-        });
-      }, 200);
-    };
-
     /**
      * 用户退出操作
      *
@@ -91,7 +52,7 @@ export default withRouter(connect(
     };
 
     render() {
-      const { props, state } = this;
+      const { props } = this;
       return (
         <section className="layout-system-header-container">
 
@@ -115,15 +76,19 @@ export default withRouter(connect(
           </section>
 
           {/* 根据路由渲染面包屑 */}
-          <QueueAnim type={['right', 'right']} duration={200} className="header-bottom-container">
-            {state.showBreadcrumb ? (
-              <Breadcrumb key={'breadcrumb'}>
-                {state.routeMatchList.map((routeMatch, index) => (
+          <TransitionGroup className="header-bottom-container">
+            <CSSTransition
+              key={props.location.pathname}
+              classNames="system-slide-left"
+              timeout={200}
+            >
+              <Breadcrumb>
+                {props.routeMatchList.map((routeMatch, index) => (
                   <Breadcrumb.Item key={index}>{routeMatch.route.breadcrumb}</Breadcrumb.Item>
                 ))}
               </Breadcrumb>
-            ) : null}
-          </QueueAnim>
+            </CSSTransition>
+          </TransitionGroup>
         </section>
       );
     }

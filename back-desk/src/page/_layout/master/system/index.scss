@@ -62,3 +62,20 @@
     }
   }
 }
+
+.system-slide-left-enter {
+  transform: translateX(-3.5vw);
+}
+
+.system-slide-left-enter.system-slide-left-enter-active {
+  transform: translateX(0);
+  transition: transform .2s ease;
+}
+
+.system-slide-left-exit {
+  display: none;
+}
+
+.system-slide-left-exit.system-slide-left-exit-active{
+  display: none;
+}

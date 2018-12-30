@@ -7,7 +7,6 @@ import './index.scss';
 
 export default class Tinymce extends React.Component {
   static propTypes = {
-    id: PropTypes.string.isRequired,
     initialValue: PropTypes.string.isRequired,
     onEditorChange: PropTypes.func.isRequired
   };
@@ -50,12 +49,11 @@ export default class Tinymce extends React.Component {
   };
 
   render() {
-    const { state, props } = this;
+    const { state } = this;
     return (
       <section className="tinymce-container">
         <Editor
           cloudChannel="dev"
-          id={props.id}
           value={state.value}
           plugins={config.TINYMCE_PLUGINS}
           toolbar={config.TINYMCE_TOOLBAR}

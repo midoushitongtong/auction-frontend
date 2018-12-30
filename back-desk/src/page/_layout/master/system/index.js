@@ -2,6 +2,7 @@ import React from 'react';
 import { renderRoutes, matchRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar/index";
 import LayoutSystemHeader from "../../../../component/_layout/master/system/header/index";
 
@@ -54,13 +55,21 @@ export default connect(
           <section className={`layout-master-system-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
             <section className="main-container">
               {/* 侧边菜单栏 */}
-              <LayoutSystemSidebar/>
+              <LayoutSystemSidebar />
               <section className="content-container">
                 {/* 操作栏 */}
-                <LayoutSystemHeader routeMatchList={matchRoutes(props.route.routes, props.location.pathname)}/>
-                <section className="main-content-container">
-                  {renderRoutes(props.route.routes)}
-                </section>
+                <LayoutSystemHeader routeMatchList={matchRoutes(props.route.routes, props.location.pathname)} />
+                <TransitionGroup>
+                  <CSSTransition
+                    key={props.location.pathname}
+                    classNames="system-slide-left"
+                    timeout={200}
+                  >
+                    <section className="main-content-container">
+                      {renderRoutes(props.route.routes)}
+                    </section>
+                  </CSSTransition>
+                </TransitionGroup>
               </section>
             </section>
           </section>
