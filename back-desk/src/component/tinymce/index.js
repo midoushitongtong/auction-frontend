@@ -48,7 +48,7 @@ export default class Tinymce extends React.Component {
     props.onEditorChange(value);
   };
 
-  render() {
+  render = () => {
     const { state } = this;
     return (
       <section className="tinymce-container">

@@ -28,7 +28,7 @@ export default connect(
       });
     };
 
-    render() {
+    render = () => {
       const { state } = this;
       if (state.isRender) {
         return (

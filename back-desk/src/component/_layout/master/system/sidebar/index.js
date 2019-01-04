@@ -16,7 +16,7 @@ export default withRouter(connect(
   // mapDispatchToProps
   {}
 )(
-  class LayoutSystemSidebar extends React.Component {
+  class LayoutMasterSystemSidebar extends React.Component {
     static propTypes = {
       // 侧边栏是否折叠
       systemSidebarIsCollapse: PropTypes.bool.isRequired
@@ -69,22 +69,23 @@ export default withRouter(connect(
       setTimeout(() => {
         this.setState({
           systemSidebarIsCollapse: props.systemSidebarIsCollapse
-        })
+        });
       }, 1);
-    }
-    
+    };
 
     shouldComponentUpdate = (nextProps, nextState) => {
-      const {state } = this;
+      const { state } = this;
+      // 侧边栏折叠状态菜单样式问题
+      // 利用定时器从不折叠状态变为折叠状态, 防止一开始就为折叠状态的样式问题
       if (state.systemSidebarIsCollapse !== nextProps.systemSidebarIsCollapse) {
         setTimeout(() => {
           this.setState({
             systemSidebarIsCollapse: nextProps.systemSidebarIsCollapse
-          })
+          });
         }, 1);
       }
       return true;
-    }
+    };
 
 
     /**
@@ -126,7 +127,7 @@ export default withRouter(connect(
       const { state, props } = this;
       return (
         <section
-          className={`layout-system-sidebar-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
+          className={`layout-master-system-sidebar-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
           <section className="logo-container">
             <NavLink to="/">新创文化艺术品</NavLink>
           </section>
@@ -146,7 +147,7 @@ export default withRouter(connect(
                   key={sideBarMenuListItem.key}
                   title={
                     <span>
-                      <Icon type={sideBarMenuListItem.icon} />
+                      <Icon type={sideBarMenuListItem.icon}/>
                       <span>{sideBarMenuListItem.name}</span>
                     </span>
                   }

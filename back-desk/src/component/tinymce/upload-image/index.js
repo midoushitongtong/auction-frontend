@@ -112,7 +112,7 @@ export default class TinymceUploadImage extends React.Component {
     });
   };
 
-  render() {
+  render = () => {
     const { state } = this;
     return (
       <section className="tinymce-editor-image-container">

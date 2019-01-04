@@ -1,6 +1,6 @@
 export default {
   // API 请求 url
-  API_ROOT: 'http://10.0.19.175:8005',
+  API_ROOT: 'https://easy-mock.com/mock/5c2eeabb5802a5653fb284f7/auction-frontend-mock-api',
   // OSS API 请求的 url
   API_OSS_ROOT: 'http://10.0.19.175:3004',
   // Tinymce 富文本启用的功能

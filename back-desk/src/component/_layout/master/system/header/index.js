@@ -22,7 +22,7 @@ export default withRouter(connect(
     toggleSystemSidebarIsCollapse
   }
 )(
-  class LayoutSystemHeader extends React.Component {
+  class LayoutMasterSystemHeader extends React.Component {
     static propTypes = {
       // 当前登陆状态
       userInfo: PropTypes.object.isRequired,
@@ -54,7 +54,7 @@ export default withRouter(connect(
     render() {
       const { props } = this;
       return (
-        <section className="layout-system-header-container">
+        <section className="layout-master-system-header-container">
 
           {/* 顶部操作栏 */}
           <section className="header-top-container">
@@ -81,6 +81,8 @@ export default withRouter(connect(
               key={props.location.pathname}
               classNames="system-slide-left"
               timeout={200}
+              mountOnEnter={true}
+              unmountOnExit={true}
             >
               <Breadcrumb>
                 {props.routeMatchList.map((routeMatch, index) => (

@@ -2,18 +2,19 @@ import React from 'react';
 import { renderRoutes, matchRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar/index";
 import LayoutSystemHeader from "../../../../component/_layout/master/system/header/index";
-
+import 'react-animated-router/animate.css'; //导入默认的切换动画样式，如果需要其它切换样式，可以导入自己的动画样式定义文件
 import './index.scss';
 
 export default connect(
   // mapStateToProps
   state => {
     return {
-      systemSidebarIsCollapse: state.systemStyle.systemSidebarIsCollapse,
-      userInfo: state.account.userInfo
+      userInfo: state.account.userInfo,
+      systemSidebarIsCollapse: state.systemStyle.systemSidebarIsCollapse
     };
   },
   // mapDispatchToProps
@@ -48,25 +49,29 @@ export default connect(
       });
     };
 
-    render() {
+    render = () => {
       const { state, props } = this;
       if (state.isRender) {
         return (
           <section className={`layout-master-system-container ${props.systemSidebarIsCollapse ? 'collapse' : ''}`}>
             <section className="main-container">
               {/* 侧边菜单栏 */}
-              <LayoutSystemSidebar />
+              <LayoutSystemSidebar/>
               <section className="content-container">
                 {/* 操作栏 */}
-                <LayoutSystemHeader routeMatchList={matchRoutes(props.route.routes, props.location.pathname)} />
+                <LayoutSystemHeader routeMatchList={matchRoutes(props.route.routes, props.location.pathname)}/>
                 <TransitionGroup>
                   <CSSTransition
                     key={props.location.pathname}
                     classNames="system-slide-left"
                     timeout={200}
+                    mountOnEnter={true}
+                    unmountOnExit={true}
                   >
                     <section className="main-content-container">
-                      {renderRoutes(props.route.routes)}
+                      <Switch location={props.location}>
+                        {renderRoutes(props.route.routes)}
+                      </Switch>
                     </section>
                   </CSSTransition>
                 </TransitionGroup>
@@ -77,6 +82,6 @@ export default connect(
       } else {
         return <section>加载中!</section>;
       }
-    }
+    };
   }
 );

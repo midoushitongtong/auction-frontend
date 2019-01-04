@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Icon, Button, notification } from 'antd';
 import NProgress from 'nprogress';
 import { connect } from 'react-redux';
-import { updateUserInfo } from '../../../store/account';
+import { updateUserInfo } from '../../../../../store/account/index';
 // import api from '../../../api';
 import './index.scss';
 
@@ -17,7 +17,7 @@ export default connect(
   }
 )(
   Form.create()(
-    class AccountSignIn extends React.Component {
+    class LayoutMasterAccountSignIn extends React.Component {
 
       handleSubmit = (e) => {
         e.preventDefault();
@@ -48,7 +48,7 @@ export default connect(
         });
       };
 
-      render() {
+      render = () => {
         const { props } = this;
         return (
           <section className="account-sign-in-container">
