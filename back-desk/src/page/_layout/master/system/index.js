@@ -6,7 +6,6 @@ import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar/index";
 import LayoutSystemHeader from "../../../../component/_layout/master/system/header/index";
-import 'react-animated-router/animate.css'; //导入默认的切换动画样式，如果需要其它切换样式，可以导入自己的动画样式定义文件
 import './index.scss';
 
 export default connect(

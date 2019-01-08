@@ -9,6 +9,8 @@ import './index.scss';
 export default Form.create()(
   class LayoutMasterSystemProductCollectionOperator extends React.Component {
     state = {
+      // 按钮的加载
+      submitButtonLoading: false,
       // 操作类型[添加, 修改]
       actionType: '',
       // 表单默认值[操作类型为修改异步获取]
@@ -166,7 +168,7 @@ export default Form.create()(
             await api.collection.updateCollectionById(state.formInitialValue.id, requestData);
           } else {
             // 添加操作
-            await api.collection.insertPerson(requestData);
+            await api.collection.insertCollection(requestData);
           }
 
           // 取消加载状态
@@ -272,7 +274,11 @@ export default Form.create()(
 
               {/* 提交 */}
               <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">保存</Button>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  loading={state.submitButtonLoading}
+                >保存</Button>
               </Form.Item>
             </Form>
           </section>

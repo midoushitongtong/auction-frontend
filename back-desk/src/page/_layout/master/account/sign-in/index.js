@@ -19,6 +19,16 @@ export default connect(
   Form.create()(
     class LayoutMasterAccountSignIn extends React.Component {
 
+      componentDidMount = () => {
+        // 鼠标移动时差效果
+        new window.Parallax(this.refs['parallaxContainer']);
+      };
+
+      /**
+       * 处理登陆逻辑
+       *
+       * @param e
+       */
       handleSubmit = (e) => {
         e.preventDefault();
         const { props } = this;
@@ -52,49 +62,60 @@ export default connect(
         const { props } = this;
         return (
           <section className="account-sign-in-container">
-            <section className="header-container">
-              <span>新创文化艺术品管理后台</span>
+            {/* 视察容器 */}
+            <section className="parallax-container" ref="parallaxContainer">
+              <section className="bg-container" data-depth="1">
+                <img src={require('../../../../../assets/account-sign-in-bg.svg')} alt=""/>
+              </section>
             </section>
-            <Form onSubmit={this.handleSubmit} className="sign-in-form-container">
-              <Form.Item>
-                {props.form.getFieldDecorator('username', {
-                  initialValue: 'admin',
-                  rules: [
-                    { required: true, message: '请输入用户名!' }
-                  ]
-                })(
-                  <Input
-                    prefix={<Icon type="user"/>}
-                    placeholder="用户名"
-                  />
-                )}
-              </Form.Item>
-              <Form.Item>
-                {props.form.getFieldDecorator('password', {
-                  initialValue: '123456',
-                  rules: [
-                    { required: true, message: '请输入密码!' }
-                  ]
-                })(
-                  <Input
-                    prefix={<Icon type="lock"/>}
-                    type="password"
-                    placeholder="密码"
-                  />
-                )}
-              </Form.Item>
-              <Button
-                type="primary"
-                size="large"
-                block={true}
-                htmlType="submit"
-              >
-                登陆
-              </Button>
-            </Form>
+            {/* 表单容器 */}
+            <section className="sign-in-form-wrapper">
+              <section className="sign-in-form-container">
+                <section className="header-container">
+                  <span>新创文化艺术品管理后台</span>
+                </section>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Item>
+                    {props.form.getFieldDecorator('username', {
+                      initialValue: 'admin',
+                      rules: [
+                        { required: true, message: '请输入用户名!' }
+                      ]
+                    })(
+                      <Input
+                        prefix={<Icon type="user"/>}
+                        placeholder="用户名"
+                      />
+                    )}
+                  </Form.Item>
+                  <Form.Item>
+                    {props.form.getFieldDecorator('password', {
+                      initialValue: '123456',
+                      rules: [
+                        { required: true, message: '请输入密码!' }
+                      ]
+                    })(
+                      <Input
+                        prefix={<Icon type="lock"/>}
+                        type="password"
+                        placeholder="密码"
+                      />
+                    )}
+                  </Form.Item>
+                  <Button
+                    type="primary"
+                    size="large"
+                    block={true}
+                    htmlType="submit"
+                  >
+                    登陆
+                  </Button>
+                </Form>
+              </section>
+            </section>
           </section>
         );
-      }
+      };
     }
   )
 );
