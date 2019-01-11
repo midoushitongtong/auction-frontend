@@ -44,7 +44,5 @@ module.exports = function override(config, env) {
     config,
   );
 
-
   return config;
-
 };

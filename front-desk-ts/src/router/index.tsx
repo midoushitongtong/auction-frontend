@@ -23,7 +23,7 @@ const Collection = Loadable({
   }
 });
 
-// 当前组件类的 ts 类型声明
+// 当前组件的类型声明
 export interface MyRouteConfig extends RouteConfig {
   meta?: {
     hiddenHeader: boolean,

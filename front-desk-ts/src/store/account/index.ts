@@ -1,9 +1,8 @@
 import api from '../../api';
 
-// 当前模块的 ts 类型声明
-interface Action {
-  type: ActionType,
-  data: object
+// 当前模块的类型声明
+export interface State {
+  userInfo: object
 }
 
 // 操作类型
@@ -13,7 +12,7 @@ enum ActionType {
 }
 
 // 状态
-const initState = {
+const initState: State = {
   // 已登录用户信息
   userInfo: {}
 };
@@ -49,7 +48,7 @@ export const clearAccountState = () => {
 };
 
 // reducer
-export default (state = initState, action: Action) => {
+export default (state = initState, action: any) => {
   switch (action.type) {
     case ActionType.UPDATE_USER_INFO:
       return {

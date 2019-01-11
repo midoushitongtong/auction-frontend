@@ -5,7 +5,7 @@ import LayoutHeader from "../../../component/_layout/header";
 import LayoutFooter from "../../../component/_layout/footer";
 import './index.scss';
 
-// 当前组件类的 ts 类型声明
+// 当前组件的类型声明
 interface Props extends RouteConfigComponentProps {
 }
 
@@ -39,7 +39,7 @@ export default class LayoutMaster extends React.Component<Props, State> {
       }
     }
     return (
-      <section></section>
+      <section>跳转中...</section>
     );
   };
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'antd';
 import './index.scss';
 
-// 当前组件类的 ts 类型声明
+// 当前组件的类型声明
 interface Props {
 }
 

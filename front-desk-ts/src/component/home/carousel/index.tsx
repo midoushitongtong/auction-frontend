@@ -7,7 +7,7 @@ import './index.scss';
 // install swiper model
 Swiper.use([Navigation, Pagination, Autoplay, Lazy]);
 
-// 当前组件类的 ts 类型声明
+// 当前组件的类型声明
 interface Props {
 }
 
