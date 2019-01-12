@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Menu, Icon } from 'antd';
 import NProgress from 'nprogress';
-import { AppStateType } from '../../../../../store';
+import { AppState } from '../../../../../store';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -43,7 +43,7 @@ interface State {
 export default compose<React.ComponentClass>(
   withRouter,
   connect<ConnectState, ConnectDispatch, Props>(
-    (state: any | AppStateType) => ({
+    (state: any | AppState) => ({
       systemSidebarIsCollapse: state.systemStyle.systemSidebarIsCollapse
     }),
     {}

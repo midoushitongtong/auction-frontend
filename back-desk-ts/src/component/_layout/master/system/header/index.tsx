@@ -8,7 +8,7 @@ import { Dropdown, Menu, Breadcrumb, Icon } from 'antd';
 import NProgress from 'nprogress';
 import { toggleSystemSidebarIsCollapse } from '../../../../../store/system-style';
 import { clearAccountState } from '../../../../../store/account';
-import { AppStateType } from '../../../../../store';
+import { AppState } from '../../../../../store';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -35,7 +35,7 @@ interface State {
 export default compose<React.ComponentClass>(
   withRouter,
   connect<ConnectState, ConnectDispatch, Props>(
-    (state: any | AppStateType) => ({
+    (state: any | AppState) => ({
       userInfo: state.account.userInfo
     }),
     {

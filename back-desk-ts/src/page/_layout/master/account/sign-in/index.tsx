@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Form, Input, Icon, Button, notification } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import NProgress from 'nprogress';
-import { AppStateType } from '../../../../../store';
+import { AppState } from '../../../../../store';
 import { updateUserInfo } from '../../../../../store/account';
 // import api from '../../../../../api';
 import './index.scss';
@@ -29,7 +29,7 @@ interface State {
 export default compose<React.ComponentClass>(
   Form.create(),
   connect<ConnectState, ConnectDispatch, Props>(
-    (state: any | AppStateType) => ({
+    (state: any | AppState) => ({
       userInfo: state.account.userInfo
     }),
     {

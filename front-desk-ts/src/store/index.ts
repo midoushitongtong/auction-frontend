@@ -5,7 +5,7 @@ import account, { State as AccountState } from './account';
 
 // 当前模块的类型声明
 // 所有 state 的类型声明
-export interface AppStateType {
+export interface AppState {
   account: AccountState
 }
 

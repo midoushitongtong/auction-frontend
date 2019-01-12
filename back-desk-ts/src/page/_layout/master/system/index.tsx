@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { AppStateType } from '../../../../store';
+import { AppState } from '../../../../store';
 import { asyncUpdateUserInfo } from '../../../../store/account';
 import LayoutSystemSidebar from '../../../../component/_layout/master/system/sidebar';
 import LayoutSystemHeader from '../../../../component/_layout/master/system/header';
@@ -30,7 +30,7 @@ interface State {
 // 当前组件类
 export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(
-    (state: any | AppStateType) => ({
+    (state: any | AppState) => ({
       userInfo: state.account.userInfo,
       systemSidebarIsCollapse: state.systemStyle.systemSidebarIsCollapse
     }),
