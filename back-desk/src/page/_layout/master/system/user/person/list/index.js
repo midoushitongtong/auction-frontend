@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Divider, Table, Modal, Button, Col, Form, Row, Input, Tag } from 'antd';
-import api from "../../../../../../../api/index";
+import api from "../../../../../../../api";
 
 export default Form.create()(
   class LayoutMasterSystemUserPersonList extends React.Component {

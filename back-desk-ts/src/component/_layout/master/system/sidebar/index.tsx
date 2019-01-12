@@ -17,7 +17,6 @@ interface ConnectDispatch {
 }
 
 interface Props extends ConnectState, ConnectDispatch, RouteConfigComponentProps {
-
 }
 
 interface SidebarMenu {

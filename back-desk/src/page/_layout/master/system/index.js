@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar/index";
-import LayoutSystemHeader from "../../../../component/_layout/master/system/header/index";
+import LayoutSystemSidebar from "../../../../component/_layout/master/system/sidebar";
+import LayoutSystemHeader from "../../../../component/_layout/master/system/header";
 import './index.scss';
 
 export default connect(

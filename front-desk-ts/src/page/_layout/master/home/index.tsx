@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import HomeCarousel from '../../../../component/_layout/master/home/carousel/index';
-import HomeProduct from '../../../../component/_layout/master/home/product/index';
+import HomeCarousel from '../../../../component/_layout/master/home/carousel';
+import HomeProduct from '../../../../component/_layout/master/home/product';
 import './index.scss';
 
 // 当前组件的类型声明

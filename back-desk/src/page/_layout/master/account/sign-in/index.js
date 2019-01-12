@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, Icon, Button, notification } from 'antd';
 import NProgress from 'nprogress';
 import { connect } from 'react-redux';
-import { updateUserInfo } from '../../../../../store/account/index';
+import { updateUserInfo } from '../../../../../store/account';
 // import api from '../../../api';
 import './index.scss';
 

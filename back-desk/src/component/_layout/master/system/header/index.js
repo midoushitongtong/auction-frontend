@@ -6,7 +6,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Dropdown, Menu, Breadcrumb, Icon } from 'antd';
 import NProgress from 'nprogress';
 import { toggleSystemSidebarIsCollapse } from "../../../../../store/system-style";
-import { clearAccountState } from "../../../../../store/account/index";
+import { clearAccountState } from "../../../../../store/account";
 import './index.scss';
 
 export default withRouter(connect(

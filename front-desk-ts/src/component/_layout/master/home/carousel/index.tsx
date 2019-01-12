@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Swiper, Navigation, Pagination, Autoplay, Lazy } from 'swiper/dist/js/swiper.esm.js';
 import 'swiper/dist/css/swiper.min.css';
 import './index.scss';

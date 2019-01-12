@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { Divider, Table, Modal, Button, Col, Form, Row, Input, Tag } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import api from '../../../../../../../api/index';
+import api from '../../../../../../../api';
 
 // 当前组件的类型声明
 interface Props extends FormComponentProps {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form, Input, Button, Upload, Icon, message, notification } from 'antd';
 import NProgress from 'nprogress';
-import TinyMce from '../../../../../../../component/tinymce/index';
-import api from '../../../../../../../api/index';
+import TinyMce from '../../../../../../../component/tinymce';
+import api from '../../../../../../../api';
 import oss from '../../../../../../../util/oss';
 import './index.scss';
 

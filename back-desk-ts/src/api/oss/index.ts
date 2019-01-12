@@ -5,7 +5,16 @@ import config from '../../config';
  * oss 相关接口
  *
  */
-export default {
+interface Api {
+  // 查询 oss sts token
+  selectOssStsToken: (data: any) => {}
+}
+
+/**
+ * oss 相关接口实现
+ *
+ */
+const api: Api = {
   // 查询 oss sts token
   selectOssStsToken(data: any): object {
     return ajax(
@@ -15,3 +24,5 @@ export default {
     );
   }
 };
+
+export default api;

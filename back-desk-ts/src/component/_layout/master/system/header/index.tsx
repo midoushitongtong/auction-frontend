@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { RouteConfigComponentProps, RouteConfig, MatchedRoute } from 'react-router-config';
+import { RouteConfigComponentProps, MatchedRoute } from 'react-router-config';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from "react-transition-group";

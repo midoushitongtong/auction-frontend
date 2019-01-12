@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import LazyLoad from 'react-lazyload';
 import { CSSTransition } from 'react-transition-group';
 import { Row, Col } from 'antd';

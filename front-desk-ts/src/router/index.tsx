@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect } from 'react-router-dom';
 import { renderRoutes, RouteConfig } from 'react-router-config';
-import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
 import Loading from '../component/loading';
 import LayoutMaster from '../page/_layout/master';

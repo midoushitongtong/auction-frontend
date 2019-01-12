@@ -4,7 +4,6 @@ import { RouteConfigComponentProps } from 'react-router-config';
 import { compose } from 'redux';
 import { Button, Form, Input, Select, Menu, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import {  MenuProps, MenuMode } from 'antd/lib/menu';
 import NProgress from 'nprogress';
 import './index.scss';
 
@@ -286,7 +285,7 @@ export default compose<React.ComponentClass>(
                         {/* 渲染二级菜单 */}
                         {item.children.map(itemChild => (
                           <Menu.Item key={itemChild.key}>
-                            <Link to={itemChild.path ? itemChild.path: ''}>
+                            <Link to={itemChild.path ? itemChild.path : ''}>
                               {itemChild.name}
                             </Link>
                           </Menu.Item>

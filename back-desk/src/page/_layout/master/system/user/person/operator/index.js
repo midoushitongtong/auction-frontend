@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Button, Radio } from 'antd';
 import NProgress from 'nprogress';
-import api from '../../../../../../../api/index';
+import api from '../../../../../../../api';
 
 export default Form.create()(
   class LayoutMasterSystemUserPersonOperator extends React.Component {

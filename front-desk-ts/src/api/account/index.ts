@@ -1,12 +1,24 @@
-import ajax from "../../util/ajax";
-import config from "../../config";
+import ajax from '../../util/ajax';
+import config from '../../config';
 
 /**
  * 账户相关接口
  *
  */
-export default {
+interface Api {
   // 登陆
+  signIn: (data: any) => {},
+  // 退出
+  signOut: () => {},
+  // 获取当前登陆的用户信息
+  selectUserInfo: () => {}
+}
+
+/**
+ * 账户相关接口实现
+ *
+ */
+const api:Api = {
   signIn(data: any): object {
     return ajax(
       'POST',
@@ -14,7 +26,6 @@ export default {
       data
     );
   },
-  // 退出
   signOut(): object {
     return ajax(
       'GET',
@@ -22,7 +33,6 @@ export default {
       {}
     );
   },
-  // 获取用户信息
   selectUserInfo(): object {
     return ajax(
       'GET',
@@ -31,3 +41,5 @@ export default {
     );
   }
 };
+
+export default api;

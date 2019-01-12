@@ -16,7 +16,6 @@ interface ConnectDispatch {
 }
 
 interface Props extends ConnectState, ConnectDispatch {
-
 }
 
 interface State {

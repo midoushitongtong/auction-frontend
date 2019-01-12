@@ -20,23 +20,22 @@ export default class LayoutMaster extends React.Component<Props, State> {
     if (props.location.pathname === '/') {
       console.log('redirecting...');
       window.location.href = '/auction-frontend-front-desk/home';
-    } else {
-      // 获取当前路由信息
-      if (props.route && props.route.routes) {
-        const currentRoute: MyRouteConfig = matchRoutes(props.route.routes, props.location.pathname)[0].route;
-        return (
-          <section className='layout-master-container'>
-            {/* 公共头部, 根据路由信息判断是否需要隐藏公共头部 */}
-            {currentRoute.meta && currentRoute.meta.hiddenHeader ? '' : <LayoutHeader/>}
+    }
+    // 获取当前路由信息
+    if (props.route && props.route.routes) {
+      const currentRoute: MyRouteConfig = matchRoutes(props.route.routes, props.location.pathname)[0].route;
+      return (
+        <section className='layout-master-container'>
+          {/* 公共头部, 根据路由信息判断是否需要隐藏公共头部 */}
+          {currentRoute.meta && currentRoute.meta.hiddenHeader ? '' : <LayoutHeader/>}
 
-            {/* 所有路由组件的入口 */}
-            {renderRoutes(props.route.routes)}
+          {/* 所有路由组件的入口 */}
+          {renderRoutes(props.route.routes)}
 
-            {/* 公共底部, 根据路由信息判断是否需要隐藏公共底部 */}
-            {currentRoute.meta && currentRoute.meta.hiddenFooter ? '' : <LayoutFooter/>}
-          </section>
-        );
-      }
+          {/* 公共底部, 根据路由信息判断是否需要隐藏公共底部 */}
+          {currentRoute.meta && currentRoute.meta.hiddenFooter ? '' : <LayoutFooter/>}
+        </section>
+      );
     }
     return (
       <section>跳转中...</section>

@@ -6,8 +6,8 @@ import { Switch } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { AppStateType } from '../../../../store';
 import { asyncUpdateUserInfo } from '../../../../store/account';
-import LayoutSystemSidebar from '../../../../component/_layout/master/system/sidebar/index';
-import LayoutSystemHeader from '../../../../component/_layout/master/system/header/index';
+import LayoutSystemSidebar from '../../../../component/_layout/master/system/sidebar';
+import LayoutSystemHeader from '../../../../component/_layout/master/system/header';
 import './index.scss';
 
 // 当前组件的类型声明

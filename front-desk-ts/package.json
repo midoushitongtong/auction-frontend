@@ -55,5 +55,6 @@
     "babel-plugin-import": "^1.11.0",
     "react-app-rewired": "^2.0.1",
     "redux-devtools-extension": "^2.13.7"
-  }
+  },
+  "homepage": "/auction-frontend-front-desk"
 }

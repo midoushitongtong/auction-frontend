@@ -7,7 +7,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import NProgress from 'nprogress';
 import { AppStateType } from '../../../../../store';
 import { updateUserInfo } from '../../../../../store/account';
-// import api from '../../../api';
+// import api from '../../../../../api';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -23,7 +23,6 @@ interface Props extends ConnectState, ConnectDispatch, RouteConfigComponentProps
 }
 
 interface State {
-
 }
 
 // 当前组件类
@@ -40,7 +39,7 @@ export default compose<React.ComponentClass>(
 )(
   class LayoutMasterAccountSignIn extends React.Component<Props, State> {
     public componentDidMount = (): void => {
-      // 鼠标移动时差效果
+      // 鼠标移动效果
       new (window as any).Parallax(document.querySelector('.parallax-container'));
     };
 

@@ -7,12 +7,13 @@ import ErrorNotFound from '../component/error/not-found';
 import LayoutMaster from '../page/_layout/master';
 
 // 非懒加载模块
-// 账户页面
+// 账户
 import LayoutMasterAccount from '../page/_layout/master/account';
 
+// 账户登陆
 import LayoutMasterAccountSignIn from '../page/_layout/master/account/sign-in';
 
-// 系统页面
+// 系统
 import LayoutMasterSystem from '../page/_layout/master/system';
 
 // 工作台

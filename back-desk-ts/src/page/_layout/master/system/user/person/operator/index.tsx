@@ -4,7 +4,7 @@ import { FormComponentProps } from 'antd/lib/form';
 import { RouteConfigComponentProps } from 'react-router-config';
 import { Form, Input, Button, Radio } from 'antd';
 import NProgress from 'nprogress';
-import api from '../../../../../../../api/index';
+import api from '../../../../../../../api';
 
 // 当前组件的类型声明
 interface Props extends FormComponentProps, RouteConfigComponentProps {
