@@ -1,8 +1,8 @@
 import React from 'react';
 import { renderRoutes, matchRoutes, RouteConfigComponentProps } from 'react-router-config';
-import { MyRouteConfig } from "../../../router";
-import LayoutHeader from "../../../component/_layout/header";
-import LayoutFooter from "../../../component/_layout/footer";
+import { MyRouteConfig } from '../../../router';
+import LayoutHeader from '../../../component/_layout/master/header';
+import LayoutFooter from '../../../component/_layout/master/footer';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -14,7 +14,7 @@ interface State {
 
 // 当前组件类
 export default class LayoutMaster extends React.Component<Props, State> {
-  public render = (): React.ReactElement<Props> => {
+  public render = (): JSX.Element => {
     const { props } = this;
     // 根路由进行跳转
     if (props.location.pathname === '/') {
@@ -25,7 +25,7 @@ export default class LayoutMaster extends React.Component<Props, State> {
       if (props.route && props.route.routes) {
         const currentRoute: MyRouteConfig = matchRoutes(props.route.routes, props.location.pathname)[0].route;
         return (
-          <section className="layout-master-container">
+          <section className='layout-master-container'>
             {/* 公共头部, 根据路由信息判断是否需要隐藏公共头部 */}
             {currentRoute.meta && currentRoute.meta.hiddenHeader ? '' : <LayoutHeader/>}
 

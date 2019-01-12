@@ -1,0 +1,25 @@
+body {
+  overflow-y: scroll;
+  #root {
+    overflow-x: hidden;
+    .app-container {
+      min-width: 900px;
+    }
+  }
+
+  // antd
+  .ant-notification-notice-message {
+    margin-bottom: 0;
+    word-break: break-all;
+  }
+
+  .ant-form {
+    .ant-calendar-picker {
+      width: 100%;
+    }
+  }
+
+  .christmas.ant-btn-primary:before {
+    display: none;
+  }
+}

@@ -7,7 +7,7 @@ import config from "../../config";
  */
 export default {
   // 登陆
-  signIn(data: object) {
+  signIn(data: any): object {
     return ajax(
       'POST',
       `${config.API_ROOT}/manager/signIn`,
@@ -15,7 +15,7 @@ export default {
     );
   },
   // 退出
-  signOut() {
+  signOut(): object {
     return ajax(
       'GET',
       `${config.API_ROOT}/manager/signOut`,
@@ -23,7 +23,7 @@ export default {
     );
   },
   // 获取用户信息
-  selectUserInfo() {
+  selectUserInfo(): object {
     return ajax(
       'GET',
       `${config.API_ROOT}/manager/userInfo`,

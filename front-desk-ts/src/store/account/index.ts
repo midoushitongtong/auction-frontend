@@ -18,7 +18,8 @@ const initState: State = {
 };
 
 // 操作函数
-export const updateUserInfo = (userInfo: object) => {
+// 修改当前登陆的用户信息
+export const updateUserInfo = (userInfo: object): object => {
   return {
     type: ActionType.UPDATE_USER_INFO,
     data: {
@@ -27,7 +28,8 @@ export const updateUserInfo = (userInfo: object) => {
   };
 };
 
-export const asyncUpdateUserInfo = () => {
+// 异步修改当前登陆的用户信息
+export const asyncUpdateUserInfo = (): object => {
   return async (dispatch: any) => {
     const result: any = await api.account.selectUserInfo();
     if (result.code === '0') {
@@ -41,14 +43,15 @@ export const asyncUpdateUserInfo = () => {
   };
 };
 
-export const clearAccountState = () => {
+// 清空当前模块的状态
+export const clearAccountState = (): object => {
   return {
     type: ActionType.CLEAR_ACCOUNT_STATE
   };
 };
 
 // reducer
-export default (state = initState, action: any) => {
+export default (state = initState, action: any): any => {
   switch (action.type) {
     case ActionType.UPDATE_USER_INFO:
       return {
@@ -62,4 +65,4 @@ export default (state = initState, action: any) => {
         ...state
       };
   }
-}
+};

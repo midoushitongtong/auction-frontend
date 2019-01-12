@@ -24,7 +24,7 @@ export default withRouter(connect(
 )(
   class LayoutMasterSystemHeader extends React.Component {
     static propTypes = {
-      // 当前登陆状态
+      // 当前登陆的用户信息
       userInfo: PropTypes.object.isRequired,
       // 当前路由信息
       routeMatchList: PropTypes.array.isRequired,

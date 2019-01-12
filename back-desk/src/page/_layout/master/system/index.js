@@ -21,7 +21,7 @@ export default connect(
 )(
   class LayoutMasterSystem extends React.Component {
     static propTypes = {
-      // 当前登陆状态
+      // 当前登陆的用户信息
       userInfo: PropTypes.object.isRequired,
       // 侧边栏是否折叠
       systemSidebarIsCollapse: PropTypes.bool.isRequired

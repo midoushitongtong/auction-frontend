@@ -3,30 +3,29 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 import { renderRoutes, RouteConfig } from 'react-router-config';
 import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
-
-// 非懒加载模块
 import Loading from '../component/loading';
 import LayoutMaster from '../page/_layout/master';
 
 // 懒加载模块
+// 首页
 const Home = Loadable({
-  loader: () => import('../page/home'),
-  loading: () => {
-    return <Loading/>;
-  }
+  loader: () => import('../page/_layout/master/home'),
+  loading: () => <Loading/>
 });
 
+// 收藏品页
 const Collection = Loadable({
-  loader: () => import('../page/collection'),
-  loading: () => {
-    return <Loading/>;
-  }
+  loader: () => import('../page/_layout/master/collection'),
+  loading: () => <Loading/>
 });
 
 // 当前组件的类型声明
 export interface MyRouteConfig extends RouteConfig {
+  // meta 信息
   meta?: {
+    // 当前路由是否需要隐藏顶部
     hiddenHeader: boolean,
+    // 当前路由是否需要隐藏底部
     hiddenFooter?: boolean
   },
   // 约束子路由
@@ -42,7 +41,7 @@ interface State {
 
 // 当前组件类
 export default class Router extends React.Component<Props, State> {
-  public state = {
+  public state: State = {
     routeList: [
       {
         // 根模块
@@ -68,7 +67,7 @@ export default class Router extends React.Component<Props, State> {
     ]
   };
 
-  public render = (): React.ReactElement<Props> => {
+  public render = (): JSX.Element => {
     const { state } = this;
     return (
       <BrowserRouter basename='/auction-frontend-front-desk'>

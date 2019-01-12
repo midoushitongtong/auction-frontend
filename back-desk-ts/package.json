@@ -1,0 +1,58 @@
+{
+  "name": "back-desk-ts",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/polyfill": "^7.2.5",
+    "@fortawesome/fontawesome-free": "^5.6.3",
+    "@tinymce/tinymce-react": "^2.4.0",
+    "antd": "^3.12.1",
+    "axios": "^0.18.0",
+    "node-sass": "^4.11.0",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-lazyload": "^2.3.0",
+    "react-loadable": "^5.5.0",
+    "react-redux": "^6.0.0",
+    "react-router-config": "^4.4.0-beta.6",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.3",
+    "react-transition-group": "^2.5.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "typescript": "3.2.2"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/jest": "23.3.12",
+    "@types/js-base64": "^2.3.1",
+    "@types/node": "10.12.18",
+    "@types/nprogress": "0.0.29",
+    "@types/react": "16.7.18",
+    "@types/react-dom": "16.0.11",
+    "@types/react-loadable": "^5.4.3",
+    "@types/react-redux": "^6.0.12",
+    "@types/react-router-config": "^1.1.0",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/react-transition-group": "^2.0.15",
+    "babel-plugin-import": "^1.11.0",
+    "react-app-rewired": "^2.0.1",
+    "redux-devtools-extension": "^2.13.7"
+  }
+}

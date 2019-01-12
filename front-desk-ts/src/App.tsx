@@ -3,8 +3,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { asyncUpdateUserInfo } from './store/account';
 import Router from './router';
+import { AppStateType } from './store';
 import './App.scss';
-import { AppStateType } from "./store";
 
 // 当前组件的类型声明
 interface ConnectState {
@@ -35,7 +35,7 @@ export default compose<React.ComponentClass>(
   )
 )(
   class App extends React.Component<Props, State> {
-    public state = {
+    public state: State = {
       isRender: false
     };
 
@@ -48,7 +48,7 @@ export default compose<React.ComponentClass>(
       });
     };
 
-    public render = (): React.ReactElement<Props> => {
+    public render = (): JSX.Element => {
       const { state } = this;
       if (state.isRender) {
         return (
