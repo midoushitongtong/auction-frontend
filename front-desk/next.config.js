@@ -4,22 +4,20 @@ const withTypescript = require('@zeit/next-typescript');
 
 // fix: prevents error when .css files are required by node
 if (typeof require !== 'undefined') {
-  require.extensions['.css'] = (file) => {}
+  require.extensions['.css'] = (file) => {
+  };
 }
 
-module.exports =
-  withTypescript(
-    withSass(
-      withCss(
-        {
-          webpack(config, options) {
-            return config;
-          },
-          generateBuildId: async () => {
-            return 'v1';
-          },
-          distDir: '../.next'
-        }
-      )
-    )
-  );
+module.exports = withTypescript(
+  withSass(
+    withCss({
+      webpack(config, options) {
+        return config;
+      },
+      generateBuildId: async () => {
+        return 'v1.0.0';
+      },
+      distDir: '../.next'
+    })
+  )
+);

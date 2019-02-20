@@ -1,6 +1,6 @@
 ## 基本环境
 
-### `typescript` + `next.js` + `react` + `sass` + `antd`
+### `typescript` + `next.js` + `koa` + `react` + `redux` + `react-router` + `sass` + `antd`
 
 ## 可用脚本
 

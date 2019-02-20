@@ -179,7 +179,7 @@ export default class Router extends React.Component<Props, State> {
   public render = (): JSX.Element => {
     const { state } = this;
     return (
-      <BrowserRouter basename='/auction-frontend-back-desk'>
+      <BrowserRouter>
         {/* 分发所有路由组件的入口 */}
         {renderRoutes(state.routeList)}
       </BrowserRouter>
