@@ -1,5 +1,5 @@
 html {
-  font-family: 'OptimaLTStd','Arial',"Microsoft JhengHei";
+  font-family: 'OptimaLTStd', 'Arial', "Microsoft JhengHei";
   font-size: 90%;
   body {
     overflow-y: scroll;
@@ -36,3 +36,63 @@ html {
     }
   }
 }
+
+// 重写库样式==============================================================
+$primary-color: #ffc107;
+// antd
+html {
+  // button
+  .ant-btn-primary {
+    border-color: #ffc107;
+    background-color: #ffc107;
+    color: rgba(0, 0, 0, 0.65);
+    text-shadow: none;
+    &:hover,
+    &:focus {
+      color: #233;
+      background-color: #eab105;
+      border-color: #eab105;
+    }
+  }
+  // nav
+  .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected,
+  .ant-menu-horizontal > .ant-menu-item-selected > a,
+  .ant-menu-horizontal > .ant-menu-item > a:hover,
+  .ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover,
+  .ant-menu-item > a:hover,
+  .ant-menu-item-selected > a, .ant-menu-item-selected > a:hover {
+    color: #eab105;
+    border-bottom-color: #eab105;
+  }
+
+  .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
+    border-right-color: #eab105;
+  }
+
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #fcfcf1;
+  }
+
+  // select
+  .ant-select-dropdown-menu-item:hover,
+  .ant-select-dropdown-menu-item-active {
+    background-color: $primary-color;
+  }
+}
+
+// swiper
+html {
+  .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTI3LDIyTDI3LDIyTDUsNDRsLTIuMS0yLjFMMjIuOCwyMkwyLjksMi4xTDUsMEwyNywyMkwyNywyMnonIGZpbGw9JyNmZmMxMDcnLz48L3N2Zz4=
+    );
+  }
+
+  .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTAsMjJMMjIsMGwyLjEsMi4xTDQuMiwyMmwxOS45LDE5LjlMMjIsNDRMMCwyMkwwLDIyTDAsMjJ6JyBmaWxsPScjZmZjMTA3Jy8+PC9zdmc+);
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: $primary-color;
+  }
+}
+
