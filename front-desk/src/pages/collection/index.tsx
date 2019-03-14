@@ -1,71 +1,84 @@
 import React from 'react';
 import Head from 'next/head';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { updateCurrentSearchCondition} from '../../store/collection';
 import Header from '../../component/_layout/header';
 import Footer from '../../component/_layout/footer';
 import CollectionSearchCondition from '../../component/collection/search-condition';
-import CollectionSearchList from '../../component/collection/search-list';
+import CollectionSearchResult from '../../component/collection/search-result';
+import api from '../../api';
 import './index.scss'
 
 // 当前组件的类型声明
-interface ConnectState {
-}
 
-interface ConnectDispatch {
-  updateCurrentSearchCondition: any
-}
-
-interface Props extends ConnectState, ConnectDispatch {
-
+interface Props {
+  // 当前收藏品搜索的条件
+  currentSearchCondition: any;
+  // 收藏品搜索条件
+  searchCondition: any,
+  // 搜索到的收藏品列表
+  searchResult: any
 }
 
 interface State {
 }
 
 // 当前组件类
-export default compose<React.ComponentClass>(
-  connect<ConnectState, ConnectDispatch, Props>(
-    () => ({}),
-    {
-      updateCurrentSearchCondition
-    }
-  )
-)(
-  class Collection extends React.Component<Props, State> {
-    public static getInitialProps = async ({ store, query }: any) => {
-      // 初始化当前的搜索条件
-      const currentSearchCondition = {
-        category: query.category || '0',
-        transaction: query.transaction || '0',
-        area: query.area || '',
-        keyword: query.keyword || ''
-      };
-      store.dispatch(updateCurrentSearchCondition(currentSearchCondition));
-      return {};
+export default class Collection extends React.Component<Props, State> {
+  public static getInitialProps = async ({ query }: any) => {
+    // 获取当前收藏品搜索条件
+    const currentSearchCondition = {
+      category: query.category || '0',
+      transaction: query.transaction || '0',
+      area: query.area || '',
+      keyword: query.keyword || '',
+      current: query.current || '1',
+      pageSize: query.pageSize || '10'
     };
+    // 获取收藏品搜索条件
+    let searchCondition: any = [];
+    const result: any = await api.collection.getSearchCondition();
+    if (result.code === '0') {
+      searchCondition = result.data;
+    }
+    // 获取收藏品列表
+    let searchResult: any = [];
+    const result2: any = await api.collection.getList(currentSearchCondition);
+    if (result2.code == '0') {
+      searchResult = result2.data;
+    }
+    return {
+      currentSearchCondition,
+      searchCondition,
+      searchResult
+    };
+  };
 
-    public render = (): JSX.Element => {
-      return (
-        <section className="app-container">
-          <Head>
-            <title>收藏品查询 - 新创文化艺术品</title>
-          </Head>
-          <Header/>
-          <section className="collection-container">
-            <section className="collection-wrapper-container">
-              <section className="collection-wrapper-inner-container">
-                {/* 收藏品搜索条件组件 */}
-                <CollectionSearchCondition/>
-                {/* 收藏品搜索结果列表 */}
-                <CollectionSearchList/>
-              </section>
+  public render = (): JSX.Element => {
+    const{props}=this;
+    return (
+      <section className="app-container">
+        <Head>
+          <title>收藏品查询 - 新创文化艺术品</title>
+        </Head>
+        <Header/>
+        <section className="collection-container">
+          <section className="collection-wrapper-container">
+            <section className="collection-wrapper-inner-container">
+              {/* 收藏品搜索条件组件 */}
+              <CollectionSearchCondition
+                currentSearchCondition={props.currentSearchCondition}
+                searchCondition={props.searchCondition}
+              />
+              {/* 收藏品搜索结果列表 */}
+              <CollectionSearchResult
+                currentSearchCondition={props.currentSearchCondition}
+                searchResult={props.searchResult}
+              />
             </section>
           </section>
-          <Footer/>
         </section>
-      );
-    };
-  }
-);
+        <Footer/>
+      </section>
+    );
+  };
+}
+

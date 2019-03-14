@@ -14,7 +14,7 @@ import './_app.scss';
 
 // 当前组件类型声明
 interface Props {
-  store: any
+  store: any;
 }
 
 // 当前组件类

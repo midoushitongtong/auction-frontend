@@ -8,7 +8,7 @@ interface Props {
 interface State {
   carouselList: {
     imagePath: string
-  }[]
+  }[];
 }
 
 // 当前组件类

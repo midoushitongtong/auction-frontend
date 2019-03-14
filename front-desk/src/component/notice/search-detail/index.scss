@@ -1,0 +1,31 @@
+.notice-search-detail-container {
+  padding: 3rem 3rem 5rem;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  .notice-description {
+    border-bottom: 1px solid #f4f4f4;
+    .title {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #333;
+    }
+    .created-at {
+      font-size: 1rem;
+      text-align: center;
+      color: #8b8b8b;
+    }
+  }
+  .notice-content {
+    padding-top: 2rem;
+    font-size: 1rem;
+    color: #333;
+    a {
+      color: #eab105;
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+
+}

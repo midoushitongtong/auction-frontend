@@ -1,7 +1,7 @@
 // 当前模块的类型声明
 export interface State {
   // 当前登陆的用户信息
-  userInfo: any
+  userInfo: any;
 }
 
 // 操作类型

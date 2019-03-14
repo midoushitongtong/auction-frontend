@@ -8,7 +8,7 @@ interface Props {
 }
 
 interface State {
-  collectionList: any[]
+  collectionList: any[];
 }
 
 // 当前组件类

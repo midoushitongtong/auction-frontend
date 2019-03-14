@@ -16,13 +16,13 @@ enum HeaderNavMode {
 // antd 菜单
 interface NavItem {
   // 菜单 key
-  key: string,
+  key: string;
   // 菜单名称
-  name: string,
+  name: string;
   // 菜单跳转路径
-  path?: string,
+  path?: string;
   // 菜单的子菜单
-  children?: NavItem[]
+  children?: NavItem[];
 }
 
 interface Props extends WithRouterProps, FormComponentProps {
@@ -30,11 +30,11 @@ interface Props extends WithRouterProps, FormComponentProps {
 
 interface State {
   // 菜单模式[垂直, 水平]
-  headerNavMode: HeaderNavMode,
+  headerNavMode: HeaderNavMode;
   // 菜单列表
-  headerNavList: NavItem[],
+  headerNavList: NavItem[];
   // 屏幕宽度发生变化触发的定时器
-  reSizeTimeOut: any
+  reSizeTimeOut: any;
 }
 
 // 当前组件类

@@ -2,29 +2,41 @@ import React from 'react';
 import Head from 'next/head';
 import Header from '../../component/_layout/header';
 import Footer from '../../component/_layout/footer';
-import NoticeSearchList from '../../component/notice/search-list';
+import NoticeSearchResult from '../../component/notice/search-result';
+import api from '../../api';
 import './index.scss'
 
 // 当前组件的类型声明
 interface Props {
-
+  // 搜索到的公告列表
+  searchResult: any;
 }
 
 interface State {
-  searchResultList: any[]
+
 }
 
 // 当前组件类
 export default class Notice extends React.Component<Props, State> {
-  // public static getInitialProps = async ({ query }: any) => {
-  //   // 初始化当前的搜索条件
-  //   const currentSearchCondition = {
-  //
-  //   };
-  //   return {};
-  // };
+  public static getInitialProps = async ({ query }: any) => {
+    // 获取当前公告搜索条件
+    const currentSearchCondition = {
+      pageStart: query.start || 1,
+      pageSize: query.pageSize || 10
+    };
+    // 获取公告列表
+    let searchResult: any = [];
+    const result: any = await api.notice.getList(currentSearchCondition);
+    if (result.code === '0') {
+      searchResult = result.data;
+    }
+    return {
+      searchResult
+    };
+  };
 
   public render = (): JSX.Element => {
+    const { props } = this;
     return (
       <section className="app-container">
         <Head>
@@ -37,7 +49,7 @@ export default class Notice extends React.Component<Props, State> {
               <section className="notice-title">
                 <h3>公告</h3>
               </section>
-              <NoticeSearchList/>
+              <NoticeSearchResult searchResult={props.searchResult}/>
             </section>
           </section>
         </section>

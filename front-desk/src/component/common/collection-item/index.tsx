@@ -6,7 +6,8 @@ import './index.scss';
 
 // 当前组件的类型声明
 interface Props {
-  collection: any
+  // 收藏品详情
+  collection: any;
 }
 
 interface State {

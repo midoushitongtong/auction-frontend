@@ -2,7 +2,7 @@ import React from 'react'
 
 // 当前组件的类型声明
 interface Props {
-  statusCode: number
+  statusCode: number;
 }
 
 interface State {
