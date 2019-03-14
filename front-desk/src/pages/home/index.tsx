@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Header from '../../component/_layout/header';
 import Footer from '../../component/_layout/footer';
 import HomeCarousel from '../../component/home/carousel';
-import HomeProduct from '../../component/home/product';
+import HomeCollectionList from '../../component/home/collection-list';
 // import { asyncUpdateUserInfo } from '../../store/account';
 import './index.scss';
 
@@ -33,7 +33,7 @@ export default class Home extends React.Component<Props, State> {
               {/* 轮播图 */}
               <HomeCarousel/>
               {/* 精选收藏品组件 */}
-              <HomeProduct/>
+              <HomeCollectionList/>
             </section>
           </section>
         </section>

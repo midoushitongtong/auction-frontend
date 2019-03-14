@@ -1,0 +1,113 @@
+.collection-search-condition-container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, .1);
+  .collection-search-condition-item {
+    display: flex;
+    padding-top: 1rem;
+    border-bottom: 1px solid #dadada;
+    &:last-child {
+      border-bottom: 0;
+    }
+    // 收藏品分类, 成交状况
+    &.collection-category,
+    &.collection-transaction {
+      .radio-item {
+        display: inline-block;
+        width: 6rem;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 3px;
+        .ant-radio-button-wrapper {
+          width: 100%;
+        }
+      }
+    }
+    // 收藏品拍卖场次
+    &.collection-area {
+      padding-bottom: 1rem;
+      .ant-cascader-picker {
+        width: 20rem;
+      }
+    }
+    // 收藏品拍品
+    &.collection-keyword {
+      padding-bottom: 1rem;
+      .ant-input-group-wrapper {
+        width: 20rem;
+      }
+    }
+    .condition-name {
+      width: 8rem;
+      padding-left: 1.5rem;
+      padding-top: .3rem;
+      font-size: 1rem;
+    }
+    .condition-select {
+      flex: 1;
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .collection-search-condition-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    .collection-search-condition-item {
+      display: block;
+      &.collection-category,
+      &.collection-transaction {
+        .ant-radio-group {
+          display: flex;
+          flex-wrap: wrap;
+          .radio-item {
+            width: 33.3%;
+            margin-right: 0;
+            padding-left: .5rem;
+            padding-right: .5rem;
+          }
+        }
+      }
+      &.collection-area {
+        .condition-select {
+          padding-left: .5rem;
+          .ant-cascader-picker {
+            width: 100%;
+          }
+        }
+      }
+      &.collection-keyword {
+        .condition-select {
+          padding-left: .5rem;
+          .ant-input-group-wrapper{
+            width: 100%;
+          }
+        }
+      }
+      .condition-name {
+        padding-top: 0;
+        padding-bottom: 1rem;
+        padding-left: .5rem;
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .collection-search-condition-container {
+    padding-left: .5rem;
+    padding-right: .5rem;
+    .collection-search-condition-item {
+      &.collection-category,
+      &.collection-transaction {
+        .ant-radio-group {
+          .radio-item {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}

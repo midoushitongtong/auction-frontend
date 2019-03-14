@@ -1,0 +1,55 @@
+.home-collection-list-container {
+  margin-top: 1rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, .1);
+  .title {
+    position: relative;
+    height: 90px;
+    margin-bottom: 0;
+    padding: 2rem;
+    font-size: 1.65rem;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.65);
+    span {
+      z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      padding-right: 1rem;
+      padding-left: 1rem;
+      background-color: #fff;
+      transform: translateY(-50%) translateX(-50%);
+    }
+    &::after {
+      z-index: 1;
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 0;
+      left: 50%;
+      width: 97.5%;
+      height: 1px;
+      background-color: #ccc;
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+  .collection-list-container {
+    display: flex;
+    .col {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .home-collection-list-container {
+    .title {
+      font-size: 1.35rem;
+    }
+    .collection-list-container {
+      .col {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

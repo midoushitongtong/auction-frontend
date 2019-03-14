@@ -5,6 +5,8 @@ import Router from 'next/router';
 // react-redux 高阶组件
 import { Provider } from 'react-redux';
 import withReduxStore from '../util/with-redux-store'
+// ie11 兼容
+import "@babel/polyfill";
 // 全局 css
 import 'normalize.css';
 import 'nprogress/nprogress.css';
@@ -29,10 +31,7 @@ export default withReduxStore(
     };
 
     public componentDidMount = (): void => {
-      Router.events.on('routeChangeStart', (url: any) => {
-        console.log(`Loading: ${url}`);
-        NProgress.start()
-      });
+      Router.events.on('routeChangeStart', () => NProgress.start());
       Router.events.on('routeChangeComplete', () => NProgress.done());
       Router.events.on('routeChangeError', () => NProgress.done());
     };

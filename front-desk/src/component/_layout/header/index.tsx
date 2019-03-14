@@ -39,8 +39,12 @@ interface Props extends WithRouterProps, FormComponentProps, ConnectState, Conne
 }
 
 interface State {
+  // 菜单模式[垂直, 水平]
   headerNavMode: HeaderNavMode,
-  headerNavList: NavItem[]
+  // 菜单列表
+  headerNavList: NavItem[],
+  // 屏幕宽度发生变化触发的定时器
+  reSizeTimeOut: any
 }
 
 // 当前组件类
@@ -61,52 +65,58 @@ export default compose<React.ComponentClass>(
         { key: '1', name: '首页', path: '/home' },
         { key: '2', name: '收藏品查询', path: '/collection' },
         {
-          key: '3', name: '拍卖指南',
+          key: '3', name: '咨询中心',
           children: [
-            { key: '3-1', name: '卖家指南', path: '/home' },
-            { key: '3-2', name: '买家指南', path: '/home' }
+            { key: '3-1', name: '拍卖动态', path: '/home' },
+            { key: '3-2', name: '新创公告', path: '/home' }
           ]
         }
-      ]
+      ],
+      reSizeTimeOut: null
     };
 
     public componentDidMount = (): void => {
-      this.watchWindowReSize();
+      window.addEventListener('resize', this.listenerReSize);
+
+      // 页面加载触发一次
+      this.handlerReSize();
+    };
+
+    public componentWillUnmount = (): void => {
+      window.removeEventListener('resize', this.listenerReSize);
     };
 
     /**
-     * 监听屏幕的宽度自适应菜单
+     * 处理屏幕宽度变换事件
      *
      */
-    public watchWindowReSize = (): void => {
-      const handlerReSize = () => {
-        // 获取客户端的可视区域
-        const clientWidth = document.body.offsetWidth;
-        if (clientWidth >= 768) {
-          // 客户端的可视区域大于 768 电脑端
-          this.setState({
-            headerNavMode: HeaderNavMode.HORIZONTAL
-          });
-          // 移除移动端样式
-          this.toggleMobileHeaderNavContainer(false);
-          this.toggleMobileSearchContainer(false);
-        } else {
-          // 客户端的可视区域小于 768 手机端
-          this.setState({
-            headerNavMode: HeaderNavMode.INLINE
-          });
-        }
-      };
+    public listenerReSize = () => {
+      clearInterval(this.state.reSizeTimeOut);
+      // 添加定时器防抖动
+      this.state.reSizeTimeOut = setTimeout(this.handlerReSize, 500);
+    };
 
-      let reSizeTimeOut: any = null;
-      window.addEventListener('resize', () => {
-        clearInterval(reSizeTimeOut);
-        // 定时器防抖
-        reSizeTimeOut = setTimeout(handlerReSize, 500);
-      });
-
-      // 页面加载触发一次
-      handlerReSize();
+    /**
+     * 根据屏幕宽度重新渲染菜单(自适应)
+     *
+     */
+    public handlerReSize = (): void => {
+      // 获取客户端的可视区域
+      const clientWidth = document.body.offsetWidth;
+      if (clientWidth >= 768) {
+        // 客户端的可视区域大于 768 电脑端
+        this.setState({
+          headerNavMode: HeaderNavMode.HORIZONTAL
+        });
+        // 移除移动端样式
+        this.toggleMobileHeaderNavContainer(false);
+        this.toggleMobileSearchContainer(false);
+      } else {
+        // 客户端的可视区域小于 768 手机端
+        this.setState({
+          headerNavMode: HeaderNavMode.INLINE
+        });
+      }
     };
 
     /**

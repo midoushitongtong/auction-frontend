@@ -1,0 +1,22 @@
+.collection-search-list-container {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  box-shadow: 0 0 50px rgba(0, 0, 0, .1);
+  .collection-list-container {
+    display: flex;
+    .col {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .collection-search-result-container {
+    .collection-list-container {
+      .col {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}

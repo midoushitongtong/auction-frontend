@@ -1,0 +1,78 @@
+.collection-item-container {
+  display: block;
+  height: 100%;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  padding-bottom: 1rem;
+  box-shadow: 0 0 3px #ccc;
+  text-direction: none;
+  color: inherit;
+  transition: box-shadow .2s ease;
+  &:hover {
+    text-decoration: none;
+    box-shadow: 0 0 10px #999;
+    .collection-image {
+      transform: scale(1.1);
+    }
+  }
+  .collection-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    min-height: 260px;
+    padding: 1rem;
+    transition: transform .3s ease;
+    img {
+      max-width: 100%;
+      max-height: 200px;
+      &.image-fade-appear {
+        opacity: 0;
+      }
+      &.image-fade-appear-active {
+        opacity: 1;
+        transition: opacity 1s;
+      }
+    }
+  }
+  .collection-description {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    p {
+      margin-bottom: .5rem;
+      color: rgba(0, 0, 0, .65);
+    }
+    .collection-lot,
+    .collection-author,
+    .collection-name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .collection-author {
+      font-size: 1.2rem;
+    }
+    .collection-lot-number {
+      margin-left: .5rem;
+      font-weight: bold;
+      color: #ffc107;
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .collection-item-container {
+    margin-right: .5rem;
+    margin-left: .5rem;
+    .collection-image {
+      min-height: 130px;
+      padding: 13px;
+      img {
+        max-width: 100%;
+        max-height: 100px;
+      }
+    }
+  }
+}

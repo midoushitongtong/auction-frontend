@@ -13,8 +13,8 @@ export default class _document extends Document {
           <meta name="keywords" content="新创文化艺术品"/>
           <meta name="description" content="新文化艺术品"/>
           <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
-          <link rel="stylesheet" href="/static/swiper/swiper.min.css"/>
-          <script src="https://cdn.bootcss.com/Swiper/4.5.0/js/swiper.min.js"></script>
+          <link rel="stylesheet" href="//cdn.bootcss.com/Swiper/4.5.0/css/swiper.min.css"/>
+          <script src="//cdn.bootcss.com/Swiper/4.5.0/js/swiper.min.js"/>
         </Head>
         <body>
           <Main/>

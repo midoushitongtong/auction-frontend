@@ -17,14 +17,6 @@ html {
         height: 100%;
       }
     }
-
-    // antd
-    .ant-select-dropdown {
-      border-radius: 0 !important;
-      .ant-select-dropdown-menu-item {
-        border-radius: 0 !important;
-      }
-    }
   }
 }
 
@@ -39,6 +31,8 @@ html {
 
 // 重写库样式==============================================================
 $primary-color: #ffc107;
+$primary-active-color: #eab105;
+
 // antd
 html {
   // button
@@ -61,22 +55,72 @@ html {
   .ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover,
   .ant-menu-item > a:hover,
   .ant-menu-item-selected > a, .ant-menu-item-selected > a:hover {
-    color: #eab105;
-    border-bottom-color: #eab105;
+    color: $primary-active-color;
+    border-bottom-color: $primary-active-color;
   }
-
   .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
-    border-right-color: #eab105;
+    border-right-color: $primary-active-color;
   }
-
   .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
     background-color: #fcfcf1;
   }
-
   // select
   .ant-select-dropdown-menu-item:hover,
   .ant-select-dropdown-menu-item-active {
     background-color: $primary-color;
+  }
+  .ant-select-dropdown {
+    border-radius: 0 !important;
+    .ant-select-dropdown-menu-item {
+      border-radius: 0 !important;
+    }
+  }
+  // radio
+  .ant-radio-button-wrapper {
+    border-left: 1px solid #d9d9d9;
+  }
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    width: 0;
+  }
+  .ant-radio-button-wrapper:hover {
+    color: $primary-active-color;
+  }
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    background: $primary-color;
+    border-color: $primary-color;
+    color: rgba(0, 0, 0, 0.65);
+  }
+  .ant-radio-button-wrapper-checked {
+    box-shadow: -1px 0 0 0 $primary-color;
+  }
+  .ant-radio-button-wrapper-checked:active,
+  .ant-radio-button-wrapper-checked:hover {
+    box-shadow: -1px 0 0 0 $primary-active-color;
+  }
+  .ant-radio-button-wrapper-checked::before {
+    background-color: $primary-color !important;
+  }
+  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+  .ant-radio-button-wrapper-checked:hover {
+    color: #000;
+    background: $primary-active-color;
+    border-color: $primary-active-color;
+  }
+  // input
+  .ant-input:hover {
+    border-color: $primary-color;
+  }
+  .ant-input:focus {
+    border-color: $primary-active-color;
+    box-shadow: 0 0 0 2px $primary-color;
+  }
+  // cascader
+  .ant-cascader-menu-item:hover {
+    background: $primary-color;
+  }
+  .ant-cascader-picker:focus .ant-cascader-input {
+    border-color: $primary-active-color;
+    box-shadow: 0 0 0 2px $primary-color;
   }
 }
 
@@ -86,13 +130,24 @@ html {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTI3LDIyTDI3LDIyTDUsNDRsLTIuMS0yLjFMMjIuOCwyMkwyLjksMi4xTDUsMEwyNywyMkwyNywyMnonIGZpbGw9JyNmZmMxMDcnLz48L3N2Zz4=
     );
   }
-
   .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTAsMjJMMjIsMGwyLjEsMi4xTDQuMiwyMmwxOS45LDE5LjlMMjIsNDRMMCwyMkwwLDIyTDAsMjJ6JyBmaWxsPScjZmZjMTA3Jy8+PC9zdmc+);
   }
-
   .swiper-pagination-bullet-active {
     background-color: $primary-color;
   }
 }
 
+// nprogress
+html {
+  #nprogress .bar {
+    background: $primary-active-color;
+  }
+  #nprogress .peg {
+    box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color
+  }
+  #nprogress .spinner-icon {
+    border-top-color: $primary-color;
+    border-left-color: $primary-color;
+  }
+}
