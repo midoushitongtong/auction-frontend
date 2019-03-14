@@ -24,7 +24,7 @@ export default class Home extends React.Component<Props, State> {
     return (
       <section className="app-container">
         <Head>
-          <title>新创文化艺术品 - 首页</title>
+          <title>首页 - 新创文化艺术品</title>
         </Head>
         <Header/>
         <section className="home-container">

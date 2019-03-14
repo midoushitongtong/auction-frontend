@@ -2,9 +2,9 @@ import React from 'react';
 import { Row, Col, Pagination } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { AppState } from '../../../../store';
-import api from '../../../../api';
-import CommonCollectionItem from '../../../common/collection-item';
+import { AppState } from '../../../store';
+import CommonCollectionItem from '../../common/collection-item/index';
+import api from '../../../api/index';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -21,7 +21,7 @@ interface Props extends ConnectState, ConnectDispatch {
 }
 
 interface State {
-  searchResultList: any[]
+  searchList: any[]
 }
 
 // 当前组件类
@@ -33,9 +33,9 @@ export default compose<React.ComponentClass>(
     {}
   )
 )(
-  class CollectionSearchResult extends React.Component<Props, State> {
+  class CollectionSearchList extends React.Component<Props, State> {
     public state: State = {
-      searchResultList: []
+      searchList: []
     };
 
     public componentDidMount = async () => {
@@ -77,7 +77,7 @@ export default compose<React.ComponentClass>(
       const result: any = await api.collection.getSearchResult(currentSearchCondition);
       if (result.code === '0') {
         this.setState({
-          searchResultList: result.data
+          searchList: result.data
         });
       }
     };
@@ -87,7 +87,7 @@ export default compose<React.ComponentClass>(
       return (
         <section className="collection-search-list-container">
           <Row className="collection-list-container" type="flex">
-            {state.searchResultList.map((collectionListItem, index) => (
+            {state.searchList.map((collectionListItem, index) => (
               <Col
                 className="col"
                 key={index}

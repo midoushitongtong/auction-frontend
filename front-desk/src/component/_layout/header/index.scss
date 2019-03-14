@@ -1,4 +1,5 @@
 .layout-header-container {
+  background-color: #fff;
   // 顶部操作栏
   .header-action-container {
     display: flex;
@@ -116,12 +117,13 @@
   .header-nav-container {
     display: flex;
     justify-content: center;
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.23);
     .header-nav-inner-container {
       width: 1200px;
       .ant-menu {
         border-bottom: 0;
         line-height: 49px;
+        background-color: #fff;
         .anticon-down {
           width: 0;
           margin-right: 0;

@@ -2,9 +2,9 @@ import React from 'react';
 import { Input, Radio, Cascader } from 'antd';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { AppState } from '../../../../store';
+import { AppState } from '../../../store';
 import Router from 'next/router';
-import api from '../../../../api';
+import api from '../../../api/index';
 import './index.scss';
 
 // 当前组件的类型声明

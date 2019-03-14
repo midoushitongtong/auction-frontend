@@ -1,10 +1,9 @@
 import React from 'react';
-import { withRouter, WithRouterProps } from 'next/router';
 import { Button, Form, Input, Select, Menu, Icon } from 'antd';
+import { withRouter, WithRouterProps } from 'next/router';
 import { FormComponentProps } from 'antd/lib/form';
-import Link from 'next/link';
 import { compose } from 'redux';
-
+import Link from 'next/link';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -52,8 +51,7 @@ export default compose<React.ComponentClass>(
         {
           key: '3', name: '咨询中心',
           children: [
-            { key: '3-1', name: '拍卖动态', path: '/home' },
-            { key: '3-2', name: '新创公告', path: '/home' }
+            { key: '3-1', name: '新创公告', path: '/notice' }
           ]
         }
       ],

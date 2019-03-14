@@ -11,4 +11,18 @@ module.exports = (router, app) => {
     await app.render(ctx.req, ctx.res, '/collection', ctx.query);
     ctx.respond = false;
   });
+
+  // 咨询中心 - 公告页面
+  router.get('/notice', async ctx => {
+    await app.render(ctx.req, ctx.res, '/notice', ctx.query);
+    ctx.respond = false;
+  });
+
+  // 咨询中心 - 公告详情页面
+  router.get('/notice/detail/:id', async ctx => {
+    await app.render(ctx.req, ctx.res, '/notice/detail', {
+      id: ctx.params.id
+    });
+    ctx.respond = false;
+  });
 };

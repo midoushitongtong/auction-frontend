@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { updateCurrentSearchCondition} from '../../store/collection';
 import Header from '../../component/_layout/header';
 import Footer from '../../component/_layout/footer';
-import CollectionSearchCondition from '../../component/collection/search/condition';
-import CollectionSearchList from '../../component/collection/search/list';
+import CollectionSearchCondition from '../../component/collection/search-condition';
+import CollectionSearchList from '../../component/collection/search-list';
 import './index.scss'
 
 // 当前组件的类型声明
@@ -50,7 +50,7 @@ export default compose<React.ComponentClass>(
       return (
         <section className="app-container">
           <Head>
-            <title>新创文化艺术品 - 收藏品查询</title>
+            <title>收藏品查询 - 新创文化艺术品</title>
           </Head>
           <Header/>
           <section className="collection-container">
