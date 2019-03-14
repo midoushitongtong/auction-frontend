@@ -33,6 +33,10 @@ html {
 $primary-color: #ffc107;
 $primary-active-color: #eab105;
 
+a {
+  color: $primary-active-color;
+}
+
 // antd
 html {
   // button
@@ -121,6 +125,33 @@ html {
   .ant-cascader-picker:focus .ant-cascader-input {
     border-color: $primary-active-color;
     box-shadow: 0 0 0 2px $primary-color;
+  }
+  // pagination
+  .ant-pagination-item-active {
+    border-color: $primary-active-color;
+    a {
+      color: $primary-active-color;
+    }
+  }
+  .ant-pagination-item:focus, .ant-pagination-item:hover {
+    border-color: $primary-active-color;
+    a {
+      color: $primary-active-color;
+    }
+  }
+  .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 2px $primary-color;
+  }
+  .ant-select-selection:hover{
+    border-color: $primary-color;
+  }
+  .ant-pagination-prev:focus .ant-pagination-item-link, .ant-pagination-next:focus .ant-pagination-item-link, .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link {
+    border-color: $primary-active-color;
+    color: $primary-active-color;
+  }
+  .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+    color: $primary-active-color;
   }
 }
 

@@ -4,19 +4,10 @@ import { Button, Form, Input, Select, Menu, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Link from 'next/link';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { AppState } from '../../../store';
 
 import './index.scss';
 
 // 当前组件的类型声明
-interface ConnectState {
-  userInfo: any
-}
-
-interface ConnectDispatch {
-}
-
 // antd 菜单 model
 enum HeaderNavMode {
   HORIZONTAL = 'horizontal',
@@ -35,7 +26,7 @@ interface NavItem {
   children?: NavItem[]
 }
 
-interface Props extends WithRouterProps, FormComponentProps, ConnectState, ConnectDispatch {
+interface Props extends WithRouterProps, FormComponentProps {
 }
 
 interface State {
@@ -50,13 +41,7 @@ interface State {
 // 当前组件类
 export default compose<React.ComponentClass>(
   withRouter,
-  Form.create(),
-  connect<ConnectState, ConnectDispatch, Props>(
-    (state: any | AppState) => ({
-      userInfo: state.account.userInfo
-    }),
-    {}
-  )
+  Form.create()
 )(
   class LayoutHeader extends React.Component<Props, State> {
     public state: State = {

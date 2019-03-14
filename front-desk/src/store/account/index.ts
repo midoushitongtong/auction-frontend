@@ -1,5 +1,3 @@
-import api from '../../api';
-
 // 当前模块的类型声明
 export interface State {
   // 当前登陆的用户信息
@@ -24,21 +22,6 @@ export const updateUserInfo = (userInfo: any): object => {
     type: ActionType.UPDATE_USER_INFO,
     data: {
       userInfo
-    }
-  };
-};
-
-// 异步修改当前登陆的用户信息
-export const asyncUpdateUserInfo = (): object => {
-  return async (dispatch: any) => {
-    const result: any = await api.account.selectUserInfo();
-    if (result.code === '0') {
-      dispatch({
-        type: ActionType.UPDATE_USER_INFO,
-        data: {
-          userInfo: result.data
-        }
-      });
     }
   };
 };

@@ -18,22 +18,22 @@ interface Api {
  * 账户相关接口实现
  *
  */
-const api:Api = {
-  signIn(data: any): object {
+const api: Api = {
+  signIn: (data: any): object => {
     return ajax(
       'POST',
       `${config.API_ROOT}/manager/signIn`,
       data
     );
   },
-  signOut(): object {
+  signOut: (): object => {
     return ajax(
       'GET',
       `${config.API_ROOT}/manager/signOut`,
       {}
     );
   },
-  selectUserInfo(): object {
+  selectUserInfo: (): object => {
     return ajax(
       'GET',
       `${config.API_ROOT}/manager/userInfo`,
