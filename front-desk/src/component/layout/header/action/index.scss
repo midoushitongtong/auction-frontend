@@ -9,6 +9,12 @@
     justify-content: space-between;
     align-items: center;
     width: 1200px;
+    .hello a {
+      color: #555;
+      &:hover {
+        color: #eab105;
+      }
+    }
     // 登陆 注册 提示
     .action-tooltip {
       padding-right: .1rem;

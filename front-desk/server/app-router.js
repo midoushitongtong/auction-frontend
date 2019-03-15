@@ -18,9 +18,15 @@ module.exports = (router, app) => {
     ctx.respond = false;
   });
 
-  // 账户 - 个人中心
-  router.get('/account/person', async ctx => {
-    await app.render(ctx.req, ctx.res, '/account/person', ctx.query);
+  // 账户 - 个人中心 - 个人信息
+  router.get('/account/person/info', async ctx => {
+    await app.render(ctx.req, ctx.res, '/account/person/info', ctx.query);
+    ctx.respond = false;
+  });
+
+  // 账户 - 个人中心 - 我的收藏
+  router.get('/account/person/collection', async ctx => {
+    await app.render(ctx.req, ctx.res, '/account/person/collection', ctx.query);
     ctx.respond = false;
   });
 

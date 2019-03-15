@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Header from '../../component/_layout/header';
-import Footer from '../../component/_layout/footer';
+import LayoutHeader from '../../component/layout/header';
+import LayoutFooter from '../../component/layout/footer';
 import HomeCarousel from '../../component/home/carousel';
 import HomeCollectionList from '../../component/home/collection-list';
 // import { asyncUpdateUserInfo } from '../../store/account';
@@ -26,7 +26,7 @@ export default class Home extends React.Component<Props, State> {
         <Head>
           <title>首页 - 新创文化艺术品</title>
         </Head>
-        <Header/>
+        <LayoutHeader/>
         <section className="home-container">
           <section className="home-wrapper-container">
             <section className="home-wrapper-inner-container">
@@ -37,7 +37,7 @@ export default class Home extends React.Component<Props, State> {
             </section>
           </section>
         </section>
-        <Footer/>
+        <LayoutFooter/>
       </section>
     );
   };

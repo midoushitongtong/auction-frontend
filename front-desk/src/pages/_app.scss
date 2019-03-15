@@ -35,9 +35,10 @@ $primary-active-color: #eab105;
 
 html {
   a {
-    color: $primary-active-color;
+    color: rgba(0, 0, 0, 0.65);
     &:hover,
     &:focus {
+      color: $primary-active-color;
       text-decoration: none;
     }
   }
@@ -76,6 +77,19 @@ html {
   }
   .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before, .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before {
     background: linear-gradient(to right, $primary-active-color, $primary-active-color);
+  }
+  .ant-menu-item-selected {
+    color: $primary-active-color;
+  }
+  .ant-menu-item-selected {
+    a {
+      color: $primary-active-color;
+    }
+  }
+  .ant-menu-item:hover {
+    a {
+      color: $primary-active-color;
+    }
   }
   // select
   .ant-select-dropdown-menu-item:hover,
@@ -130,8 +144,10 @@ html {
   .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
     border-color: $primary-active-color;
   }
-  .has-error .ant-input-affix-wrapper .ant-input, .has-error .ant-input-affix-wrapper .ant-input:hover {
-    box-shadow: 0 0 0 2px #ff5555b3;
+  .ant-form-item-control.has-error {
+    .ant-input {
+      box-shadow: 0 0 0 2px #ff5555b3;
+    }
   }
   // cascader
   .ant-cascader-menu-item:hover {

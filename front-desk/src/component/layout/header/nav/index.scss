@@ -1,0 +1,81 @@
+.header-nav-container {
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.23);
+  .header-nav-inner-container {
+    width: 1200px;
+    .ant-menu {
+      border-bottom: 0;
+      line-height: 49px;
+      background-color: #fff;
+      .ant-menu-item {
+        .anticon-down {
+          width: 0;
+          margin-right: 0;
+          margin-left: 5px;
+          font-size: 12px;
+        }
+      }
+    }
+    .ant-menu-inline {
+      .anticon-down {
+        font-size: 0;
+      }
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .header-nav-container {
+    width: 0;
+    &.mobile-active {
+      z-index: 100;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      border-top: 0;
+      border-bottom: 0;
+      .header-nav-inner-container {
+        transform: translateX(0);
+      }
+      .mobile-header-nav-container-mask {
+        z-index: 102;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: rgba(0, 0, 0, .3);
+        transition: background .5s ease;
+      }
+    }
+    .header-nav-inner-container {
+      z-index: 103;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 250px;
+      transform: translateX(-350px);
+      transition: transform .3s ease;
+      .ant-menu-inline {
+        height: 100%;
+        .ant-menu-item,
+        .ant-menu-submenu .ant-menu-submenu-title {
+          display: flex;
+          align-items: center;
+          height: 3.5rem;
+          margin-top: 0;
+          margin-bottom: 0;
+          border-bottom: 3px solid rgba(0, 0, 0, .1);
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Header from '../../component/_layout/header';
-import Footer from '../../component/_layout/footer';
+import LayoutHeader from '../../component/layout/header';
+import LayoutFooter from '../../component/layout/footer';
 import CollectionSearchCondition from '../../component/collection/search-condition';
 import CollectionSearchResult from '../../component/collection/search-result';
 import api from '../../api';
@@ -59,7 +59,7 @@ export default class Collection extends React.Component<Props, State> {
         <Head>
           <title>收藏品查询 - 新创文化艺术品</title>
         </Head>
-        <Header/>
+        <LayoutHeader/>
         <section className="collection-container">
           <section className="collection-wrapper-container">
             <section className="collection-wrapper-inner-container">
@@ -76,7 +76,7 @@ export default class Collection extends React.Component<Props, State> {
             </section>
           </section>
         </section>
-        <Footer/>
+        <LayoutFooter/>
       </section>
     );
   };

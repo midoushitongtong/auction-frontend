@@ -5,7 +5,7 @@
   margin-left: 1rem;
   padding-bottom: 1rem;
   box-shadow: 0 0 3px #ccc;
-  text-direction: none;
+  text-decoration: none;
   color: inherit;
   transition: box-shadow .2s ease;
   &:hover {
@@ -43,20 +43,35 @@
       margin-bottom: .5rem;
       color: rgba(0, 0, 0, .65);
     }
-    .collection-lot,
-    .collection-author,
-    .collection-name {
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+    .collection-lot-and-author-and-name {
+      &:hover {
+        p {
+          color: #eab105;
+        }
+      }
+      p {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .collection-lot {
+        .collection-lot-number {
+          margin-left: .5rem;
+        }
+      }
+      .collection-author {
+        font-size: 1.2rem;
+      }
     }
-    .collection-author {
-      font-size: 1.2rem;
-    }
-    .collection-lot-number {
-      margin-left: .5rem;
-      font-weight: bold;
-      color: #ffc107;
+    .collection-favorite {
+      text-align: right;
+      font-size: 1.5rem;
+      .anticon:hover {
+        color: #eab105;
+      }
+      .ok {
+        color: #ffc107;
+      }
     }
   }
 }

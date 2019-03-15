@@ -1,11 +1,17 @@
 import React from 'react';
-import HeaderAction from './action';
-import HeaderTop from './top';
-import HeaderNav from './nav';
+import HeaderAction from './action/index';
+import HeaderTop from './top/index';
+import HeaderNav from './nav/index';
 import './index.scss';
 
 // 当前组件的类型声明
 interface Props {
+  // 隐藏顶部操作栏
+  hiddenHeaderAction: boolean;
+  // 隐藏顶部内容
+  hiddenHeaderTop: boolean;
+  // 隐藏顶部菜单
+  hiddenHeaderNav: boolean;
 }
 
 interface State {
@@ -15,6 +21,12 @@ interface State {
 
 // 当前组件类
 export default class LayoutHeader extends React.Component<Props, State> {
+  static defaultProps = {
+    hiddenHeaderAction: false,
+    hiddenHeaderTop: false,
+    hiddenHeaderNav: false
+  };
+
   public state: State = {
     reSizeTimeOut: null
   };
@@ -91,16 +103,17 @@ export default class LayoutHeader extends React.Component<Props, State> {
   };
 
   public render = (): JSX.Element => {
+    const { props } = this;
     return (
       <section className="layout-header-container">
-        <HeaderAction/>
-        <HeaderTop
+        {props.hiddenHeaderAction ? null : <HeaderAction/>}
+        {props.hiddenHeaderTop ? null : <HeaderTop
           toggleMobileHeaderNavContainer={this.toggleMobileHeaderNavContainer}
           toggleMobileSearchContainer={this.toggleMobileSearchContainer}
-        />
-        <HeaderNav
+        />}
+        {props.hiddenHeaderNav ? null : <HeaderNav
           toggleMobileHeaderNavContainer={this.toggleMobileHeaderNavContainer}
-        />
+        />}
       </section>
     );
   };

@@ -19,7 +19,7 @@ interface State {
 
 // 当前组件类
 export default class CollectionSearchCondition extends React.Component<Props, State> {
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.state = {
       currentSearchCondition: props.currentSearchCondition

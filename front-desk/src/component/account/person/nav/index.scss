@@ -1,0 +1,22 @@
+.account-person-nav-container {
+  width: 250px;
+  height: 20vh;
+  background-color: #fff;
+  .ant-menu {
+    border-right: 0;
+    .ant-menu-item {
+      height: 3.5rem;
+      margin-top: 0;
+      margin-bottom: 0;
+      border-bottom: 3px solid #ddd;
+      line-height: 3.5rem;
+      transition: background-color .3s ease;
+      &::after {
+        display: none;
+      }
+      &.ant-menu-item-selected {
+        border-bottom-color: #eab105;
+      }
+    }
+  }
+}

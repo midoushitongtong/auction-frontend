@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Header from '../../../component/_layout/header';
-import Footer from '../../../component/_layout/footer';
+import LayoutHeader from '../../../component/layout/header';
+import LayoutFooter from '../../../component/layout/footer';
 import AccountSignUpDetail from '../../../component/account/sign-up-detail';
 import './index.scss';
 
@@ -22,7 +22,7 @@ export default class AccountSignUp extends React.Component<Props, State> {
         <Head>
           <title>注册 - 新创文化艺术品</title>
         </Head>
-        <Header/>
+        <LayoutHeader/>
         <section className="account-sign-up-container">
           <section className="account-sign-up-wrapper-container">
             <section className="account-sign-up-wrapper-inner-container">
@@ -30,7 +30,7 @@ export default class AccountSignUp extends React.Component<Props, State> {
             </section>
           </section>
         </section>
-        <Footer/>
+        <LayoutFooter/>
       </section>
     );
   }

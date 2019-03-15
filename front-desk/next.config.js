@@ -21,7 +21,7 @@ module.exports = withTypescript(
         return config;
       },
       generateBuildId: async () => {
-        return 'v1.0.0';
+        return 'v1.0.2';
       },
       distDir: '../.next'
     })

@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
-import Header from '../../component/_layout/header';
-import Footer from '../../component/_layout/footer';
+import LayoutHeader from '../../component/layout/header';
+import LayoutFooter from '../../component/layout/footer';
 import NoticeSearchResult from '../../component/notice/search-result';
 import api from '../../api';
 import './index.scss'
@@ -45,7 +45,7 @@ export default class Notice extends React.Component<Props, State> {
         <Head>
           <title>公告 - 新创文化艺术品</title>
         </Head>
-        <Header/>
+        <LayoutHeader/>
         <section className="notice-container">
           <section className="notice-wrapper-container">
             <section className="notice-wrapper-inner-container">
@@ -59,7 +59,7 @@ export default class Notice extends React.Component<Props, State> {
             </section>
           </section>
         </section>
-        <Footer/>
+        <LayoutFooter/>
       </section>
     );
   };

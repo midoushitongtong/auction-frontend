@@ -1,0 +1,11 @@
+.account-person-collection-container {
+  width: 100%;
+  .account-person-collection-wrapper-container {
+    display: flex;
+    justify-content: center;
+    .account-person-collection-wrapper-inner-container {
+      width: 100%;
+      max-width: 1200px;
+    }
+  }
+}
