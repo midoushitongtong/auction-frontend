@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Form, Input, Select, Menu, Icon } from 'antd';
-import { withRouter, WithRouterProps } from 'next/router';
+import Router, { withRouter, WithRouterProps } from 'next/router';
 import { FormComponentProps } from 'antd/lib/form';
 import { compose } from 'redux';
 import Link from 'next/link';
@@ -152,7 +152,16 @@ export default compose<React.ComponentClass>(
       const { props } = this;
       props.form.validateFields(async (error, valueList) => {
         if (!error) {
-          console.log(valueList);
+          switch (valueList.type) {
+            case 1:
+              Router.push({
+                pathname: '/collection',
+                query: {
+                  keyword: valueList.value
+                }
+              });
+              break;
+          }
         }
       });
     };
@@ -215,29 +224,40 @@ export default compose<React.ComponentClass>(
                 欢迎来到 新创文化艺术品
               </section>
               <section className="action-tooltip">
-                <span>登陆</span>
-                <span>注册</span>
+                <Link href="/account/sign-in">
+                  <a href="/account/sign-in">
+                    <span>登陆</span>
+                  </a>
+                </Link>
+                <Link href="/account/sign-up">
+                  <a href="/account/sign-up">
+                    <span>注册</span>
+                  </a>
+                </Link>
               </section>
             </section>
           </section>
           <section className="header-top-container">
             <section className="header-top-inner-container">
-              <img src="http://www.cguardian.com.hk/images/logo.png" className="logo" alt="logo"/>
+              <Link href="/home">
+                <a href="/home">
+                  <img src="http://www.cguardian.com.hk/images/logo.png" className="logo" alt="logo"/>
+                </a>
+              </Link>
               <section className="operation-container">
                 <section className="search-container">
                   <Form onSubmit={this.handleSearchSubmit}>
                     <Form.Item>
-                      {props.form.getFieldDecorator('bookCategoryId', {
+                      {props.form.getFieldDecorator('type', {
                         initialValue: 1
                       })(
                         <Select>
                           <Select.Option value={1}>拍卖品</Select.Option>
-                          <Select.Option value={2}>文章</Select.Option>
                         </Select>
                       )}
                     </Form.Item>
                     <Form.Item>
-                      {props.form.getFieldDecorator('name', {
+                      {props.form.getFieldDecorator('value', {
                         initialValue: ''
                       })(
                         <Input type="text" placeholder="请输入关键字"/>

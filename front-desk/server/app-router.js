@@ -6,7 +6,19 @@ module.exports = (router, app) => {
     ctx.respond = false;
   });
 
-  // 收藏品查询页
+  // 账户 - 登陆
+  router.get('/account/sign-in', async ctx => {
+    await app.render(ctx.req, ctx.res, '/account/sign-in', ctx.query);
+    ctx.respond = false;
+  });
+
+  // 账户 - 注册
+  router.get('/account/sign-up', async ctx => {
+    await app.render(ctx.req, ctx.res, '/account/sign-up', ctx.query);
+    ctx.respond = false;
+  });
+
+  // 收藏品 - 查询页
   router.get('/collection', async ctx => {
     await app.render(ctx.req, ctx.res, '/collection', ctx.query);
     ctx.respond = false;

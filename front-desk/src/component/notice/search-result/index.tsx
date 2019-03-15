@@ -1,10 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import { Pagination } from 'antd';
+import Router from 'next/router';
+import BrowserUtil from '../../../util/browser';
 import './index.scss'
 
 // 当前组件的类型声明
 interface Props {
+  // 当前文章搜索的条件(分页等)
+  currentSearchCondition: any;
   // 搜索到的公告列表
   searchResult: any;
 }
@@ -14,22 +18,50 @@ interface State {
 
 // 当前组件类
 export default class NoticeSearchResult extends React.Component<Props, State> {
+  public shouldComponentUpdate = (nextProps: any): boolean => {
+    // url 改变会触发当前搜索条件的改变
+    if (nextProps.currentSearchCondition !== this.props.currentSearchCondition) {
+
+    }
+    return true;
+  };
+
   /**
    * 分页数据改变
    *
-   * @param page
+   * @param current
    * @param pageSize
    */
-  public paginationChange = (page: any, pageSize: any): void => {
-    console.log(page, pageSize);
+  public paginationChange = (current: any, pageSize: any): void => {
+    const { props } = this;
+    setTimeout(() => BrowserUtil.scrollToTop(233), 100);
+    Router.push({
+      pathname: '/notice',
+      query: {
+        ...props.currentSearchCondition,
+        current,
+        pageSize
+      }
+    });
   };
 
   /**
    * 分页显示条目改变
    *
+   * @param current
+   * @param pageSize
    */
   public paginationShowSizeChange = (current: any, pageSize: any): void => {
-    console.log(current, pageSize);
+    const { props } = this;
+    setTimeout(() => BrowserUtil.scrollToTop(233), 100);
+    Router.push({
+      pathname: '/notice',
+      query: {
+        ...props.currentSearchCondition,
+        current,
+        pageSize
+      }
+    });
   };
 
   public render = (): JSX.Element => {
@@ -54,10 +86,11 @@ export default class NoticeSearchResult extends React.Component<Props, State> {
         <section className="notice-pagination-container">
           <Pagination
             showSizeChanger
+            current={parseInt(props.currentSearchCondition.current)}
+            pageSize={parseInt(props.currentSearchCondition.pageSize)}
+            total={parseInt(props.searchResult.total)}
             onChange={this.paginationChange}
             onShowSizeChange={this.paginationShowSizeChange}
-            defaultCurrent={3}
-            total={500}
           />
         </section>
       </section>

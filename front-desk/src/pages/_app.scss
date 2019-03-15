@@ -33,8 +33,10 @@ html {
 $primary-color: #ffc107;
 $primary-active-color: #eab105;
 
-a {
-  color: $primary-active-color;
+html {
+  a {
+    color: $primary-active-color;
+  }
 }
 
 // antd

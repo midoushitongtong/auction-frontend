@@ -2,12 +2,13 @@ import React from 'react';
 import { Row, Col, Pagination } from 'antd';
 import Router from 'next/router';
 import CommonCollectionItem from '../../common/collection-item/index';
+import BrowserUtil from '../../../util/browser';
 import './index.scss';
 
 // 当前组件的类型声明
 
 interface Props {
-  // 当前收藏品搜索的条件
+  // 当前文章搜索的条件(分页等)
   currentSearchCondition: any;
   // 搜索到的收藏品列表
   searchResult: any;
@@ -19,6 +20,13 @@ interface State {
 
 // 当前组件类
 export default class CollectionSearchResult extends React.Component<Props, State> {
+  public shouldComponentUpdate = (nextProps: any): boolean => {
+    // url 改变会触发当前搜索条件的改变
+    if (nextProps.currentSearchCondition !== this.props.currentSearchCondition) {
+
+    }
+    return true;
+  };
 
   /**
    * 分页数据改变
@@ -28,6 +36,7 @@ export default class CollectionSearchResult extends React.Component<Props, State
    */
   public paginationChange = (current: any, pageSize: any): void => {
     const { props } = this;
+    setTimeout(() => BrowserUtil.scrollToTop(233), 100);
     Router.push({
       pathname: '/collection',
       query: {
@@ -46,6 +55,7 @@ export default class CollectionSearchResult extends React.Component<Props, State
    */
   public paginationShowSizeChange = (current: any, pageSize: any): void => {
     const { props } = this;
+    setTimeout(() => BrowserUtil.scrollToTop(233), 100);
     Router.push({
       pathname: '/collection',
       query: {
@@ -77,11 +87,11 @@ export default class CollectionSearchResult extends React.Component<Props, State
         <section className="collection-pagination-container">
           <Pagination
             showSizeChanger
-            onChange={this.paginationChange}
-            onShowSizeChange={this.paginationShowSizeChange}
             current={parseInt(props.currentSearchCondition.current)}
             pageSize={parseInt(props.currentSearchCondition.pageSize)}
             total={parseInt(props.searchResult.total)}
+            onChange={this.paginationChange}
+            onShowSizeChange={this.paginationShowSizeChange}
           />
         </section>
       </section>

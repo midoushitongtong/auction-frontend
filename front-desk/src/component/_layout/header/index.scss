@@ -15,11 +15,15 @@
       // 登陆 注册 提示
       .action-tooltip {
         padding-right: .1rem;
-        span {
+        a {
           position: relative;
           cursor: pointer;
+          color: #555;
+          &:hover {
+            color: #eab105;
+          }
         }
-        span:first-child {
+        a:first-child {
           &::after {
             content: '';
             position: absolute;
@@ -87,8 +91,14 @@
                 height: 40px;
                 .ant-select-selection__rendered {
                   line-height: 40px;
+                  .ant-select-selection-selected-value {
+                    float: none;
+                    padding-right: 0;
+                    text-align: center;
+                  }
                 }
                 .ant-select-arrow {
+                  display: none;
                 }
               }
               // input 样式

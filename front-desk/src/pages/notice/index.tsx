@@ -8,6 +8,8 @@ import './index.scss'
 
 // 当前组件的类型声明
 interface Props {
+  // 当前收藏品搜索的条件(分类, 分类, 关键字等)
+  currentSearchCondition: any;
   // 搜索到的公告列表
   searchResult: any;
 }
@@ -21,7 +23,7 @@ export default class Notice extends React.Component<Props, State> {
   public static getInitialProps = async ({ query }: any) => {
     // 获取当前公告搜索条件
     const currentSearchCondition = {
-      pageStart: query.start || 1,
+      current: query.current || 1,
       pageSize: query.pageSize || 10
     };
     // 获取公告列表
@@ -31,6 +33,7 @@ export default class Notice extends React.Component<Props, State> {
       searchResult = result.data;
     }
     return {
+      currentSearchCondition,
       searchResult
     };
   };
@@ -49,7 +52,10 @@ export default class Notice extends React.Component<Props, State> {
               <section className="notice-title">
                 <h3>公告</h3>
               </section>
-              <NoticeSearchResult searchResult={props.searchResult}/>
+              <NoticeSearchResult
+                currentSearchCondition={props.currentSearchCondition}
+                searchResult={props.searchResult}
+              />
             </section>
           </section>
         </section>

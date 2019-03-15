@@ -27,7 +27,7 @@ export default class CollectionSearchCondition extends React.Component<Props, St
   }
 
   public shouldComponentUpdate = (nextProps: any): boolean => {
-    // url 改变会触发当前搜索条件的改变(因为父组件会调用 redux 改变当前搜索条件)
+    // url 改变会触发当前搜索条件的改变
     if (nextProps.currentSearchCondition !== this.props.currentSearchCondition) {
       this.setState({
         currentSearchCondition: nextProps.currentSearchCondition

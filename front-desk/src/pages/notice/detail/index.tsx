@@ -9,7 +9,7 @@ import './index.scss'
 // 当前组件的类型声明
 interface Props {
   // 搜索到的公告详情
-  searchDetail: any;
+  notice: any;
 }
 
 interface State {
@@ -22,12 +22,12 @@ export default class NoticeDetail extends React.Component<Props, State> {
     const id: string = query.id;
     // 获取公告详情
     const result: any = await api.notice.getDetail(id);
-    let searchDetail: any = {};
+    let notice: any = {};
     if (result.code === '0') {
-      searchDetail = result.data;
+      notice = result.data;
     }
     return {
-      searchDetail
+      notice
     };
   };
 
@@ -36,13 +36,13 @@ export default class NoticeDetail extends React.Component<Props, State> {
     return (
       <section className="app-container">
         <Head>
-          <title>{props.searchDetail.title} - 新创文化艺术品</title>
+          <title>{props.notice.title} - 新创文化艺术品</title>
         </Head>
         <Header/>
         <section className="notice-container">
           <section className="notice-wrapper-container">
             <section className="notice-wrapper-inner-container">
-              <NoticeSearchDetail searchDetail={props.searchDetail}/>
+              <NoticeSearchDetail notice={props.notice}/>
             </section>
           </section>
         </section>
