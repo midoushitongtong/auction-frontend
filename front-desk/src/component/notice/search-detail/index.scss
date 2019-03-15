@@ -22,10 +22,16 @@
     a {
       color: #eab105;
     }
+    img {
+      margin: .5rem auto;
+      max-width: 100%;
+    }
   }
 }
 
 // 移动端适配
 @media (max-width: 767px) {
-
+  .notice-search-detail-container {
+    padding: 1rem 1rem 1.5rem;
+  }
 }

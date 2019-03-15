@@ -1,0 +1,12 @@
+.account-sign-in-container {
+  width: 100%;
+  .account-sign-in-wrapper-container {
+    display: flex;
+    justify-content: center;
+    .account-sign-in-wrapper-inner-container {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 1rem;
+    }
+  }
+}

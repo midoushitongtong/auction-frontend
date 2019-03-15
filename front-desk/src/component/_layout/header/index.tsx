@@ -152,6 +152,8 @@ export default compose<React.ComponentClass>(
       const { props } = this;
       props.form.validateFields(async (error, valueList) => {
         if (!error) {
+          // 隐藏搜索框
+          this.toggleMobileSearchContainer(false);
           switch (valueList.type) {
             case 1:
               Router.push({
