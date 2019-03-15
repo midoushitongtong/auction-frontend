@@ -36,13 +36,17 @@ $primary-active-color: #eab105;
 html {
   a {
     color: $primary-active-color;
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
   }
 }
 
 // antd
 html {
   // button
-  .ant-btn-primary {
+  .ant-btn {
     border-color: #ffc107;
     background-color: #ffc107;
     color: rgba(0, 0, 0, 0.65);
@@ -123,6 +127,12 @@ html {
     border-color: $primary-active-color;
     box-shadow: 0 0 0 2px $primary-color;
   }
+  .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
+    border-color: $primary-active-color;
+  }
+  .has-error .ant-input-affix-wrapper .ant-input, .has-error .ant-input-affix-wrapper .ant-input:hover {
+    box-shadow: 0 0 0 2px #ff5555b3;
+  }
   // cascader
   .ant-cascader-menu-item:hover {
     background: $primary-color;
@@ -148,7 +158,7 @@ html {
     border-color: $primary-color;
     box-shadow: 0 0 0 2px $primary-color;
   }
-  .ant-select-selection:hover{
+  .ant-select-selection:hover {
     border-color: $primary-color;
   }
   .ant-pagination-prev:focus .ant-pagination-item-link, .ant-pagination-next:focus .ant-pagination-item-link, .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link {
@@ -157,6 +167,43 @@ html {
   }
   .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
     color: $primary-active-color;
+  }
+  // form
+  .ant-form {
+    .ant-form-item {
+      height: 65px;
+      margin-bottom: 0;
+      transition: height .3s ease;
+      &.ant-form-item-with-help {
+        height: 75px;
+      }
+      .ant-form-explain {
+        margin-top: 5px;
+      }
+    }
+  }
+  // notification
+  .ant-notification-notice {
+    color: #333;
+    background-color: $primary-active-color;
+    .ant-notification-notice-content {
+      .ant-notification-notice-message {
+        color: inherit;
+        margin-bottom: 0;
+      }
+    }
+    .ant-notification-notice-close {
+      color: inherit;
+    }
+  }
+  // notification 移动端适配
+  @media (max-width: 767px) {
+    .ant-notification-bottomLeft {
+      max-width: 100%;
+      margin-left: 0;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 }
 

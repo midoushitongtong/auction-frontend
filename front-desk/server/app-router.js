@@ -18,6 +18,12 @@ module.exports = (router, app) => {
     ctx.respond = false;
   });
 
+  // 账户 - 个人中心
+  router.get('/account/person', async ctx => {
+    await app.render(ctx.req, ctx.res, '/account/person', ctx.query);
+    ctx.respond = false;
+  });
+
   // 收藏品 - 查询页
   router.get('/collection', async ctx => {
     await app.render(ctx.req, ctx.res, '/collection', ctx.query);

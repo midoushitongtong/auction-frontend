@@ -28,7 +28,7 @@ export default class Notice extends React.Component<Props, State> {
     };
     // 获取公告列表
     let searchResult: any = [];
-    const result: any = await api.notice.getList(currentSearchCondition);
+    const result: any = await api.notice.selectList(currentSearchCondition);
     if (result.code === '0') {
       searchResult = result.data;
     }

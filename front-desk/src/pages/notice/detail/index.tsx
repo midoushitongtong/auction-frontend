@@ -21,7 +21,7 @@ export default class NoticeDetail extends React.Component<Props, State> {
     // 获取当前公告搜索条件
     const id: string = query.id;
     // 获取公告详情
-    const result: any = await api.notice.getDetail(id);
+    const result: any = await api.notice.selectDetail(id);
     let notice: any = {};
     if (result.code === '0') {
       notice = result.data;

@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import Header from '../../../component/_layout/header';
 import Footer from '../../../component/_layout/footer';
+import AccountSignUpDetail from '../../../component/account/sign-up-detail';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -25,7 +26,7 @@ export default class AccountSignUp extends React.Component<Props, State> {
         <section className="account-sign-up-container">
           <section className="account-sign-up-wrapper-container">
             <section className="account-sign-up-wrapper-inner-container">
-              sign up
+              <AccountSignUpDetail/>
             </section>
           </section>
         </section>

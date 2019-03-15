@@ -35,13 +35,13 @@ export default class Collection extends React.Component<Props, State> {
     };
     // 获取收藏品搜索条件
     let searchCondition: any = [];
-    const result: any = await api.collection.getSearchCondition();
+    const result: any = await api.collection.selectSearchCondition();
     if (result.code === '0') {
       searchCondition = result.data;
     }
     // 获取收藏品列表
     let searchResult: any = [];
-    const result2: any = await api.collection.getList(currentSearchCondition);
+    const result2: any = await api.collection.selectList(currentSearchCondition);
     if (result2.code == '0') {
       searchResult = result2.data;
     }
@@ -53,7 +53,7 @@ export default class Collection extends React.Component<Props, State> {
   };
 
   public render = (): JSX.Element => {
-    const{props}=this;
+    const { props } = this;
     return (
       <section className="app-container">
         <Head>
