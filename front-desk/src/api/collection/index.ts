@@ -7,9 +7,9 @@ import config from '../../config';
  */
 interface Api {
   // 获取搜索条件
-  selectSearchCondition: () => {};
+  selectCollectionSearchCondition: () => {};
   // 获取搜索结果
-  selectList: (searchCondition: any) => {};
+  selectCollectionList: (searchCondition: any) => {};
 }
 
 /**
@@ -17,13 +17,13 @@ interface Api {
  *
  */
 const api: Api = {
-  selectSearchCondition: (): object => {
+  selectCollectionSearchCondition: (): object => {
     return ajax(
       'GET',
       `${config.API_ROOT}/collection/searchCondition`
     );
   },
-  selectList: (searchCondition: any): object => {
+  selectCollectionList: (searchCondition: any): object => {
     return ajax(
       'GET',
       `${config.API_ROOT}/collection/list`,

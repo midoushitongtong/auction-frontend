@@ -1,6 +1,6 @@
 import React from 'react';
-import { compose } from 'redux';
 import Link from 'next/link';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import './index.scss';
 

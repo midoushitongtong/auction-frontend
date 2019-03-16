@@ -3,7 +3,7 @@ const next = require('next');
 const Router = require('koa-router');
 const AppRouter = require('./app-router');
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = process.env.NODE_ENV !== 'production' ? 3000 : 3005;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({
   dev,

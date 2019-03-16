@@ -9,7 +9,7 @@ export default class _document extends Document {
           <meta charSet="utf-8"/>
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
           <meta httpEquiv="X-UA-Compatible" content="edge"/>
-          <meta name="theme-color" content="#40a9ff"/>
+          <meta name="theme-color" content="#eab105"/>
           <meta name="keywords" content="新创文化艺术品"/>
           <meta name="description" content="新文化艺术品"/>
           <meta name="viewport" content="initial-scale=1.0, width=device-width"/>

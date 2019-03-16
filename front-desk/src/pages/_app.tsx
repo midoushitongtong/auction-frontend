@@ -29,9 +29,15 @@ export default withReduxStore(
       }
 
       // 在此初始化用户登陆信息(因为每个页面都可能需要用到)
-      const result: any = await api.account.selectUserInfo();
-      if (result.code === '0') {
-        ctx.store.dispatch(updateUserInfo(result.data));
+      // (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+      if (ctx.store.getState().account.userInfo.isGet === undefined) {
+        let userInfo: any = {};
+        const result: any = await api.account.selectUserInfo();
+        userInfo = result.data;
+        userInfo.isGet = true;
+        if (result.code === '0') {
+          ctx.store.dispatch(updateUserInfo(userInfo));
+        }
       }
 
       return {

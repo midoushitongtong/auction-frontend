@@ -4,18 +4,18 @@ export interface State {
   userInfo: any;
 }
 
-// 操作类型
+// action type
 enum ActionType {
   UPDATE_USER_INFO = 'updateUserInfo',
   CLEAR_ACCOUNT_STATE = 'clearAccountState'
 }
 
-// 状态
+// state
 const initState: State = {
   userInfo: {}
 };
 
-// 操作函数
+// action
 // 修改当前登陆的用户信息
 export const updateUserInfo = (userInfo: any): object => {
   return {

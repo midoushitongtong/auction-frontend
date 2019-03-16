@@ -44,20 +44,20 @@ export default class CommonCollectionItem extends React.Component<Props, State> 
         {/* 商品的图片 */}
         <section className="collection-image">
           {/* 图片懒加载 */}
-          <LazyLoad offset={20} height={200}>
-            <CSSTransition
-              in={true}
-              classNames="image-fade"
-              appear
-              timeout={1000}
-            >
-              <Link href="/collection">
-                <a href="/collection">
+          <Link href="/collection">
+            <a href="/collection">
+              <LazyLoad offset={55} height={200}>
+                <CSSTransition
+                  in={true}
+                  classNames="image-fade"
+                  appear
+                  timeout={3000}
+                >
                   <img src={state.collection.imagePath} alt={state.collection.name}/>
-                </a>
-              </Link>
-            </CSSTransition>
-          </LazyLoad>
+                </CSSTransition>
+              </LazyLoad>
+            </a>
+          </Link>
         </section>
         {/* 产品的描述 */}
         <section className="collection-description">
