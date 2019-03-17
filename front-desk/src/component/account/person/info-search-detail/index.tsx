@@ -14,7 +14,7 @@ interface State {
 export default class AccountPersonInfoDetail extends React.Component<Props, State> {
   public render = (): JSX.Element => {
     return (
-      <section className="account-person-info-detail-container">
+      <section className="account-person-info-search-detail-container">
         person info
       </section>
     );

@@ -1,6 +1,6 @@
 .account-person-nav-container {
   width: 250px;
-  height: 20vh;
+  min-height: 20vh;
   background-color: #fff;
   .ant-menu {
     border-right: 0;
@@ -16,6 +16,67 @@
       }
       &.ant-menu-item-selected {
         border-bottom-color: #eab105;
+      }
+    }
+  }
+  .mobile-account-person-nav-container {
+    display: none;
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .account-person-nav-container {
+    min-height: auto;
+    margin-top: 1.5rem;
+    .ant-menu {
+      display: none;
+    }
+    .mobile-account-person-nav-container {
+      position: relative;
+      display: block;
+      .person-nav-list-container {
+        overflow-x: auto;
+        display: flex;
+        margin: 0;
+        padding: 0;
+        white-space: nowrap;
+        list-style-type: none;
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 3.5rem;
+          padding-left: 1.1rem;
+          padding-right: 1.1rem;
+          border-bottom: 3px solid transparent;
+          &.active {
+            border-bottom: 3px solid #eab105;
+          }
+        }
+      }
+      .left-mask {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.5rem;
+        height: 3.5rem;
+        background-color: rgba(255, 255, 255, 0);
+        background-image: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.902) 70%);
+      }
+      .right-mask {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 1.5rem;
+        height: 3.5rem;
+        background-color: rgba(255, 255, 255, 0);
+        background-image: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.902) 70%);
       }
     }
   }

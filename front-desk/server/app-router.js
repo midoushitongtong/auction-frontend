@@ -25,14 +25,22 @@ module.exports = (router, app) => {
   });
 
   // 账户 - 个人中心 - 我的收藏
-  router.get('/account/person/collection', async ctx => {
-    await app.render(ctx.req, ctx.res, '/account/person/collection', ctx.query);
+  router.get('/account/person/collection-favorite', async ctx => {
+    await app.render(ctx.req, ctx.res, '/account/person/collection-favorite', ctx.query);
     ctx.respond = false;
   });
 
   // 收藏品 - 查询页
   router.get('/collection', async ctx => {
     await app.render(ctx.req, ctx.res, '/collection', ctx.query);
+    ctx.respond = false;
+  });
+
+  // 收藏品 - 详情页面
+  router.get('/collection/detail/:id', async ctx => {
+    await app.render(ctx.req, ctx.res, '/collection/detail', {
+      id: ctx.params.id
+    });
     ctx.respond = false;
   });
 

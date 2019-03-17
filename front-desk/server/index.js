@@ -3,8 +3,19 @@ const next = require('next');
 const Router = require('koa-router');
 const AppRouter = require('./app-router');
 
-const port = process.env.NODE_ENV !== 'production' ? 3000 : 3005;
+const port = process.env.PORT;
 const dev = process.env.NODE_ENV !== 'production';
+
+// 打印当前环境
+console.log(`environment: ${process.env.NODE_ENV}`);
+console.log(`PORT: ${process.env.PORT}`);
+
+// 删除系统代理
+delete process.env['http_proxy'];
+delete process.env['HTTP_PROXY'];
+delete process.env['https_proxy'];
+delete process.env['HTTPS_PROXY'];
+
 const app = next({
   dev,
   dir: './src'
@@ -28,6 +39,7 @@ app.prepare().then(() => {
     await next();
   });
 
+  // 加载应用路由
   server.use(router.routes());
 
   server.listen(port, () => {

@@ -7,9 +7,9 @@ import config from '../../config';
  */
 interface Api {
   // 获取公告列表
-  selectList: (searchCondition: any) => {};
+  selectNoticeList: (searchCondition: any) => {};
   // 获取公告详情
-  selectDetail: (id: any) => {};
+  selectNoticeDetail: (id: any) => {};
 }
 
 /**
@@ -17,14 +17,14 @@ interface Api {
  *
  */
 const api: Api = {
-  selectList: (searchCondition: any): object => {
+  selectNoticeList: (searchCondition: any): object => {
     return ajax(
       'GET',
       `${config.API_ROOT}/notice/list`,
       searchCondition
     );
   },
-  selectDetail: (id: any): object => {
+  selectNoticeDetail: (id: any): object => {
     return ajax(
       'GET',
       `${config.API_ROOT}/notice/detail/${id}`

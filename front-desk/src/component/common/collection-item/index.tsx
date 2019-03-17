@@ -44,8 +44,8 @@ export default class CommonCollectionItem extends React.Component<Props, State> 
         {/* 商品的图片 */}
         <section className="collection-image">
           {/* 图片懒加载 */}
-          <Link href="/collection">
-            <a href="/collection">
+          <Link href={`/collection/detail?id=${state.collection.id}`} as={`/collection/detail/${state.collection.id}`}>
+            <a href={`/collection/detail/${state.collection.id}`}>
               <LazyLoad offset={55} height={200}>
                 <CSSTransition
                   in={true}
@@ -61,8 +61,8 @@ export default class CommonCollectionItem extends React.Component<Props, State> 
         </section>
         {/* 产品的描述 */}
         <section className="collection-description">
-          <Link href="/collection">
-            <a href="/collection" className="collection-lot-and-author-and-name">
+          <Link href={`/collection/detail?id=${state.collection.id}`} as={`/collection/detail/${state.collection.id}`}>
+            <a href={`/collection/detail/${state.collection.id}`} className="collection-lot-and-author-and-name">
               <p className="collection-lot">
                 <span>Lot</span>
                 <span className="collection-lot-number">{state.collection.lot}</span>

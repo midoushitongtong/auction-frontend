@@ -51,7 +51,7 @@ export default compose<React.Component>(
 
       // 获取公告的搜索结果集
       let noticeSearchResult: any = [];
-      const result: any = await api.notice.selectList(currentNoticeSearchCondition);
+      const result: any = await api.notice.selectNoticeList(currentNoticeSearchCondition);
       if (result.code === '0') {
         noticeSearchResult = result.data;
         store.dispatch(updateNoticeSearchResult(noticeSearchResult));

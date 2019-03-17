@@ -67,8 +67,8 @@ export default compose<React.ComponentClass>(
                   {/*</section>*/}
                 {/*)}*/}
               <section>
-                <Link href="/account/person/info">
-                  <a href="/account/person/info" className="separation">
+                <Link href="/account/person/collection-favorite">
+                  <a href="/account/person/collection-favorite" className="separation">
                     <span>个人中心</span>
                   </a>
                 </Link>

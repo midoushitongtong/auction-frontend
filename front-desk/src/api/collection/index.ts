@@ -6,10 +6,12 @@ import config from '../../config';
  *
  */
 interface Api {
-  // 获取搜索条件
+  // 获取收藏品搜索条件
   selectCollectionSearchCondition: () => {};
-  // 获取搜索结果
+  // 获取收藏品列表
   selectCollectionList: (searchCondition: any) => {};
+  // 获取收藏品详情
+  selectCollectionDetail: (id: any) => {};
 }
 
 /**
@@ -28,6 +30,12 @@ const api: Api = {
       'GET',
       `${config.API_ROOT}/collection/list`,
       searchCondition
+    );
+  },
+  selectCollectionDetail: (id: any) : object => {
+    return ajax(
+      'GET',
+      `${config.API_ROOT}/collection/detail/${id}`
     );
   }
 };

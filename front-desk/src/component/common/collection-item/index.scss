@@ -1,9 +1,8 @@
 .collection-item-container {
   display: block;
   height: 100%;
-  margin-right: 1rem;
-  margin-left: 1rem;
-  padding-bottom: 1rem;
+  margin-right: .6rem;
+  margin-left: .6rem;
   box-shadow: 0 0 3px #ccc;
   text-decoration: none;
   color: inherit;
@@ -21,7 +20,7 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    min-height: 260px;
+    height: 235px;
     padding: 1rem;
     transition: transform .3s ease;
     img {
@@ -37,8 +36,8 @@
     }
   }
   .collection-description {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.3rem;
+    padding-right: 1.3rem;
     p {
       margin-bottom: .5rem;
       color: rgba(0, 0, 0, .65);
@@ -82,7 +81,7 @@
     margin-right: .5rem;
     margin-left: .5rem;
     .collection-image {
-      min-height: 130px;
+      height: 130px;
       padding: 13px;
       img {
         max-width: 100%;

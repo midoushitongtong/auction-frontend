@@ -3,7 +3,7 @@ import Head from 'next/head';
 import AccountPerson from '../../../../component/account/person';
 import LayoutHeader from '../../../../component/layout/header';
 import LayoutFooter from '../../../../component/layout/footer';
-import AccountPersonInfoDetail from '../../../../component/account/person/info-detail';
+import AccountPersonInfoSearchDetail from '../../../../component/account/person/info-search-detail';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -31,7 +31,7 @@ export default class AccountPersonCollection extends React.Component<Props, Stat
           <section className="account-person-info-wrapper-container">
             <section className="account-person-info-wrapper-inner-container">
               <AccountPerson>
-                <AccountPersonInfoDetail/>
+                <AccountPersonInfoSearchDetail/>
               </AccountPerson>
             </section>
           </section>
