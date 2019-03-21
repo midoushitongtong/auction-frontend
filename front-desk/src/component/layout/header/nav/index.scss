@@ -1,5 +1,5 @@
 .header-nav-container {
-  display: none;
+  display: flex;
   justify-content: center;
   box-shadow: 0 0 5px rgba(0, 0, 0, .25);
   .header-nav-inner-container {
@@ -25,18 +25,9 @@
   }
 }
 
-// pc端适配
-@media (min-width: 767px) {
-  .header-nav-container {
-    display: flex;
-  }
-}
-
 // 移动端适配
 @media (max-width: 767px) {
   .header-nav-container {
-    display: flex;
-    width: 0;
     &.mobile-active {
       z-index: 100;
       overflow: hidden;
@@ -49,7 +40,7 @@
       border-top: 0;
       border-bottom: 0;
       .header-nav-inner-container {
-        transform: translateX(0);
+        transform: translateX(355px);
       }
       .mobile-header-nav-container-mask {
         z-index: 102;
@@ -59,19 +50,18 @@
         bottom: 0;
         left: 0;
         background: rgba(0, 0, 0, .3);
-        transition: background .5s ease;
       }
     }
     .header-nav-inner-container {
-      z-index: 103;
       position: fixed;
       top: 0;
+      right: 0;
+      left: -355px;
       bottom: 0;
-      left: 0;
-      width: 250px;
+      z-index: 103;
+      width: 255px;
       background-color: #fff;
-      transform: translateX(-350px);
-      transition: transform .5s;
+      transition: .5s;
       .ant-menu-inline {
         height: 100%;
         .ant-menu-item,
@@ -82,7 +72,6 @@
           margin-top: 0;
           margin-bottom: 0;
           border-bottom: 3px solid rgba(0, 0, 0, .1);
-          transition: none;
           .anticon-down {
             display: none;
           }

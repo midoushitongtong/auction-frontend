@@ -16,19 +16,22 @@
         &.lot {
           align-items: center;
           .detail {
-            font-size: 1.65rem;
+            font-size: 1.5rem;
+            font-weight: bold;
           }
         }
         &.author {
           align-items: center;
           .detail {
-            font-size: 1.65rem;
+            font-size: 1.5rem;
+            font-weight: bold;
           }
         }
         &.name {
           align-items: center;
           .detail {
-            font-size: 1.65rem;
+            font-size: 1.5rem;
+            font-weight: bold;
           }
         }
         &.description {
@@ -87,21 +90,25 @@
         .collection-base-info-item {
           &.lot {
             .detail {
-              font-size: 1.5rem;
+              font-size: 1.3rem;
             }
           }
           &.author {
             .detail {
-              font-size: 1.5rem;
+              font-size: 1.3rem;
             }
           }
           &.name {
             .detail {
-              font-size: 1.5rem;
+              font-size: 1.3rem;
             }
           }
           .title {
             padding-left: .5rem;
+            font-size: 1rem;
+          }
+          .detail {
+            font-size: 1rem;
           }
         }
       }

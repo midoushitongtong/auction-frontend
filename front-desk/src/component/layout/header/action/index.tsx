@@ -36,7 +36,7 @@ export default compose<React.ComponentClass>(
           <section className="header-action-inner-container">
             <section className="hello">
               <Link href="/home">
-                <a href="/home">
+                <a href="/home" style={{color: 'rgba(0, 0, 0, 0.65)'}}>
                   <span>欢迎来到 新创文化艺术品</span>
                 </a>
               </Link>
@@ -46,7 +46,7 @@ export default compose<React.ComponentClass>(
                 {/*? (*/}
                   {/*<section>*/}
                     {/*<Link href="/account/person/info">*/}
-                      {/*<a href="/account/person/info">*/}
+                      {/*<a href="/account/person/info" style={{color: 'rgba(0, 0, 0, 0.65)'}}>*/}
                         {/*<span>个人中心</span>*/}
                       {/*</a>*/}
                     {/*</Link>*/}
@@ -55,12 +55,12 @@ export default compose<React.ComponentClass>(
                 {/*: (*/}
                   {/*<section>*/}
                     {/*<Link href="/account/sign-in">*/}
-                      {/*<a href="/account/sign-in" className="separation">*/}
+                      {/*<a href="/account/sign-in" className="separation" style={{color: 'rgba(0, 0, 0, 0.65)'}}>*/}
                         {/*<span>登陆</span>*/}
                       {/*</a>*/}
                     {/*</Link>*/}
                     {/*<Link href="/account/sign-up">*/}
-                      {/*<a href="/account/sign-up">*/}
+                      {/*<a href="/account/sign-up" style={{color: 'rgba(0, 0, 0, 0.65)'}}>*/}
                         {/*<span>注册</span>*/}
                       {/*</a>*/}
                     {/*</Link>*/}
@@ -68,17 +68,17 @@ export default compose<React.ComponentClass>(
                 {/*)}*/}
               <section>
                 <Link href="/account/person/collection-favorite">
-                  <a href="/account/person/collection-favorite" className="separation">
+                  <a href="/account/person/collection-favorite" className="separation" style={{color: 'rgba(0, 0, 0, 0.65)'}}>
                     <span>个人中心</span>
                   </a>
                 </Link>
                 <Link href="/account/sign-in">
-                  <a href="/account/sign-in" className="separation">
+                  <a href="/account/sign-in" className="separation" style={{color: 'rgba(0, 0, 0, 0.65)'}}>
                     <span>登陆</span>
                   </a>
                 </Link>
                 <Link href="/account/sign-up">
-                  <a href="/account/sign-up">
+                  <a href="/account/sign-up" style={{color: 'rgba(0, 0, 0, 0.65)'}}>
                     <span>注册</span>
                   </a>
                 </Link>

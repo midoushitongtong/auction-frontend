@@ -47,7 +47,7 @@ export default class HomeCarousel extends React.Component<Props, State> {
     setTimeout(() => {
       const myEvent = new Event('resize');
       window.dispatchEvent(myEvent);
-    }, 200);
+    }, 1000);
   };
 
   public render = (): JSX.Element => {

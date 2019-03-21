@@ -18,7 +18,8 @@ export default class Home extends React.Component<Props, State> {
   public componentDidMount = (): void => {
     setTimeout(() => {
       window.scrollTo(0, 1);
-    }, 500);
+      window.scrollTo(0, 0);
+    }, 1000);
   };
 
   public render = (): JSX.Element => {

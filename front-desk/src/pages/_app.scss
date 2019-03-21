@@ -1,13 +1,13 @@
 html {
   font-family: 'OptimaLTStd', 'Arial', "Microsoft JhengHei";
-  font-size: 90%;
+  font-size: 13px;
   &.mobile-active {
     overflow: hidden;
   }
   body {
     overflow-y: scroll;
     overflow-x: hidden;
-    font-size: 1rem;
+    font-size: .8rem;
     background-color: #f6f6f6;
     #__next {
       transition: transform .3s ease;
@@ -37,7 +37,7 @@ html {
     color: rgba(0, 0, 0, 0.65);
     &:hover,
     &:focus {
-      color: $primary-active-color;
+      color: $primary-active-color !important;
       text-decoration: none;
     }
   }
@@ -47,101 +47,24 @@ html {
 html {
   // button
   .ant-btn {
-    border-color: #ffc107;
-    background-color: #ffc107;
     color: rgba(0, 0, 0, 0.65);
     text-shadow: none;
     &:hover,
     &:focus {
       color: #233;
-      background-color: #eab105;
-      border-color: #eab105;
-    }
-  }
-  // nav
-  .ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected,
-  .ant-menu-horizontal > .ant-menu-item-selected > a,
-  .ant-menu-horizontal > .ant-menu-item > a:hover,
-  .ant-menu-item:hover, .ant-menu-item-active, .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open, .ant-menu-submenu-active, .ant-menu-submenu-title:hover,
-  .ant-menu-item > a:hover,
-  .ant-menu-item-selected > a, .ant-menu-item-selected > a:hover {
-    color: $primary-active-color;
-    border-bottom-color: $primary-active-color;
-  }
-  .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
-    border-right-color: $primary-active-color;
-  }
-  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-    background-color: #fcfcf1;
-  }
-  .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::after, .ant-menu-submenu-vertical > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before, .ant-menu-submenu-vertical-left > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before, .ant-menu-submenu-vertical-right > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before, .ant-menu-submenu-inline > .ant-menu-submenu-title:hover .ant-menu-submenu-arrow::before {
-    background: linear-gradient(to right, $primary-active-color, $primary-active-color);
-  }
-  .ant-menu-item-selected {
-    color: $primary-active-color;
-  }
-  .ant-menu-item-selected {
-    a {
-      color: $primary-active-color;
-    }
-  }
-  .ant-menu-item:hover {
-    a {
-      color: $primary-active-color;
-    }
-  }
-  // select
-  .ant-select-dropdown-menu-item:hover,
-  .ant-select-dropdown-menu-item-active {
-    background-color: $primary-color;
-  }
-  .ant-select-dropdown {
-    border-radius: 0 !important;
-    .ant-select-dropdown-menu-item {
-      border-radius: 0 !important;
     }
   }
   // radio
-  .ant-radio-button-wrapper {
-    border-left: 1px solid #d9d9d9;
-  }
-  .ant-radio-button-wrapper:not(:first-child)::before {
-    width: 0;
-  }
-  .ant-radio-button-wrapper:hover {
-    color: $primary-active-color;
-  }
   .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
-    background: $primary-color;
-    border-color: $primary-color;
     color: rgba(0, 0, 0, 0.65);
-  }
-  .ant-radio-button-wrapper-checked {
-    box-shadow: -1px 0 0 0 $primary-color;
-  }
-  .ant-radio-button-wrapper-checked:active,
-  .ant-radio-button-wrapper-checked:hover {
-    box-shadow: -1px 0 0 0 $primary-active-color;
-  }
-  .ant-radio-button-wrapper-checked::before {
-    background-color: $primary-color !important;
   }
   .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
   .ant-radio-button-wrapper-checked:hover {
     color: #000;
-    background: $primary-active-color;
-    border-color: $primary-active-color;
   }
   // input
-  .ant-input:hover {
-    border-color: $primary-color;
-  }
   .ant-input:focus {
-    border-color: $primary-active-color;
     box-shadow: 0 0 0 2px $primary-color;
-  }
-  .ant-input-affix-wrapper:hover .ant-input:not(.ant-input-disabled) {
-    border-color: $primary-active-color;
   }
   .ant-form-item-control.has-error {
     .ant-input {
@@ -149,39 +72,12 @@ html {
     }
   }
   // cascader
-  .ant-cascader-menu-item:hover {
-    background: $primary-color;
-  }
   .ant-cascader-picker:focus .ant-cascader-input {
-    border-color: $primary-active-color;
     box-shadow: 0 0 0 2px $primary-color;
   }
   // pagination
-  .ant-pagination-item-active {
-    border-color: $primary-active-color;
-    a {
-      color: $primary-active-color;
-    }
-  }
-  .ant-pagination-item:focus, .ant-pagination-item:hover {
-    border-color: $primary-active-color;
-    a {
-      color: $primary-active-color;
-    }
-  }
   .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
-    border-color: $primary-color;
     box-shadow: 0 0 0 2px $primary-color;
-  }
-  .ant-select-selection:hover {
-    border-color: $primary-color;
-  }
-  .ant-pagination-prev:focus .ant-pagination-item-link, .ant-pagination-next:focus .ant-pagination-item-link, .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link {
-    border-color: $primary-active-color;
-    color: $primary-active-color;
-  }
-  .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
-    color: $primary-active-color;
   }
   // form
   .ant-form {

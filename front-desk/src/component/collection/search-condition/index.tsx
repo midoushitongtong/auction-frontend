@@ -120,7 +120,7 @@ export default compose<React.ComponentClass>(
       return (
         <section className="collection-search-condition-container">
           <section className="mobile-collection-search-condition-action-container">
-            <Button onClick={() => this.toggleMobileCollectionSearchConditionContainer(true)}>筛选</Button>
+            <Button type="primary" onClick={() => this.toggleMobileCollectionSearchConditionContainer(true)}>筛选</Button>
           </section>
           <section className="collection-select-search-condition-container">
             <section className="collection-search-condition-item collection-category">

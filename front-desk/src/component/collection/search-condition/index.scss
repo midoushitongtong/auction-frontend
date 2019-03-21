@@ -68,7 +68,7 @@
     padding: 0;
     &.mobile-active {
       .collection-select-search-condition-container {
-        transform: translateX(0);
+        transform: translateX(-255px);
       }
       .mobile-collection-select-search-condition-container-mask {
         z-index: 102;
@@ -78,7 +78,6 @@
         bottom: 0;
         left: 0;
         background: rgba(0, 0, 0, 0.3);
-        transition: background .5s ease;
       }
     }
     .mobile-collection-search-condition-action-container {
@@ -88,18 +87,17 @@
       background-color: #fff;
     }
     .collection-select-search-condition-container {
-      overflow: scroll;
       z-index: 103;
+      overflow: scroll;
       position: fixed;
       top: 0;
-      right: 0;
+      right: -255px;
       bottom: 0;
       width: 255px;
       padding-left: 1rem;
       padding-right: 1rem;
       background: #fff;
-      transition: transform .5s;
-      transform: translateX(350px);
+      transition: .5s;
       .collection-search-condition-item {
         display: block;
         &.collection-category,

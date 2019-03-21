@@ -20,8 +20,12 @@ export default class LayoutFooter extends React.Component<Props, State> {
               <section className="action-item-group">
                 <p>帮助中心</p>
                 <ul>
-                  <li>买家指南</li>
-                  <li>卖家指南</li>
+                  <li>
+                    <a href="javascript:void(0)">买家指南</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">卖家指南</a>
+                  </li>
                 </ul>
               </section>
               <section className="action-item-group contact-action-item-group">
