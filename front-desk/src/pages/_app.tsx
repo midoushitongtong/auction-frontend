@@ -14,6 +14,16 @@ import 'normalize.css';
 import 'nprogress/nprogress.css';
 import './_app.scss';
 
+// NProgress 配置
+NProgress.configure({
+  minimum: .35,
+  easing: 'ease-in',
+  speed: 233,
+  trickle: true,
+  trickleSpeed: 65,
+  showSpinner: false
+});
+
 // 当前组件类型声明
 interface Props {
   store: any;

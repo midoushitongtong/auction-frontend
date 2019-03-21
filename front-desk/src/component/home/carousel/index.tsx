@@ -39,8 +39,15 @@ export default class HomeCarousel extends React.Component<Props, State> {
         disableOnInteraction: false,
       },
       preloadImages: false,
-      lazy: true
+      lazy: true,
+      observer: true,
+      observeParents: false
     });
+    // 触发一次 resize, 让 swiper 重新渲染
+    setTimeout(() => {
+      const myEvent = new Event('resize');
+      window.dispatchEvent(myEvent);
+    }, 200);
   };
 
   public render = (): JSX.Element => {
@@ -51,7 +58,7 @@ export default class HomeCarousel extends React.Component<Props, State> {
           <div className="swiper-wrapper">
             {state.carouselList.map((item, index) => (
               <div className="swiper-slide" key={index}>
-                <img alt="" data-src={item.imagePath} className="swiper-lazy"/>
+                <img data-src={item.imagePath} className="swiper-lazy"/>
                 <div className="swiper-lazy-preloader swiper-lazy-preloader-white"/>
               </div>
             ))}

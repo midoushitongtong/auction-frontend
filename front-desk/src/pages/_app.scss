@@ -1,15 +1,14 @@
 html {
   font-family: 'OptimaLTStd', 'Arial', "Microsoft JhengHei";
   font-size: 90%;
+  &.mobile-active {
+    overflow: hidden;
+  }
   body {
     overflow-y: scroll;
     overflow-x: hidden;
     font-size: 1rem;
     background-color: #f6f6f6;
-    &.mobile-active {
-      overflow: hidden;
-    }
-
     #__next {
       transition: transform .3s ease;
       // 移动端菜单显示触发
@@ -240,6 +239,7 @@ html {
 // nprogress
 html {
   #nprogress .bar {
+    height: .3rem;
     background: $primary-active-color;
   }
   #nprogress .peg {

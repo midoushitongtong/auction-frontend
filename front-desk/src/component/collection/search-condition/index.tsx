@@ -103,10 +103,13 @@ export default compose<React.ComponentClass>(
      */
     public toggleMobileCollectionSearchConditionContainer = (isShow: boolean): void => {
       const collectionSearchConditionContainer = document.querySelector('.collection-search-condition-container');
-      if (collectionSearchConditionContainer) {
+      const htmlElem = document.querySelector('html');
+      if (htmlElem && collectionSearchConditionContainer) {
         if (isShow) {
+          htmlElem.classList.add('mobile-active');
           collectionSearchConditionContainer.classList.add('mobile-active');
         } else {
+          htmlElem.classList.remove('mobile-active');
           collectionSearchConditionContainer.classList.remove('mobile-active');
         }
       }

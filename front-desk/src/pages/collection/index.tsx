@@ -86,6 +86,12 @@ export default compose<React.ComponentClass>(
       return {};
     };
 
+    public componentDidMount = (): void => {
+      setTimeout(() => {
+        window.scrollTo(0, 1);
+      }, 500);
+    };
+
     public render = (): JSX.Element => {
       return (
         <section className="app-container">

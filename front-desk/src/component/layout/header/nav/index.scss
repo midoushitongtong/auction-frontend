@@ -1,5 +1,5 @@
 .header-nav-container {
-  display: flex;
+  display: none;
   justify-content: center;
   box-shadow: 0 0 5px rgba(0, 0, 0, .25);
   .header-nav-inner-container {
@@ -25,9 +25,17 @@
   }
 }
 
+// pc端适配
+@media (min-width: 767px) {
+  .header-nav-container {
+    display: flex;
+  }
+}
+
 // 移动端适配
 @media (max-width: 767px) {
   .header-nav-container {
+    display: flex;
     width: 0;
     &.mobile-active {
       z-index: 100;

@@ -4,7 +4,6 @@ import LayoutHeader from '../../component/layout/header';
 import LayoutFooter from '../../component/layout/footer';
 import HomeCarousel from '../../component/home/carousel';
 import HomeCollectionList from '../../component/home/collection-list';
-// import { asyncUpdateUserInfo } from '../../store/account';
 import './index.scss';
 
 // 当前组件的类型声明
@@ -16,9 +15,11 @@ interface State {
 
 // 当前组件类
 export default class Home extends React.Component<Props, State> {
-  // public static getInitialProps = async ({ store }: any) => {
-  //   store.dispatch(asyncUpdateUserInfo());
-  // };
+  public componentDidMount = (): void => {
+    setTimeout(() => {
+      window.scrollTo(0, 1);
+    }, 500);
+  };
 
   public render = (): JSX.Element => {
     return (

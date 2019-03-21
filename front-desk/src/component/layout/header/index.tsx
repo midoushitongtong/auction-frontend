@@ -71,11 +71,14 @@ export default class LayoutHeader extends React.Component<Props, State> {
    *
    */
   public toggleMobileSearchContainer = (isShow: boolean): void => {
+    const htmlElem = document.querySelector('html');
     const operationContainerElem = document.querySelector('.operation-container');
-    if (operationContainerElem) {
+    if (htmlElem && operationContainerElem) {
       if (isShow) {
+        htmlElem.classList.add('mobile-active');
         operationContainerElem.classList.add('mobile-active');
       } else {
+        htmlElem.classList.remove('mobile-active');
         operationContainerElem.classList.remove('mobile-active');
       }
     }
@@ -86,16 +89,16 @@ export default class LayoutHeader extends React.Component<Props, State> {
    *
    */
   public toggleMobileHeaderNavContainer = (isShow: boolean): void => {
-    const bodyElem = document.querySelector('body');
+    const htmlElem = document.querySelector('html');
     const rootElem = document.querySelector('#__next');
     const headerNavContainer = document.querySelector('.header-nav-container');
-    if (bodyElem && rootElem && headerNavContainer) {
+    if (htmlElem && rootElem && headerNavContainer) {
       if (isShow) {
-        bodyElem.classList.add('mobile-active');
+        htmlElem.classList.add('mobile-active');
         rootElem.classList.add('mobile-active');
         headerNavContainer.classList.add('mobile-active');
       } else {
-        bodyElem.classList.remove('mobile-active');
+        htmlElem.classList.remove('mobile-active');
         rootElem.classList.remove('mobile-active');
         headerNavContainer.classList.remove('mobile-active');
       }
