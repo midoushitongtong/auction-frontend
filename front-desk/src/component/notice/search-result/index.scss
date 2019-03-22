@@ -6,11 +6,11 @@
   .notice-list-container {
     padding: 1rem 2rem 2rem;
     .notice-list-item {
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
       border-bottom: 1px dashed #cecece;
       .description-top {
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
         display: flex;
         justify-content: space-between;
         .title {
@@ -18,7 +18,7 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          font-size: 1.1rem;
+          font-size: 1.25rem;
           color: #555;
           text-decoration: none;
           &:hover {
@@ -30,14 +30,12 @@
         }
       }
       .description-bottom {
+        max-width: 65%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         margin-bottom: 0;
         .description {
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          max-width: 100%;
           color: #898989;
         }
       }
@@ -54,6 +52,13 @@
   .notice-search-result-container {
     .notice-list-container {
       padding: 1rem;
+      .notice-list-item {
+        .description-top {
+          .title {
+            max-width: 75%;
+          }
+        }
+      }
     }
   }
 }

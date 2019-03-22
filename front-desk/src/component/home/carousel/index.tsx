@@ -25,29 +25,31 @@ export default class HomeCarousel extends React.Component<Props, State> {
   };
 
   public componentDidMount = (): void => {
-    new (window as any).Swiper('.swiper-container', {
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      },
-      pagination: {
-        el: '.swiper-pagination'
-      },
-      loop: true,
-      autoplay: {
-        delay: 5000,
-        disableOnInteraction: false,
-      },
-      preloadImages: false,
-      lazy: true,
-      observer: true,
-      observeParents: false
-    });
+    try {
+      new (window as any).Swiper('.swiper-container', {
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        loop: true,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: false,
+        },
+        preloadImages: false,
+        lazy: true
+      });
+    } catch (e) {
+      console.error('实例化 swiper 失败, 请检查 swiper 资源文件');
+    }
     // 触发一次 resize, 让 swiper 重新渲染
     setTimeout(() => {
       const myEvent = new Event('resize');
       window.dispatchEvent(myEvent);
-    }, 1000);
+    }, 500);
   };
 
   public render = (): JSX.Element => {
