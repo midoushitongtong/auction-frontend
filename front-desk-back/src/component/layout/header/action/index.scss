@@ -1,0 +1,56 @@
+.header-action-container {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  background: #f2f2f2;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px;
+  .header-action-inner-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+    .hello a {
+      color: #555;
+      &:hover {
+        color: #eab105;
+      }
+    }
+    // 登陆 注册 提示
+    .action-tooltip {
+      padding-right: .1rem;
+      a {
+        position: relative;
+        cursor: pointer;
+        color: #555;
+        &.separation {
+          &::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            bottom: 2px;
+            left: 100%;
+            margin-left: 10px;
+            border-right: 1px solid #ccc;
+          }
+        }
+        &:hover {
+          color: #eab105;
+        }
+      }
+      span:last-child {
+        margin-left: 1.5rem;
+      }
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  // 顶部操作栏
+  .header-action-container {
+    .header-action-inner-container {
+      padding-left: .5rem;
+      padding-right: .5rem;
+    }
+  }
+}

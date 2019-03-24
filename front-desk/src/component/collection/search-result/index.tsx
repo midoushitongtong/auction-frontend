@@ -50,17 +50,15 @@ export default compose<React.ComponentClass>(
      * 分页数据改变
      *
      * @param current
-     * @param pageSize
      */
-    public paginationChange = (current: any, pageSize: any): void => {
+    public paginationChange = (current: any): void => {
       const { props } = this;
       setTimeout(() => BrowserUtil.scrollToTop(233), 100);
       Router.push({
         pathname: '/collection',
         query: {
           ...props.currentCollectionSearchCondition,
-          current,
-          pageSize
+          current
         }
       });
     };
@@ -79,18 +77,24 @@ export default compose<React.ComponentClass>(
                 md={8}
                 sm={12}
               >
-                <CommonCollectionItem collection={collectionListItem}/>
+                <CommonCollectionItem collection={{
+                  id: collectionListItem.id,
+                  imagePath: collectionListItem.goods_logo,
+                  lot: collectionListItem.id,
+                  author: collectionListItem.goods_spec,
+                  name: collectionListItem.goods_title,
+                  isFavorite: false,
+                  expectPrice: collectionListItem.market_price + '-' + collectionListItem.selling_price
+                }}/>
               </Col>
             ))}
           </Row>
           <section className="collection-pagination-container">
             <Pagination
-              showSizeChanger
               current={parseInt(props.currentCollectionSearchCondition.current)}
-              pageSize={parseInt(props.currentCollectionSearchCondition.pageSize)}
+              pageSize={parseInt(props.collectionSearchResult.per_page)}
               total={parseInt(props.collectionSearchResult.total)}
               onChange={this.paginationChange}
-              onShowSizeChange={this.paginationChange}
             />
           </section>
         </section>

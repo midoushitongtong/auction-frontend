@@ -24,7 +24,16 @@ export default class CollectionDetail extends React.Component<Props, State> {
     const result: any = await api.collection.selectCollectionDetail(id);
     let collection: any = {};
     if (result.code === '0') {
-      collection = result.data;
+      const data = result.data[0];
+      collection = {
+        lot: data.id,
+        description: data.goods_content,
+        imagePath: data.goods_logo,
+        descriptionList: data.goods_spec,
+        carouselList: data.goods_image,
+        price: data.market_price + '-' + data.selling_price,
+        name: data.goods_title
+      };
     }
     return {
       collection

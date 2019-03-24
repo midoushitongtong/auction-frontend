@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Radio, Cascader, Button } from 'antd';
+import { Input, Radio, Button, Icon } from 'antd';
 import Router from 'next/router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -26,6 +26,8 @@ interface Props extends ConnectState, ConnectDispatch {
 interface State {
   // 屏幕宽度发生变化触发的定时器
   reSizeTimeOut: any;
+  // 当前父级分类Id
+  parentCategoryId: any;
 }
 
 // 当前组件类
@@ -42,12 +44,27 @@ export default compose<React.ComponentClass>(
 )(
   class CollectionSearchCondition extends React.Component<Props, State> {
     public state: State = {
-      reSizeTimeOut: null
+      reSizeTimeOut: null,
+      parentCategoryId: {}
+    };
+
+    constructor(props: any) {
+      super(props);
+      this.state.parentCategoryId = this.getParentCategoryId(props)
+    }
+
+    public shouldComponentUpdate = (nextProps: Props): boolean => {
+      const { props } = this;
+      if (props.currentCollectionSearchCondition != nextProps.currentCollectionSearchCondition) {
+        this.setState({
+          parentCategoryId: this.getParentCategoryId(nextProps)
+        });
+      }
+      return true;
     };
 
     public componentDidMount = (): void => {
       window.addEventListener('resize', this.listenerReSize);
-
       // 页面加载触发一次
       this.handlerReSize();
     };
@@ -80,6 +97,14 @@ export default compose<React.ComponentClass>(
     };
 
     /**
+     * 获取当前父级分类 id
+     *
+     */
+    public getParentCategoryId = (props: Props): void => {
+      return props.currentCollectionSearchCondition.parentCategoryId;
+    };
+
+    /**
      * 搜索条件发生改变
      *
      */
@@ -87,12 +112,22 @@ export default compose<React.ComponentClass>(
       const { props } = this;
       // 隐藏搜索条件容器
       this.toggleMobileCollectionSearchConditionContainer(false);
+      const searchCondition = {
+        ...props.currentCollectionSearchCondition,
+        current: 1
+      };
+      console.log(value);
+      switch (type) {
+        case 'childrenCategoryId':
+          searchCondition.parentCategoryId = value.parentCategoryId;
+          searchCondition.childrenCategoryId = value.childrenCategoryId;
+          break;
+        default:
+          searchCondition[type] = value;
+      }
       Router.push({
         pathname: '/collection',
-        query: {
-          ...props.currentCollectionSearchCondition,
-          [type]: value
-        }
+        query: searchCondition
       });
     };
 
@@ -116,7 +151,7 @@ export default compose<React.ComponentClass>(
     };
 
     public render = (): JSX.Element => {
-      const { props } = this;
+      const { props, state } = this;
       return (
         <section className="collection-search-condition-container">
           <section className="mobile-collection-search-condition-action-container">
@@ -125,48 +160,96 @@ export default compose<React.ComponentClass>(
           <section className="collection-select-search-condition-container">
             <section className="collection-search-condition-item collection-category">
               <div className="condition-name">分类</div>
-              <div className="condition-select">
-                <Radio.Group value={props.currentCollectionSearchCondition.category} buttonStyle="solid">
-                  {props.collectionSearchCondition.categoryList.map((item: any, index: number) => (
-                    <div className="radio-item" key={index}>
-                      <Radio.Button
-                        value={item.id}
-                        onClick={() => this.changeSearchCondition('category', item.id)}
-                      >{item.name}</Radio.Button>
-                    </div>
-                  ))}
-                </Radio.Group>
-              </div>
-            </section>
-            <section className="collection-search-condition-item collection-transaction">
-              <div className="condition-name">成交状况</div>
-              <div className="condition-select">
-                <Radio.Group value={props.currentCollectionSearchCondition.transaction} buttonStyle="solid">
-                  {props.collectionSearchCondition.transactionList.map((item: any, index: number) => (
-                    <div className="radio-item" key={index}>
-                      <Radio.Button
-                        value={item.id}
-                        onClick={() => this.changeSearchCondition('transaction', item.id)}
-                      >{item.name}</Radio.Button>
-                    </div>
-                  ))}
-                </Radio.Group>
-              </div>
-            </section>
-            <section className="collection-search-condition-item collection-area">
-              <div className="condition-name">拍卖场次</div>
-              <div className="condition-select">
-                <Cascader
-                  allowClear={false}
-                  placeholder="请选择"
-                  value={props.currentCollectionSearchCondition.area}
-                  options={props.collectionSearchCondition.areaList}
-                  onChange={(value) => this.changeSearchCondition('area', value)}
-                />
+              <div
+                className="condition-select"
+                onMouseLeave={() => {
+                  this.setState({
+                    parentCategoryId: this.getParentCategoryId(props)
+                  });
+                }}
+              >
+                {/* 一级分类 */}
+                {props.currentCollectionSearchCondition.childrenCategoryId === 0
+                  ? (
+                    <Radio.Group
+                      value={state.parentCategoryId} buttonStyle="solid"
+                    >
+                      {props.collectionSearchCondition.categoryList.map((item: any, index: number) => (
+                        <div className="radio-item parent-category" key={index}>
+                          <Radio.Button
+                            value={item.id}
+                            onMouseEnter={() => {
+                              this.setState({
+                                parentCategoryId: item.id
+                              })
+                            }}
+                          >{item.cate_title}</Radio.Button>
+                        </div>
+                      ))}
+                    </Radio.Group>
+                  )
+                  : null}
+                {/* 二级分类 */}
+                {props.collectionSearchCondition.categoryList.map((item: any, index: number) => (
+                  <section
+                    key={index}
+                    className="collection-children-category-container"
+                    style={{ display: state.parentCategoryId === item.id ? 'block' : 'none' }}
+                  >
+                    <Radio.Group
+                      value={props.currentCollectionSearchCondition.childrenCategoryId} buttonStyle="solid"
+                    >
+                      {props.currentCollectionSearchCondition.childrenCategoryId === 0
+                        ? (
+                          item.children.map((childrenItem: any, childrenIndex: number) => (
+                            <div className="radio-item children-category" key={childrenIndex}>
+                              <Radio.Button
+                                value={childrenItem.id}
+                                onClick={() => {
+                                  this.changeSearchCondition('childrenCategoryId', {
+                                    parentCategoryId: item.id,
+                                    childrenCategoryId: childrenItem.id
+                                  })
+                                }}
+                              >{childrenItem.cate_title}</Radio.Button>
+                            </div>
+                          ))
+                        )
+                        : (
+                          // 已选择的分类
+                          item.children.map((childrenItem: any, childrenIndex: number) => {
+                            if (childrenItem.id === props.currentCollectionSearchCondition.childrenCategoryId) {
+                              return (
+                                <div className="radio-item children-category" key={childrenIndex}>
+                                  <Radio.Button
+                                    value={childrenItem.id}
+                                    onClick={() => {
+                                      this.changeSearchCondition('childrenCategoryId', {
+                                        parentCategoryId: 0,
+                                        childrenCategoryId: 0
+                                      })
+                                    }}
+                                  >
+                                    {childrenItem.cate_title}
+                                    <Icon
+                                      type="close"
+                                      className="close-icon"
+                                    />
+                                  </Radio.Button>
+                                </div>
+                              );
+                            } else {
+                              return null;
+                            }
+                          })
+                        )}
+                    </Radio.Group>
+                  </section>
+                ))}
               </div>
             </section>
             <section className="collection-search-condition-item collection-keyword">
-              <div className="condition-name">拍品</div>
+              <div className="condition-name">关键字</div>
               <div className="condition-select">
                 <Input.Search
                   value={props.currentCollectionSearchCondition.keyword}

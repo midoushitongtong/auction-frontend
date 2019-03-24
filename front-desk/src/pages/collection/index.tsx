@@ -55,12 +55,10 @@ export default compose<React.ComponentClass>(
     public static getInitialProps = async ({ query, store }: any) => {
       // 获取当前收藏品的搜索条件
       const currentCollectionSearchCondition = {
-        category: query.category || '0',
-        transaction: query.transaction || '0',
-        area: query.area || '',
+        parentCategoryId: parseInt(query.parentCategoryId) || 1,
+        childrenCategoryId: parseInt(query.childrenCategoryId) || 0,
         keyword: query.keyword || '',
-        current: query.current || '1',
-        pageSize: query.pageSize || '10'
+        current: query.current || '1'
       };
       store.dispatch(updateCurrentCollectionSearchCondition(currentCollectionSearchCondition));
 
@@ -69,7 +67,9 @@ export default compose<React.ComponentClass>(
         let collectionSearchCondition: any = {};
         const result: any = await api.collection.selectCollectionSearchCondition();
         if (result.code === '0') {
-          collectionSearchCondition = result.data;
+          collectionSearchCondition = {
+            categoryList: result.data
+          };
           collectionSearchCondition.isGet = true;
         }
         store.dispatch(updateCollectionSearchCondition(collectionSearchCondition));
@@ -77,9 +77,23 @@ export default compose<React.ComponentClass>(
 
       // 获取收藏品的搜索结果集
       let collectionSearchResult: any = {};
-      const result2: any = await api.collection.selectCollectionList(currentCollectionSearchCondition);
+      const searchCondition: any = {};
+      if (currentCollectionSearchCondition.childrenCategoryId != 0) {
+        searchCondition.cate = currentCollectionSearchCondition.childrenCategoryId;
+      }
+      if (currentCollectionSearchCondition.keyword != '') {
+        searchCondition.goods_spec = currentCollectionSearchCondition.keyword;
+      }
+      if (currentCollectionSearchCondition.current != '1') {
+        searchCondition.page = currentCollectionSearchCondition.current;
+      }
+      const result2: any = await api.collection.selectCollectionList(searchCondition);
       if (result2.code == '0') {
-        collectionSearchResult = result2.data;
+        collectionSearchResult = {
+          itemList: result2.data,
+          per_page: result2.page.per_page,
+          total: result2.page.total
+        };
         store.dispatch(updateCollectionSearchResult(collectionSearchResult));
       }
 
@@ -88,9 +102,11 @@ export default compose<React.ComponentClass>(
 
     public componentDidMount = (): void => {
       setTimeout(() => {
-        window.scrollTo(0, 1);
-        window.scrollTo(0, 0);
-      }, 1000);
+        if (window.scrollY === 0) {
+          window.scrollTo(0, 1);
+          window.scrollTo(0, 0);
+        }
+      }, 500);
     };
 
     public render = (): JSX.Element => {

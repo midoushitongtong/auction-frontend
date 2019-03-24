@@ -1,0 +1,50 @@
+.notice-search-detail-container {
+  padding: 3rem 3rem 5rem;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  .notice-description {
+    border-bottom: 1px solid #f4f4f4;
+    .title {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #333;
+    }
+    .created-at {
+      font-size: 1.25rem;
+      text-align: center;
+      color: #8b8b8b;
+    }
+  }
+  .notice-content {
+    padding-top: 2rem;
+    font-size: 1.1rem;
+    color: #333;
+    a {
+      color: #eab105;
+    }
+    img {
+      margin: .5rem auto;
+      max-width: 100%;
+    }
+  }
+}
+
+// 移动端适配
+@media (max-width: 767px) {
+  .notice-search-detail-container {
+    padding: 1rem 1rem 1.5rem;
+    .notice-description {
+      .title {
+        font-size: 1.3rem;
+      }
+      .created-at {
+        font-size: 1.05rem;
+      }
+    }
+    .notice-content {
+      padding-top: 1rem;
+      font-size: 1rem;
+      line-height: 1.75rem;
+    }
+  }
+}

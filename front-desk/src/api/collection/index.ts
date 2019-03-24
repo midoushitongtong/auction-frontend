@@ -1,11 +1,13 @@
 import ajax from '../../util/ajax';
-import config from '../../config';
+// import config from '../../config';
 
 /**
  * 收藏品相关接口
  *
  */
 interface Api {
+  // 获取热门收藏品列表
+  selectCollectionFavoriteList: () => {};
   // 获取收藏品搜索条件
   selectCollectionSearchCondition: () => {};
   // 获取收藏品列表
@@ -19,23 +21,29 @@ interface Api {
  *
  */
 const api: Api = {
+  selectCollectionFavoriteList: (): object => {
+    return ajax(
+      'GET',
+      `http://106.13.107.45/HP`
+    );
+  },
   selectCollectionSearchCondition: (): object => {
     return ajax(
       'GET',
-      `${config.API_ROOT}/collection/searchCondition`
+      `http://106.13.107.45/CateList`
     );
   },
   selectCollectionList: (searchCondition: any): object => {
     return ajax(
       'GET',
-      `${config.API_ROOT}/collection/list`,
+      `http://106.13.107.45/PT`,
       searchCondition
     );
   },
   selectCollectionDetail: (id: any) : object => {
     return ajax(
       'GET',
-      `${config.API_ROOT}/collection/detail/${id}`
+      `http://106.13.107.45/PtRead/${id}`
     );
   }
 };

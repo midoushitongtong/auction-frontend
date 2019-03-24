@@ -1,6 +1,6 @@
 ## 基本环境
 
-### `typescript` + `react` + `redux` + `react-router` + `sass` + `antd`
+### `TypeScript` + `React` + `Redux` + `React-Router` + `Sass` + `Antd`
 
 ## 可用脚本
 

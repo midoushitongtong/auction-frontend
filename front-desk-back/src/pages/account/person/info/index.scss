@@ -1,0 +1,11 @@
+.account-person-info-container {
+  width: 100%;
+  .account-person-info-wrapper-container {
+    display: flex;
+    justify-content: center;
+    .account-person-info-wrapper-inner-container {
+      width: 100%;
+      max-width: 1200px;
+    }
+  }
+}

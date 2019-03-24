@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageGallery from 'react-image-gallery';
 import './index.scss'
 
 // 当前组件的类型声明
@@ -22,37 +23,40 @@ export default class CollectionSearchDetail extends React.Component<Props, State
               <span className="title">lot</span>
               <span className="detail">{props.collection.lot}</span>
             </section>
-            <section className="collection-base-info-item author">
-              <span className="title">作者</span>
-              <span className="detail">{props.collection.author}</span>
-            </section>
             <section className="collection-base-info-item name">
               <span className="title">名称</span>
               <span className="detail">{props.collection.name}</span>
             </section>
-            <section className="collection-base-info-item expect-price">
+            <section className="collection-base-info-item">
               <span className="title">参考价</span>
-              <span className="detail">{props.collection.expectPrice}</span>
+              <span className="detail">{props.collection.price}</span>
             </section>
-            <section className="collection-base-info-item type">
-              <span className="title">材质</span>
-              <span className="detail">{props.collection.type}</span>
-            </section>
-            <section className="collection-base-info-item dimension">
-              <span className="title">尺寸</span>
-              <span className="detail">{props.collection.dimension}</span>
-            </section>
+            {props.collection.descriptionList.map((description: any, index: number) => {
+              const descriptionArr = description.split(':');
+              return (
+                <section className="collection-base-info-item" key={index}>
+                  <span className="title">{descriptionArr[0]}</span>
+                  <span className="detail">{descriptionArr[1]}</span>
+                </section>
+              );
+            })}
             <section className="collection-base-info-item description">
               <span className="title">描述</span>
               <section
                 className="detail"
-                dangerouslySetInnerHTML={{ __html: props.collection.description[Object.keys(props.collection.description)[0]] }}
+                dangerouslySetInnerHTML={{ __html: props.collection.description }}
               />
             </section>
           </section>
           <section className="collection-image-container">
-            <img
-              src={props.collection.imagePath[Object.keys(props.collection.imagePath)[0]]}
+            <ImageGallery
+              showFullscreenButton={false}
+              showPlayButton={false}
+              showNav={false}
+              items={props.collection.carouselList.map((carouselListItem: any) => ({
+                original: carouselListItem,
+                thumbnail: carouselListItem
+              }))}
             />
           </section>
         </section>
