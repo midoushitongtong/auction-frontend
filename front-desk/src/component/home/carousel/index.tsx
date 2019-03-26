@@ -3,26 +3,19 @@ import './index.scss';
 
 // 当前组件的类型声明
 interface Props {
+  carouselList: any[]
 }
 
 interface State {
-  carouselList: {
-    imagePath: string
-  }[];
+
 }
 
 // 当前组件类
 export default class HomeCarousel extends React.Component<Props, State> {
-  public state: State = {
-    carouselList: [
-      {
-        imagePath: 'https://yyccyy-01.oss-cn-shenzhen.aliyuncs.com/collection/banner/banner01.png'
-      },
-      {
-        imagePath: 'https://yyccyy-01.oss-cn-shenzhen.aliyuncs.com/collection/banner/banner02.png'
-      }
-    ]
-  };
+  constructor(props: any) {
+    super(props);
+  }
+
 
   public componentDidMount = (): void => {
     try {
@@ -53,12 +46,12 @@ export default class HomeCarousel extends React.Component<Props, State> {
   };
 
   public render = (): JSX.Element => {
-    const { state } = this;
+    const { props } = this;
     return (
       <section className="home-carousel-container">
         <div className="swiper-container">
           <div className="swiper-wrapper">
-            {state.carouselList.map((item, index) => (
+            {props.carouselList.map((item: any, index: number) => (
               <div className="swiper-slide" key={index}>
                 <img data-src={item.imagePath} className="swiper-lazy"/>
                 <div className="swiper-lazy-preloader swiper-lazy-preloader-white"/>

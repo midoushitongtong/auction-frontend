@@ -23,7 +23,7 @@ export default class NoticeDetail extends React.Component<Props, State> {
     // 获取公告详情
     const result: any = await api.notice.selectNoticeDetail(id);
     let notice: any = {};
-    if (result.code === '0') {
+    if (parseInt(result.code) === 0) {
       notice = result.data;
     }
     return {

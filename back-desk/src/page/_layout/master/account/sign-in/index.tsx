@@ -57,7 +57,7 @@ export default compose<React.ComponentClass>(
           // const result = await api.account.signIn(valueList);
           // 写死结果集
           const result: any = { "code": "0", "data": { "id": 1, "username": "admin", "password": "123456" } };
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             // 保存用户信息
             props.updateUserInfo(result.data);
             // 跳转

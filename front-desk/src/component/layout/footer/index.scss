@@ -21,6 +21,21 @@
           }
           &.contact-action-item-group {
             ul {
+              li {
+                display: flex;
+                align-items: center;
+                span {
+                  position: relative;
+                  width: 2.79rem;
+                  text-align: left;
+                  margin-right: 1rem;
+                  &::after {
+                    content: ':';
+                    position: absolute;
+                    right: 0;
+                  }
+                }
+              }
               li:hover {
                 color: inherit;
                 cursor: auto;

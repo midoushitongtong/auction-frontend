@@ -1,6 +1,8 @@
 import React from 'react';
 import { Menu, Icon } from 'antd';
 import { withRouter, WithRouterProps } from 'next/router';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import Link from 'next/link';
 import './index.scss';
 
@@ -11,19 +13,17 @@ enum HeaderNavMode {
   INLINE = 'inline'
 }
 
-// antd 菜单
-interface NavItem {
-  // 菜单 key
-  key: string;
-  // 菜单名称
-  name: string;
-  // 菜单跳转路径
-  path?: string;
-  // 菜单的子菜单
-  children?: NavItem[];
+interface ConnectState {
+  // 公告分类
+  noticeCategory: any;
+  // 公告搜索条件(用于触发更新props, 更新当前选中菜单的 key)
+  currentNoticeSearchCondition: any;
 }
 
-interface Props extends WithRouterProps {
+interface ConnectDispatch {
+}
+
+interface Props extends WithRouterProps, ConnectState, ConnectDispatch {
   toggleMobileHeaderNavContainer: any;
 }
 
@@ -31,32 +31,74 @@ interface State {
   // 菜单模式[垂直, 水平]
   headerNavMode: HeaderNavMode;
   // 菜单列表
-  headerNavList: NavItem[];
-  // 屏幕宽度发生变化触发的定时器
-  reSizeTimeOut: any;
+  headerNavList: any[];
+  // 菜单选中的 key
+  headerNavSelectKey: string;
 }
 
 // 当前组件类
-export default withRouter(
+export default compose<React.ComponentClass>(
+  connect<ConnectState, ConnectDispatch, Props>(
+    (state: any) => ({
+      noticeCategory: state.notice.noticeCategory,
+      currentNoticeSearchCondition: state.notice.currentNoticeSearchCondition
+    }),
+    {}
+  ),
+  withRouter
+)(
   class HeaderNav extends React.Component<Props, State> {
-    public state: State = {
-      headerNavMode: HeaderNavMode.HORIZONTAL,
-      headerNavList: [
-        { key: '1', name: '首页', path: '/home' },
-        { key: '2', name: '收藏品查询', path: '/collection' },
-        {
-          key: '3', name: '咨询中心',
-          children: [
-            { key: '3-1', name: '新创公告', path: '/notice' }
-          ]
-        }
-      ],
-      reSizeTimeOut: null
+    // 屏幕宽度发生变化触发的定时器
+    public reSizeTimeOut: any = null;
+
+    constructor(props: any) {
+      super(props);
+
+      // 把公告分类构建成导航
+      const noticeCategory = props.noticeCategory.itemList.map((item: any) => {
+        return {
+          key: item.id + '',
+          name: item.name,
+          children: item.children
+            ? item.children.map((itemChild: any) => {
+              return {
+                key: itemChild.id + '',
+                name: itemChild.name,
+                path: `/notice/${itemChild.id}`
+              };
+            })
+            : []
+        };
+      });
+      const headerNavList = [
+        { key: '100', name: '首页', path: '/home' },
+        { key: '200', name: '收藏品查询', path: '/collection' },
+        ...noticeCategory
+      ];
+
+      this.state = {
+        headerNavMode: HeaderNavMode.HORIZONTAL,
+        headerNavList,
+        headerNavSelectKey: this.getHeaderNavSelectKey(headerNavList, props.router && props.router.asPath)
+      };
+    }
+
+    public shouldComponentUpdate = (nextProps: Props): boolean => {
+      const { props, state } = this;
+      if (props.currentNoticeSearchCondition != nextProps.currentNoticeSearchCondition) {
+        // 因为动态路由不会触发更新条件
+        // 需要根据当前的公告分类, 更新选中菜单的 key
+        const currentAsPath = `/notice/${nextProps.currentNoticeSearchCondition.category}`;
+        this.setState({
+          headerNavSelectKey: this.getHeaderNavSelectKey(state.headerNavList, currentAsPath)
+        });
+      }
+      return true;
     };
 
     public componentDidMount = (): void => {
+      // 监听页面宽度发生变化移除手机端样式
       window.addEventListener('resize', this.listenerReSize);
-
       // 页面加载触发一次
       this.handlerReSize();
     };
@@ -70,9 +112,9 @@ export default withRouter(
      *
      */
     public listenerReSize = () => {
-      clearInterval(this.state.reSizeTimeOut);
+      clearInterval(this.reSizeTimeOut);
       // 添加定时器防抖动
-      this.state.reSizeTimeOut = setTimeout(this.handlerReSize, 500);
+      this.reSizeTimeOut = setTimeout(this.handlerReSize, 500);
     };
 
     /**
@@ -99,33 +141,43 @@ export default withRouter(
      * 获取当前的 url 对应的菜单 key
      *
      */
-    public getHeaderNavSelectKey = (): string => {
-      const { state, props } = this;
-
-      // 更新菜单激活样式 =====
-      // 当前 url 的路径
-      const currentPathName = props.router && props.router.pathname.split('/')[1];
+    public getHeaderNavSelectKey = (headerNavList: any[], currentPathName: any): string => {
+      // 根路由解析为 home
+      if (currentPathName === '/') {
+        currentPathName = '/home';
+      }
+      const currentPathNameArr = currentPathName.split('/');
 
       // 当前 url 的路径匹配的菜单
-      let currentRouteNav: any | NavItem = null;
+      let currentRouteNav: any = null;
       // 遍历所有菜单, 获取与当前 url 的路径匹配的菜单
-      state.headerNavList.forEach(navItem => {
+      headerNavList.forEach(navItem => {
         if (currentRouteNav) return false;
         // 无二级菜单, 匹配一级菜单
         if (!navItem.children && navItem.path) {
-          const navItemPathName = navItem.path.split('/')[1];
-          if (navItemPathName === currentPathName) {
+          const navItemPathNameArr = navItem.path.split('/');
+          // 比如 home === home
+          if (navItemPathNameArr[1] === currentPathNameArr[1]) {
             currentRouteNav = navItem;
           }
         }
         // 有二级菜单, 匹配二级菜单
         if (navItem.children) {
-          navItem.children.forEach(navItemChildrenItem => {
+          navItem.children.forEach((childrenNavItem: any) => {
             if (currentRouteNav) return false;
-            if (navItemChildrenItem.path) {
-              const navItemChildrenItemPathName = navItemChildrenItem.path.split('/')[1];
-              if (navItemChildrenItemPathName === currentPathName) {
-                currentRouteNav = navItemChildrenItem;
+            if (childrenNavItem.path) {
+              const childrenNavItemPathNameArr = childrenNavItem.path.split('/');
+              // 比如 notice === notice
+              if (childrenNavItemPathNameArr[1] === currentPathNameArr[1]) {
+                // 如果是 公告 单独处理
+                if (currentPathNameArr[1] === 'notice') {
+                  const id = currentPathNameArr[2];
+                  if (childrenNavItem.key === id) {
+                    currentRouteNav = childrenNavItem;
+                  }
+                } else {
+                  currentRouteNav = childrenNavItem;
+                }
               }
             }
           });
@@ -154,7 +206,7 @@ export default withRouter(
           <section className="header-nav-inner-container">
             <Menu
               onClick={this.handleHeaderNavClick}
-              selectedKeys={[this.getHeaderNavSelectKey()]}
+              selectedKeys={[state.headerNavSelectKey]}
               mode={state.headerNavMode}
             >
               {/* 渲染一级菜单 */}
@@ -172,11 +224,20 @@ export default withRouter(
                       }
                     >
                       {/* 渲染二级菜单 */}
-                      {item.children.map(itemChild => (
+                      {item.children.map((itemChild: any) => (
                         <Menu.Item key={itemChild.key}>
-                          <Link href={itemChild.path ? itemChild.path : ''}>
-                            <a href={itemChild.path ? itemChild.path : ''}>{itemChild.name}</a>
-                          </Link>
+                          {/* 公告连接单独处理 */}
+                          {itemChild.path.split('/')[1] === 'notice'
+                            ? (
+                              <Link href={`/notice?id=${itemChild.key}`} as={`/notice/${itemChild.key}`}>
+                                <a href={`/notice/${itemChild.key}`}>{itemChild.name}</a>
+                              </Link>
+                            )
+                            : (
+                              <Link href={itemChild.path ? itemChild.path : ''}>
+                                <a href={itemChild.path ? itemChild.path : ''}>{itemChild.name}</a>
+                              </Link>
+                            )}
                         </Menu.Item>
                       ))}
                     </Menu.SubMenu>
@@ -201,4 +262,4 @@ export default withRouter(
       );
     };
   }
-);
+) as any;

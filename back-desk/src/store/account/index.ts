@@ -32,7 +32,7 @@ export const updateUserInfo = (userInfo: any): object => {
 export const asyncUpdateUserInfo = (): object => {
   return async (dispatch: any) => {
     const result: any = await api.account.selectUserInfo();
-    if (result.code === '0') {
+    if (parseInt(result.code) === 0) {
       dispatch({
         type: ActionType.UPDATE_USER_INFO,
         data: {

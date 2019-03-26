@@ -10,11 +10,8 @@ export default class _document extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=yes"/>
           <meta name="renderer" content="webkit"/>
           <meta name="force-rendering" content="webkit"/>
-          <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
           <meta name="theme-color" content="#eab105"/>
-
-          <meta name="keywords" content="新创文化艺术品"/>
-          <meta name="description" content="新文化艺术品"/>
 
           <script
             dangerouslySetInnerHTML={{

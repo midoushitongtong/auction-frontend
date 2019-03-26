@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Pagination } from 'antd';
+import { Pagination, Alert } from 'antd';
 import Router from 'next/router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -50,52 +50,54 @@ export default compose<React.ComponentClass>(
      * 分页数据改变
      *
      * @param current
-     * @param pageSize
      */
-    public paginationChange = (current: any, pageSize: any): void => {
+    public paginationChange = (current: any): void => {
       const { props } = this;
       setTimeout(() => BrowserUtil.scrollToTop(233), 100);
-      Router.push({
-        pathname: '/notice',
-        query: {
-          ...props.currentNoticeSearchCondition,
-          current,
-          pageSize
-        }
-      });
+      Router.push(
+        `/notice?id=${props.currentNoticeSearchCondition.category}&current=${current}`,
+        `/notice/${props.currentNoticeSearchCondition.category}?current=${current}`,
+      );
     };
 
     public render = (): JSX.Element => {
       const { props } = this;
-      return (
-        <section className="notice-search-result-container">
-          <section className="notice-list-container">
-            {props.noticeSearchResult.itemList.map((item: any, index: number) => (
-              <section className="notice-list-item" key={index}>
-                <p className="description-top">
-                  <Link href={`/notice/detail?id=${item.id}`} as={`/notice/detail/${item.id}`}>
-                    <a href={`/notice/detail/${item.id}`} className="title">{item.title}</a>
-                  </Link>
-                  <span className="created-at">{item.createdAt}</span>
-                </p>
-                <p className="description-bottom">
-                  <span className="description">{item.description}</span>
-                </p>
-              </section>
-            ))}
-          </section>
-          <section className="notice-pagination-container">
-            <Pagination
-              showSizeChanger
-              current={parseInt(props.currentNoticeSearchCondition.current)}
-              pageSize={parseInt(props.currentNoticeSearchCondition.pageSize)}
-              total={parseInt(props.noticeSearchResult.total)}
-              onChange={this.paginationChange}
-              onShowSizeChange={this.paginationChange}
-            />
-          </section>
-        </section>
-      );
+       return props.noticeSearchResult.itemList.length > 0
+        ? (
+           <section className="notice-search-result-container">
+             <section>
+               <section className="notice-list-container">
+                 {props.noticeSearchResult.itemList.map((item: any, index: number) => (
+                   <section className="notice-list-item" key={index}>
+                     <p className="description-top">
+                       <Link href={`/notice/detail?id=${item.id}`} as={`/notice/detail/${item.id}`}>
+                         <a href={`/notice/detail/${item.id}`} className="title">{item.title}</a>
+                       </Link>
+                       <span className="created-at">{item.createdAt}</span>
+                     </p>
+                     <p className="description-bottom">
+                       <span className="description">{item.description}</span>
+                     </p>
+                   </section>
+                 ))}
+               </section>
+               <section className="notice-pagination-container">
+                 <Pagination
+                   current={parseInt(props.noticeSearchResult.current)}
+                   pageSize={parseInt(props.noticeSearchResult.pageSize)}
+                   total={parseInt(props.noticeSearchResult.total)}
+                   onChange={this.paginationChange}
+                 />
+               </section>
+             </section>
+           </section>
+          )
+        : (
+           <Alert
+             message="暂无数据！"
+             type="warning"
+           />
+        );
     };
   }
 );

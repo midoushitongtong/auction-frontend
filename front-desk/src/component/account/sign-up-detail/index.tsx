@@ -23,10 +23,14 @@ export default compose<React.ComponentClass>(
   Form.create()
 )(
   class AccountSignUpDetail extends React.Component<Props, State> {
-    public state: State = {
-      sendCaptchaNumber: 0,
-      signUpLoading: false
-    };
+    constructor(props: any) {
+      super(props);
+      this.state = {
+        sendCaptchaNumber: 0,
+        signUpLoading: false
+      };
+    }
+
 
     /**
      * 发送验证码倒计时定时器
@@ -72,8 +76,7 @@ export default compose<React.ComponentClass>(
             phoneNumber: valueList['phoneNumber']
           });
 
-          console.log(result);
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '验证码已发送, 请注意查收',
@@ -111,7 +114,7 @@ export default compose<React.ComponentClass>(
           this.setState({
             signUpLoading: false
           });
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '注册成功',

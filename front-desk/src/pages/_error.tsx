@@ -1,27 +1,47 @@
 import React from 'react'
+import './_error.scss';
 
-// 当前组件的类型声明
+// 当前组件类型声明
 interface Props {
-  statusCode: number;
+  statusCode: any;
 }
 
 interface State {
+
 }
 
-// 当前组件类
-export default class _error extends React.Component<Props, State> {
-  public static getInitialProps({ res, err }: any) {
+export default class Error extends React.Component<Props, State> {
+  static getInitialProps({ res, err }: any) {
     const statusCode = res ? res.statusCode : err ? err.statusCode : null;
-    return { statusCode }
+    return {
+      statusCode
+    };
   }
 
   public render = (): JSX.Element => {
-    return (
-      <p>
-        {this.props.statusCode
-          ? `An error ${this.props.statusCode} occurred on server`
-          : 'An error occurred on client'}
-      </p>
-    );
-  };
+    const { props } = this;
+    const statusCode: any = props.statusCode;
+    console.error(props);
+    switch (statusCode ) {
+      case 404:
+        return (
+          <section className="error-container">
+            <h1>404</h1>
+            <h3>当前访问的页面不存在！</h3>
+          </section>
+        );
+      case 500:
+        return (
+          <section className="error-container">
+            <h3>服务器内部错误, 请稍后重试！</h3>
+          </section>
+        );
+      default:
+        return (
+          <section className="error-container">
+            <h3>服务器正在开小差, 请稍后重试！</h3>
+          </section>
+        );
+    }
+  }
 }

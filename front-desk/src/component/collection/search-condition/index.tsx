@@ -24,8 +24,6 @@ interface Props extends ConnectState, ConnectDispatch {
 }
 
 interface State {
-  // 屏幕宽度发生变化触发的定时器
-  reSizeTimeOut: any;
   // 当前父级分类Id
   parentCategoryId: any;
 }
@@ -43,14 +41,14 @@ export default compose<React.ComponentClass>(
   )
 )(
   class CollectionSearchCondition extends React.Component<Props, State> {
-    public state: State = {
-      reSizeTimeOut: null,
-      parentCategoryId: {}
-    };
+    // 屏幕宽度发生变化触发的定时器
+    public reSizeTimeOut: any = null;
 
     constructor(props: any) {
       super(props);
-      this.state.parentCategoryId = this.getParentCategoryId(props)
+      this.state = {
+        parentCategoryId: this.getParentCategoryId(props)
+      };
     }
 
     public shouldComponentUpdate = (nextProps: Props): boolean => {
@@ -78,9 +76,9 @@ export default compose<React.ComponentClass>(
      *
      */
     public listenerReSize = () => {
-      clearInterval(this.state.reSizeTimeOut);
+      clearInterval(this.reSizeTimeOut);
       // 添加定时器防抖动
-      this.state.reSizeTimeOut = setTimeout(this.handlerReSize, 500);
+      this.reSizeTimeOut = setTimeout(this.handlerReSize, 500);
     };
 
     /**
@@ -110,13 +108,13 @@ export default compose<React.ComponentClass>(
      */
     public changeSearchCondition = (type: any, value: any): void => {
       const { props } = this;
-      // 隐藏搜索条件容器
+      // 隐藏条件容器
       this.toggleMobileCollectionSearchConditionContainer(false);
+      // 构建搜索条件
       const searchCondition = {
         ...props.currentCollectionSearchCondition,
         current: 1
       };
-      console.log(value);
       switch (type) {
         case 'childrenCategoryId':
           searchCondition.parentCategoryId = value.parentCategoryId;

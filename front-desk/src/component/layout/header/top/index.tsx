@@ -3,10 +3,20 @@ import { Button, Form, Input, Select, Icon } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Link from 'next/link';
 import Router from 'next/router';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import './index.scss';
 
 // 当前组件的类型声明
-interface Props extends FormComponentProps {
+interface ConnectState {
+  siteInfo: any;
+}
+
+interface ConnectDispatch {
+
+}
+
+interface Props extends FormComponentProps, ConnectState, ConnectDispatch {
   toggleMobileSearchContainer: any;
   toggleMobileHeaderNavContainer: any;
 }
@@ -16,7 +26,15 @@ interface State {
 }
 
 // 当前组件类
-export default Form.create()(
+export default compose<React.ComponentClass>(
+  connect<ConnectState, ConnectDispatch, Props>(
+    (state: any) => ({
+      siteInfo: state.site.siteInfo
+    }),
+    {}
+  ),
+  Form.create()
+)(
   class HeaderTop extends React.Component<Props, State> {
     /**
      * 搜索表单提交事件
@@ -51,7 +69,7 @@ export default Form.create()(
           <section className="header-top-inner-container">
             <Link href="/home">
               <a href="/home">
-                <img src="http://www.cguardian.com.hk/images/logo.png" className="logo" alt="logo"/>
+                <img src={props.siteInfo.logo} className="logo" alt="logo"/>
               </a>
             </Link>
             <section className="operation-container">
@@ -104,4 +122,4 @@ export default Form.create()(
       );
     };
   }
-);
+) as any;

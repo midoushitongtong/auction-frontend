@@ -17,6 +17,7 @@ import './index.scss'
 
 // 当前组件的类型声明
 interface ConnectState {
+  siteInfo: any;
   // 收藏品的搜索条件
   collectionSearchCondition: any;
 }
@@ -42,6 +43,7 @@ interface State {
 export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(
     (state: any | AppState) => ({
+      siteInfo: state.site.siteInfo,
       collectionSearchCondition: state.collection.collectionSearchCondition
     }),
     {
@@ -66,7 +68,7 @@ export default compose<React.ComponentClass>(
       if (store.getState().collection.collectionSearchCondition.isGet === undefined) {
         let collectionSearchCondition: any = {};
         const result: any = await api.collection.selectCollectionSearchCondition();
-        if (result.code === '0') {
+        if (parseInt(result.code) === 0) {
           collectionSearchCondition = {
             categoryList: result.data
           };
@@ -90,8 +92,17 @@ export default compose<React.ComponentClass>(
       const result2: any = await api.collection.selectCollectionList(searchCondition);
       if (result2.code == '0') {
         collectionSearchResult = {
-          itemList: result2.data,
-          per_page: result2.page.per_page,
+          itemList: result2.data.map((item: any) => ({
+            id: item.id,
+            imagePath: item.goods_logo,
+            lot: item.id,
+            author: item.goods_spec,
+            name: item.goods_title,
+            isFavorite: false,
+            expectPrice: item.market_price + '-' + item.selling_price
+          })),
+          current: result2.page.current_page,
+          pageSize: result2.page.per_page,
           total: result2.page.total
         };
         store.dispatch(updateCollectionSearchResult(collectionSearchResult));
@@ -110,12 +121,13 @@ export default compose<React.ComponentClass>(
     };
 
     public render = (): JSX.Element => {
+      const { props } = this;
       return (
         <section className="app-container">
-          <Head>
-            <title>收藏品查询 - 新创文化艺术品</title>
-          </Head>
           <LayoutHeader/>
+          <Head>
+            <title>收藏品查询 - {props.siteInfo.companyName}</title>
+          </Head>
           <section className="collection-container">
             <section className="collection-wrapper-container">
               <section className="collection-wrapper-inner-container">

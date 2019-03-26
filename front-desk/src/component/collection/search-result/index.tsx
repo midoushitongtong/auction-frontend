@@ -77,22 +77,14 @@ export default compose<React.ComponentClass>(
                 md={8}
                 sm={12}
               >
-                <CommonCollectionItem collection={{
-                  id: collectionListItem.id,
-                  imagePath: collectionListItem.goods_logo,
-                  lot: collectionListItem.id,
-                  author: collectionListItem.goods_spec,
-                  name: collectionListItem.goods_title,
-                  isFavorite: false,
-                  expectPrice: collectionListItem.market_price + '-' + collectionListItem.selling_price
-                }}/>
+                <CommonCollectionItem collection={collectionListItem}/>
               </Col>
             ))}
           </Row>
           <section className="collection-pagination-container">
             <Pagination
-              current={parseInt(props.currentCollectionSearchCondition.current)}
-              pageSize={parseInt(props.collectionSearchResult.per_page)}
+              current={parseInt(props.collectionSearchResult.current)}
+              pageSize={parseInt(props.collectionSearchResult.pageSize)}
               total={parseInt(props.collectionSearchResult.total)}
               onChange={this.paginationChange}
             />

@@ -7,7 +7,8 @@ import './index.scss';
 // 当前组件的类型声明
 interface ConnectState {
   // redux 存储的用户信息
-  userInfo: any
+  userInfo: any,
+  siteInfo: any;
 }
 
 interface ConnectDispatch {
@@ -23,21 +24,22 @@ interface State {
 export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(
     (state: any) => ({
-      userInfo: state.account.userInfo
+      userInfo: state.account.userInfo,
+      siteInfo: state.site.siteInfo
     }),
     {}
   )
 )(
   class HeaderAction extends React.Component<Props, State> {
     public render = (): JSX.Element => {
-      // const { props } = this;
+      const { props } = this;
       return (
         <section className="header-action-container">
           <section className="header-action-inner-container">
             <section className="hello">
               <Link href="/home">
                 <a href="/home" style={{color: 'rgba(0, 0, 0, 0.65)'}}>
-                  <span>欢迎来到 新创文化艺术品</span>
+                  <span>欢迎来到 {props.siteInfo.companyName}</span>
                 </a>
               </Link>
             </section>

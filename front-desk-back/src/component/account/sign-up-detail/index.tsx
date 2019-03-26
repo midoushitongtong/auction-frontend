@@ -73,7 +73,7 @@ export default compose<React.ComponentClass>(
           });
 
           console.log(result);
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '验证码已发送, 请注意查收',
@@ -111,7 +111,7 @@ export default compose<React.ComponentClass>(
           this.setState({
             signUpLoading: false
           });
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '注册成功',

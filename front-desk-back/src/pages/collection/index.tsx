@@ -68,7 +68,7 @@ export default compose<React.ComponentClass>(
       if (store.getState().collection.collectionSearchCondition.isGet === undefined) {
         let collectionSearchCondition: any = {};
         const result: any = await api.collection.selectCollectionSearchCondition();
-        if (result.code === '0') {
+        if (parseInt(result.code) === 0) {
           collectionSearchCondition = result.data;
           collectionSearchCondition.isGet = true;
         }

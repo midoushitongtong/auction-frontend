@@ -45,8 +45,11 @@ module.exports = (router, app) => {
   });
 
   // 咨询中心 - 公告页面
-  router.get('/notice', async ctx => {
-    await app.render(ctx.req, ctx.res, '/notice', ctx.query);
+  router.get('/notice/:id', async ctx => {
+    await app.render(ctx.req, ctx.res, '/notice', {
+      id: ctx.params.id,
+      current: ctx.query.current
+    });
     ctx.respond = false;
   });
 

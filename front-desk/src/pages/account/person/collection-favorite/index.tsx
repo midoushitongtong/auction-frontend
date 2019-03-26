@@ -6,15 +6,18 @@ import {
   updateCurrentAccountPersonCollectionFavoriteSearchCondition,
   updateAccountPersonCollectionFavoriteSearchResult
 } from '../../../../store/account/person';
+import api from '../../../../api';
+import { AppState } from '../../../../store';
 import AccountPerson from '../../../../component/account/person';
 import LayoutHeader from '../../../../component/layout/header';
 import LayoutFooter from '../../../../component/layout/footer';
-import AccountPersonCollectionFavoriteSearchResult from '../../../../component/account/person/collection-favorite-search-result';
-import api from '../../../../api';
+import AccountPersonCollectionFavoriteSearchResult
+  from '../../../../component/account/person/collection-favorite-search-result';
 import './index.scss';
 
 // 当前组件的类型声明
 interface ConnectState {
+  siteInfo: any;
 }
 
 interface ConnectDispatch {
@@ -24,7 +27,7 @@ interface ConnectDispatch {
   updateAccountPersonCollectionFavoriteSearchResult: any;
 }
 
-interface Props {
+interface Props extends ConnectState, ConnectDispatch {
 
 }
 
@@ -33,9 +36,11 @@ interface State {
 }
 
 // 当前组件类
-export default compose<React.Component>(
+export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(
-    () => ({}),
+    (state: any | AppState) => ({
+      siteInfo: state.site.siteInfo
+    }),
     {
       updateCurrentAccountPersonCollectionFavoriteSearchCondition,
       updateAccountPersonCollectionFavoriteSearchResult
@@ -54,7 +59,7 @@ export default compose<React.Component>(
       // 获取公告的搜索结果集
       let accountPersonCollectionFavoriteSearchResult: any = [];
       const result: any = await api.accountPerson.selectAccountPersonCollectionFavoriteList(currentAccountPersonCollectionFavoriteSearchCondition);
-      if (result.code === '0') {
+      if (parseInt(result.code) === 0) {
         accountPersonCollectionFavoriteSearchResult = result.data;
         store.dispatch(updateAccountPersonCollectionFavoriteSearchResult(accountPersonCollectionFavoriteSearchResult));
       }
@@ -62,15 +67,16 @@ export default compose<React.Component>(
     };
 
     public render = (): JSX.Element => {
+      const { props } = this;
       return (
         <section className="app-container">
-          <Head>
-            <title>我的收藏 - 个人中心 - 新创文化艺术品</title>
-          </Head>
           <LayoutHeader
             hiddenHeaderTop={true}
             hiddenHeaderNav={true}
           />
+          <Head>
+            <title>我的收藏 - 个人中心 - {props.siteInfo.companyName}</title>
+          </Head>
           <section className="account-person-collection-favorite-container">
             <section className="account-person-collection-favorite-wrapper-container">
               <section className="account-person-collection-favorite-wrapper-inner-container">

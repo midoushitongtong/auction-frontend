@@ -45,7 +45,7 @@ export default withReduxStore(
         const result: any = await api.account.selectUserInfo();
         userInfo = result.data;
         userInfo.isGet = true;
-        if (result.code === '0') {
+        if (parseInt(result.code) === 0) {
           ctx.store.dispatch(updateUserInfo(userInfo));
         }
       }

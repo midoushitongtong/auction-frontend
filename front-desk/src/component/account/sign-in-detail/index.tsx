@@ -21,9 +21,13 @@ export default compose<React.ComponentClass>(
   Form.create()
 )(
   class AccountSignInDetail extends React.Component<Props, State> {
-    public state: State = {
-      signInLoading: false
-    };
+    constructor(props: any) {
+      super(props);
+      this.state = {
+        signInLoading: false
+      };
+    }
+
 
     /**
      * 处理表单提交
@@ -42,7 +46,7 @@ export default compose<React.ComponentClass>(
           this.setState({
             signInLoading: false
           });
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '登陆成功',

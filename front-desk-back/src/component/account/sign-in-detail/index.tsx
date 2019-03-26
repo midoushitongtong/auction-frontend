@@ -42,7 +42,7 @@ export default compose<React.ComponentClass>(
           this.setState({
             signInLoading: false
           });
-          if (result.code === '0') {
+          if (parseInt(result.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '登陆成功',

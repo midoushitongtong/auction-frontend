@@ -1,3 +1,6 @@
+$primary-color: #ffc107;
+$primary-active-color: #eab105;
+
 html {
   font-family: 'OptimaLTStd', 'Arial', "Microsoft JhengHei";
   font-size: 13px;
@@ -16,6 +19,14 @@ html {
         height: 100%;
       }
     }
+    a {
+      color: rgba(0, 0, 0, 0.65);
+      &:hover,
+      &:focus {
+        color: $primary-active-color !important;
+        text-decoration: none;
+      }
+    }
   }
 }
 
@@ -29,20 +40,6 @@ html {
 }
 
 // 重写库样式==============================================================
-$primary-color: #ffc107;
-$primary-active-color: #eab105;
-
-html {
-  a {
-    color: rgba(0, 0, 0, 0.65);
-    &:hover,
-    &:focus {
-      color: $primary-active-color !important;
-      text-decoration: none;
-    }
-  }
-}
-
 // antd
 html {
   // button
@@ -144,5 +141,13 @@ html {
   #nprogress .spinner-icon {
     border-top-color: $primary-color;
     border-left-color: $primary-color;
+  }
+
+  // notification 移动端适配
+  @media (max-width: 767px) {
+    #nprogress .bar {
+      height: .5rem;
+      background: $primary-active-color;
+    }
   }
 }

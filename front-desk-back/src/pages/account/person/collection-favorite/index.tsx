@@ -54,7 +54,7 @@ export default compose<React.Component>(
       // 获取公告的搜索结果集
       let accountPersonCollectionFavoriteSearchResult: any = [];
       const result: any = await api.accountPerson.selectAccountPersonCollectionFavoriteList(currentAccountPersonCollectionFavoriteSearchCondition);
-      if (result.code === '0') {
+      if (parseInt(result.code) === 0) {
         accountPersonCollectionFavoriteSearchResult = result.data;
         store.dispatch(updateAccountPersonCollectionFavoriteSearchResult(accountPersonCollectionFavoriteSearchResult));
       }
