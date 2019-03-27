@@ -128,6 +128,7 @@ export default compose<React.ComponentClass>(
           <Head>
             <title>{props.siteInfo.title}</title>
             <meta name="keywords" content={props.siteInfo.seoKeyword}/>
+            <link rel="icon" href={props.siteInfo.browserIcon} type="image/x-icon"/>
           </Head>
           {props.hiddenHeaderAction
             ? null

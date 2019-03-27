@@ -19,6 +19,12 @@
     padding-top: 2rem;
     font-size: 1.1rem;
     color: #333;
+    p {
+      text-indent: 2em;
+      img {
+        margin-left: -2rem;
+      }
+    }
     a {
       color: #eab105;
     }

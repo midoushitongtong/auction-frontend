@@ -21,7 +21,7 @@ if (typeof require !== 'undefined') {
 
 // change: antd theme
 const themeVariables = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './src/asset/less/antd-custom.less'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, './src/static/less/antd-custom.less'), 'utf8')
 );
 
 module.exports = withTypescript(
@@ -42,7 +42,7 @@ module.exports = withTypescript(
           return config;
         },
         generateBuildId: async () => {
-          return 'v1.2.1.1.1.1.1.1';
+          return 'v1.2.2.2.2.2.2.2';
         },
         distDir: '../.next'
       })

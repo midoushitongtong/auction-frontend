@@ -5,6 +5,7 @@
   font-size: 1.3rem;
   text-align: center;
 }
+
 .notice-search-result-container {
   margin-top: 1rem;
   padding-bottom: 2rem;
@@ -13,37 +14,59 @@
   .notice-list-container {
     padding: 1rem 2rem 2rem;
     .notice-list-item {
+      display: flex;
       padding-top: 1.25rem;
       padding-bottom: 1.25rem;
       border-bottom: 1px dashed #cecece;
-      .description-top {
-        margin-bottom: 1.25rem;
-        display: flex;
-        justify-content: space-between;
-        .title {
-          max-width: 65%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          font-size: 1.25rem;
-          color: #555;
-          text-decoration: none;
-          &:hover {
-            color: #eab105;
+      .preview-image-container {
+        overflow: hidden;
+        width: 120px;
+        height: 80px;
+        &:hover {
+          img {
+            transform: scale(1.1);
           }
         }
-        .created-at {
-          color: #bfbfbf;
+        img {
+          width: 100%;
+          height: 100%;
+          transition: transform .3s;
         }
       }
-      .description-bottom {
-        max-width: 65%;
+      .description-container {
+        flex: 1;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        margin-bottom: 0;
-        .description {
-          color: #898989;
+        padding-left: 20px;
+        .description-top {
+          margin-bottom: 1.25rem;
+          display: flex;
+          justify-content: space-between;
+          .title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 75%;
+            font-size: 1.25rem;
+            color: #555;
+            text-decoration: none;
+            &:hover {
+              color: #eab105;
+            }
+          }
+          .created-at {
+            letter-spacing: 1px;
+            color: #bfbfbf;
+          }
+        }
+        .description-bottom {
+          display: flex;
+          margin-bottom: 0;
+          .description {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #898989;
+          }
         }
       }
     }
@@ -60,9 +83,23 @@
     .notice-list-container {
       padding: 1rem;
       .notice-list-item {
-        .description-top {
-          .title {
-            max-width: 75%;
+        .preview-image-container {
+          width: 80px;
+          height: 60px;
+        }
+        .description-container {
+          .description-top {
+            .title {
+              max-width: 100%;
+            }
+            .created-at {
+              display: none;
+            }
+          }
+          .description-bottom {
+            .description {
+              max-width: 100%;
+            }
           }
         }
       }

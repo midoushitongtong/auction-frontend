@@ -1,13 +1,16 @@
 import React from 'react';
 import Head from 'next/head';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { AppState } from '../../../store';
+import {
+  updateNoticeSearchDetail
+} from '../../../store/notice';
 import LayoutHeader from '../../../component/layout/header';
 import LayoutFooter from '../../../component/layout/footer';
 import NoticeSearchDetail from '../../../component/notice/search-detail';
 import api from '../../../api';
 import './index.scss'
-import { AppState } from "../../../store";
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 
 // 当前组件的类型声明
 interface ConnectState {
@@ -15,12 +18,13 @@ interface ConnectState {
 }
 
 interface ConnectDispatch {
-
+  // 修改公告的搜索详情
+  updateNoticeSearchDetail: any;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
-  // 搜索到的公告详情
-  notice: any;
+  // 公告的搜索详情
+  noticeSearchDetail: any;
 }
 
 interface State {
@@ -32,27 +36,32 @@ export default compose<React.ComponentClass>(
     (state: any | AppState) => ({
       siteInfo: state.site.siteInfo
     }),
-    {}
+    {
+      updateNoticeSearchDetail
+    }
   )
 )(
   class NoticeDetail extends React.Component<Props, State> {
-    public static getInitialProps = async ({ query }: any) => {
+    public static getInitialProps = async ({ store, query }: any) => {
       // 获取当前公告搜索条件
       const id: string = query.id;
+
       // 获取公告详情
       const result: any = await api.notice.selectNoticeDetail(id);
-      let notice: any = {};
-      console.log(notice);
+      let noticeSearchDetail: any = {};
       if (parseInt(result.code) === 0) {
-        notice = {
+        noticeSearchDetail = {
           id: result.data[0].id,
           title: result.data[0].title,
           createdAt: result.data[0].time,
-          content: result.data[0].content
-        }
+          content: result.data[0].content,
+          category: result.data[0].cate + ''
+        };
+        store.dispatch(updateNoticeSearchDetail(noticeSearchDetail));
       }
+
       return {
-        notice
+        noticeSearchDetail
       };
     };
 
@@ -62,12 +71,12 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>{props.notice.title} - {props.siteInfo.companyName}</title>
+            <title>{props.noticeSearchDetail.title} - {props.siteInfo.companyName}</title>
           </Head>
           <section className="notice-container">
             <section className="notice-wrapper-container">
               <section className="notice-wrapper-inner-container">
-                <NoticeSearchDetail notice={props.notice}/>
+                <NoticeSearchDetail/>
               </section>
             </section>
           </section>

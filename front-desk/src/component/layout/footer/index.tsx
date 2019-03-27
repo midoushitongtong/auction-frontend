@@ -50,10 +50,22 @@ export default compose<React.ComponentClass>(
                 <section className="action-item-group contact-action-item-group">
                   <p>联系我们</p>
                   <ul>
-                    <li><span>地址</span>{props.siteInfo.contactAddress}</li>
-                    <li><span>电话</span>{props.siteInfo.contactPhone}</li>
-                    <li><span>邮箱</span>{props.siteInfo.contactEmail}</li>
-                    <li><span>传真</span>{props.siteInfo.fax}</li>
+                    <li>
+                      <span>地址</span>
+                      <span>{props.siteInfo.contactAddress}</span>
+                    </li>
+                    <li>
+                      <span>电话</span>
+                      <span>{props.siteInfo.contactPhone}</span>
+                    </li>
+                    <li>
+                      <span>邮箱</span>
+                      <span>{props.siteInfo.contactEmail}</span>
+                    </li>
+                    <li>
+                      <span>传真</span>
+                      <span>{props.siteInfo.fax}</span>
+                    </li>
                   </ul>
                 </section>
               </section>

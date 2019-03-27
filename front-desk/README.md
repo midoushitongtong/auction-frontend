@@ -53,7 +53,7 @@ front-desk
 
 ​	|── api `API 接口方法`
 
-​	|── asset `资源文件[css, js, image]等`
+​	|── static `资源文件[css, js, image]等`
 
 ​	|── component `组件`
 

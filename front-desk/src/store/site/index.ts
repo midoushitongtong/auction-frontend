@@ -15,7 +15,7 @@ const initState: State = {
 };
 
 // action
-// 修改当前登陆的用户信息
+// 修改站点信息
 export const updateSiteInfo = (siteInfo: any): object => {
   return {
     type: ActionType.UPDATE_SITE_INFO,

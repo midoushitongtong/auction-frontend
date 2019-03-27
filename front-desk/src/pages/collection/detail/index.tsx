@@ -4,6 +4,7 @@ import LayoutHeader from '../../../component/layout/header';
 import LayoutFooter from '../../../component/layout/footer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import {updateCollectionSearchDetail} from '../../../store/collection';
 import CollectionSearchDetail from '../../../component/collection/search-detail';
 import api from '../../../api';
 import './index.scss'
@@ -14,11 +15,13 @@ interface ConnectState {
 }
 
 interface ConnectDispatch {
+  // 修改当前收藏品的搜索详情
+  updateCollectionSearchDetail: any;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
   // 搜索到的收藏品详情
-  collection: any;
+  collectionSearchDetail: any;
 }
 
 interface State {
@@ -30,19 +33,21 @@ export default compose<React.ComponentClass>(
     (state: any) => ({
       siteInfo: state.site.siteInfo
     }),
-    {}
+    {
+      updateCollectionSearchDetail
+    }
   )
 )(
   class CollectionDetail extends React.Component<Props, State> {
-    public static getInitialProps = async ({ query }: any) => {
+    public static getInitialProps = async ({ store, query }: any) => {
       // 获取当前收藏品的搜索条件
       const id: string = query.id;
       // 获取收藏品详情
       const result: any = await api.collection.selectCollectionDetail(id);
-      let collection: any = {};
+      let collectionSearchDetail: any = {};
       if (parseInt(result.code) === 0) {
         const data = result.data[0];
-        collection = {
+        collectionSearchDetail = {
           lot: data.id,
           description: data.goods_content,
           imagePath: data.goods_logo,
@@ -51,9 +56,10 @@ export default compose<React.ComponentClass>(
           price: data.market_price + '-' + data.selling_price,
           name: data.goods_title
         };
+        store.dispatch(updateCollectionSearchDetail(collectionSearchDetail));
       }
       return {
-        collection
+        collectionSearchDetail
       };
     };
 
@@ -63,12 +69,12 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>{props.collection.name} - {props.siteInfo.companyName}</title>
+            <title>{props.collectionSearchDetail.name} - {props.siteInfo.companyName}</title>
           </Head>
           <section className="collection-detail-container">
             <section className="collection-detail-wrapper-container">
               <section className="collection-detail-wrapper-inner-container">
-                <CollectionSearchDetail collection={props.collection}/>
+                <CollectionSearchDetail/>
               </section>
             </section>
           </section>

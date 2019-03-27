@@ -16,11 +16,14 @@ enum HeaderNavMode {
 interface ConnectState {
   // 公告分类
   noticeCategory: any;
-  // 公告搜索条件(用于触发更新props, 更新当前选中菜单的 key)
+  // 公告搜索条件(公告分类改变, 触发更新props, 更新当前选中菜单的 key)
   currentNoticeSearchCondition: any;
+  // 公告的搜索详情
+  noticeSearchDetail: any;
 }
 
 interface ConnectDispatch {
+
 }
 
 interface Props extends WithRouterProps, ConnectState, ConnectDispatch {
@@ -41,7 +44,8 @@ export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(
     (state: any) => ({
       noticeCategory: state.notice.noticeCategory,
-      currentNoticeSearchCondition: state.notice.currentNoticeSearchCondition
+      currentNoticeSearchCondition: state.notice.currentNoticeSearchCondition,
+      noticeSearchDetail: state.notice.noticeSearchDetail
     }),
     {}
   ),
@@ -84,13 +88,19 @@ export default compose<React.ComponentClass>(
     }
 
     public shouldComponentUpdate = (nextProps: Props): boolean => {
-      const { props, state } = this;
+      const { props } = this;
       if (props.currentNoticeSearchCondition != nextProps.currentNoticeSearchCondition) {
         // 因为动态路由不会触发更新条件
         // 需要根据当前的公告分类, 更新选中菜单的 key
-        const currentAsPath = `/notice/${nextProps.currentNoticeSearchCondition.category}`;
         this.setState({
-          headerNavSelectKey: this.getHeaderNavSelectKey(state.headerNavList, currentAsPath)
+          headerNavSelectKey: nextProps.currentNoticeSearchCondition.category
+        });
+      }
+      if (props.noticeSearchDetail != nextProps.noticeSearchDetail) {
+        // 因为动态路由不会触发更新条件
+        // 需要根据当前的公告的搜索详情, 更新选中菜单的 key
+        this.setState({
+          headerNavSelectKey: nextProps.noticeSearchDetail.category
         });
       }
       return true;
@@ -142,6 +152,7 @@ export default compose<React.ComponentClass>(
      *
      */
     public getHeaderNavSelectKey = (headerNavList: any[], currentPathName: any): string => {
+      const { props } = this;
       // 根路由解析为 home
       if (currentPathName === '/') {
         currentPathName = '/home';
@@ -169,14 +180,22 @@ export default compose<React.ComponentClass>(
               const childrenNavItemPathNameArr = childrenNavItem.path.split('/');
               // 比如 notice === notice
               if (childrenNavItemPathNameArr[1] === currentPathNameArr[1]) {
-                // 如果是 公告 单独处理
-                if (currentPathNameArr[1] === 'notice') {
-                  const id = currentPathNameArr[2];
-                  if (childrenNavItem.key === id) {
+                switch (currentPathNameArr[1]) {
+                  // 如果是 公告 单独处理(/notice/1)
+                  case 'notice':
+                    // 如果是 公告 详情单独处理(/notice/detail/52)
+                    if (currentPathNameArr[2] === 'detail') {
+                      if (childrenNavItem.key === props.noticeSearchDetail.category) {
+                        currentRouteNav = childrenNavItem;
+                      }
+                    } else {
+                      if (childrenNavItem.key === props.currentNoticeSearchCondition.category) {
+                        currentRouteNav = childrenNavItem;
+                      }
+                    }
+                    break;
+                  default:
                     currentRouteNav = childrenNavItem;
-                  }
-                } else {
-                  currentRouteNav = childrenNavItem;
                 }
               }
             }

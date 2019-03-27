@@ -6,13 +6,16 @@ export interface State {
   currentCollectionSearchCondition: any;
   // 收藏品的搜索结果集
   collectionSearchResult: any;
+  // 收藏品的搜索详情
+  collectionSearchDetail: any;
 }
 
 // action type
 enum ActionType {
   UPDATE_COLLECTION_SEARCH_CONDITION = 'updateCollectionSearchCondition',
   UPDATE_CURRENT_COLLECTION_SEARCH_CONDITION = 'updateCurrentCollectionSearchCondition',
-  Update_COLLECTION_SEARCH_RESULT = 'updateCollectionSearchResult',
+  UPDATE_COLLECTION_SEARCH_RESULT = 'updateCollectionSearchResult',
+  UPDATE_COLLECTION_SEARCH_DETAIL = 'updateCollectionSearchDetail',
   CLEAR_COLLECTION_STATE = 'clearCollectionState'
 }
 
@@ -25,7 +28,8 @@ const initState: State = {
     keyword: ''
   },
   currentCollectionSearchCondition: {},
-  collectionSearchResult: {}
+  collectionSearchResult: {},
+  collectionSearchDetail: {}
 };
 
 // action
@@ -50,9 +54,18 @@ export const updateCurrentCollectionSearchCondition = (currentCollectionSearchCo
 // 修改当前收藏品的搜索集合
 export const updateCollectionSearchResult = (collectionSearchResult: any): object => {
   return {
-    type: ActionType.Update_COLLECTION_SEARCH_RESULT,
+    type: ActionType.UPDATE_COLLECTION_SEARCH_RESULT,
     data: {
       collectionSearchResult
+    }
+  };
+};
+// 修改当前收藏品的搜索详情
+export const updateCollectionSearchDetail = (collectionSearchDetail: any): object => {
+  return {
+    type: ActionType.UPDATE_COLLECTION_SEARCH_RESULT,
+    data: {
+      collectionSearchDetail
     }
   };
 };
@@ -76,7 +89,12 @@ export default (state = initState, action: any): any => {
         ...state,
         ...action.data
       };
-    case ActionType.Update_COLLECTION_SEARCH_RESULT:
+    case ActionType.UPDATE_COLLECTION_SEARCH_RESULT:
+      return {
+        ...state,
+        ...action.data
+      };
+    case ActionType.UPDATE_COLLECTION_SEARCH_DETAIL:
       return {
         ...state,
         ...action.data

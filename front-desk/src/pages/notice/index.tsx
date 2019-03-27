@@ -2,7 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { AppState } from "../../store";
+import { AppState } from '../../store';
 import {
   updateCurrentNoticeSearchCondition,
   updateNoticeSearchResult
@@ -73,7 +73,8 @@ export default compose<React.ComponentClass>(
             id: item.id,
             title: item.title,
             createdAt: item.time,
-            description: item.description
+            description: item.description,
+            previewImage: item.thumb
           })),
           current: result.page.current_page,
           pageSize: result.page.per_page,

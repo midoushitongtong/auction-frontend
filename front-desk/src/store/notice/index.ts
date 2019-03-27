@@ -6,6 +6,8 @@ export interface State {
   currentNoticeSearchCondition: any;
   // 公告的搜索结果集
   noticeSearchResult: any;
+  // 公告的搜索详情
+  noticeSearchDetail: any;
 }
 
 // action type
@@ -13,6 +15,7 @@ enum ActionType {
   UPDATE_NOTICE_CATEGORY = 'updateNoticeCategory',
   UPDATE_CURRENT_NOTICE_SEARCH_CONDITION = 'updateCurrentNoticeSearchCondition',
   UPDATE_NOTICE_SEARCH_RESULT = 'updateNoticeSearchResult',
+  UPDATE_NOTICE_SEARCH_DETAIL = 'updateNoticeSearchDetail',
   CLEAR_NOTICE_STATE = 'clearNoticeState'
 }
 
@@ -20,7 +23,8 @@ enum ActionType {
 const initState: State = {
   noticeCategory: {},
   currentNoticeSearchCondition: {},
-  noticeSearchResult: {}
+  noticeSearchResult: {},
+  noticeSearchDetail: {}
 };
 
 // action
@@ -51,6 +55,15 @@ export const updateNoticeSearchResult = (noticeSearchResult: any): object => {
     }
   };
 };
+// 修改当前公告的搜索详情
+export const updateNoticeSearchDetail = (noticeSearchDetail: any): object => {
+  return {
+    type: ActionType.UPDATE_NOTICE_SEARCH_DETAIL,
+    data: {
+      noticeSearchDetail
+    }
+  };
+};
 // 清空当前模块的状态
 export const clearNoticeState = (): object => {
   return {
@@ -72,6 +85,11 @@ export default (state = initState, action: any): any => {
         ...action.data
       };
     case ActionType.UPDATE_NOTICE_SEARCH_RESULT:
+      return {
+        ...state,
+        ...action.data
+      };
+    case ActionType.UPDATE_NOTICE_SEARCH_DETAIL:
       return {
         ...state,
         ...action.data
