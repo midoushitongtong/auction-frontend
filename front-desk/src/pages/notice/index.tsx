@@ -22,9 +22,9 @@ interface ConnectState {
 
 interface ConnectDispatch {
   // 修改当前公告的搜索条件
-  updateCurrentNoticeSearchCondition: any;
+  updateCurrentNoticeSearchCondition: (currentNoticeSearchCondition: any) => object;
   // 修改当前公告的搜索结果集
-  updateNoticeSearchResult: any;
+  updateNoticeSearchResult: (noticeSearchResult: any) => object;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
@@ -111,7 +111,7 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>{this.getTitle()} - {props.siteInfo.companyName}</title>
+            <title>{this.getTitle()} - {props.siteInfo.title}</title>
           </Head>
           <section className="notice-container">
             <section className="notice-wrapper-container">

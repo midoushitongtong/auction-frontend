@@ -4,7 +4,7 @@ import LayoutHeader from '../../../component/layout/header';
 import LayoutFooter from '../../../component/layout/footer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import {updateCollectionSearchDetail} from '../../../store/collection';
+import { updateCollectionSearchDetail } from '../../../store/collection';
 import CollectionSearchDetail from '../../../component/collection/search-detail';
 import api from '../../../api';
 import './index.scss'
@@ -16,7 +16,7 @@ interface ConnectState {
 
 interface ConnectDispatch {
   // 修改当前收藏品的搜索详情
-  updateCollectionSearchDetail: any;
+  updateCollectionSearchDetail: (collectionSearchDetail: any) => object;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
@@ -69,7 +69,7 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>{props.collectionSearchDetail.name} - {props.siteInfo.companyName}</title>
+            <title>{props.collectionSearchDetail.name} - {props.siteInfo.title}</title>
           </Head>
           <section className="collection-detail-container">
             <section className="collection-detail-wrapper-container">

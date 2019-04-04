@@ -7,15 +7,15 @@ import ajax from '../../util/ajax';
  */
 interface Api {
   // 获取公告分类
-  selectNoticeCategory: () => {};
+  selectNoticeCategory: () => object;
   // 获取公告列表
-  selectNoticeList: (searchCondition: any) => {};
+  selectNoticeList: (searchCondition: any) => object;
   // 获取公告详情
-  selectNoticeDetail: (id: any) => {};
+  selectNoticeDetail: (id: any) => object;
 }
 
 /**
- * 账户相关接口实现
+ * 公告相关接口实现
  *
  */
 const api: Api = {

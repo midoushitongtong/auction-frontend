@@ -42,7 +42,7 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>登陆 - {props.siteInfo.companyName}</title>
+            <title>登陆 - {props.siteInfo.title}</title>
           </Head>
           <section className="account-sign-in-container">
             <section className="account-sign-in-wrapper-container">

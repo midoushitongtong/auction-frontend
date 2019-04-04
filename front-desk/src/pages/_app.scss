@@ -2,7 +2,7 @@ $primary-color: #ffc107;
 $primary-active-color: #eab105;
 
 html {
-  font-family: 'OptimaLTStd', 'Arial', "Microsoft JhengHei";
+  font-family: 'OptimaLTStd', 'Arial', 'Microsoft JhengHei';
   font-size: 13px;
   &.mobile-active {
     overflow: hidden;
@@ -13,7 +13,7 @@ html {
     font-size: 12px;
     background-color: #f6f6f6;
     #__next {
-      transition: transform .3s ease;
+      transition: transform 0.3s ease;
       // 移动端菜单显示触发
       &.mobile-active {
         height: 100%;
@@ -34,7 +34,7 @@ html {
 @media (max-width: 767px) {
   html {
     body {
-      font-size: .8rem;
+      font-size: 0.8rem;
     }
   }
 }
@@ -52,10 +52,12 @@ html {
     }
   }
   // radio
-  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  .ant-radio-group-solid
+    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
     color: rgba(0, 0, 0, 0.65);
   }
-  .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+  .ant-radio-group-solid
+    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
   .ant-radio-button-wrapper-checked:hover {
     color: #000;
   }
@@ -73,7 +75,9 @@ html {
     box-shadow: 0 0 0 2px $primary-color;
   }
   // pagination
-  .ant-select-focused .ant-select-selection, .ant-select-selection:focus, .ant-select-selection:active {
+  .ant-select-focused .ant-select-selection,
+  .ant-select-selection:focus,
+  .ant-select-selection:active {
     box-shadow: 0 0 0 2px $primary-color;
   }
   // form
@@ -81,7 +85,7 @@ html {
     .ant-form-item {
       height: 65px;
       margin-bottom: 0;
-      transition: height .3s ease;
+      transition: height 0.3s ease;
       &.ant-form-item-with-help {
         height: 75px;
       }
@@ -117,11 +121,13 @@ html {
 
 // swiper
 html {
-  .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+  .swiper-button-next,
+  .swiper-container-rtl .swiper-button-prev {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTI3LDIyTDI3LDIyTDUsNDRsLTIuMS0yLjFMMjIuOCwyMkwyLjksMi4xTDUsMEwyNywyMkwyNywyMnonIGZpbGw9JyNmZmMxMDcnLz48L3N2Zz4=
     );
   }
-  .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
+  .swiper-button-prev,
+  .swiper-container-rtl .swiper-button-next {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTAsMjJMMjIsMGwyLjEsMi4xTDQuMiwyMmwxOS45LDE5LjlMMjIsNDRMMCwyMkwwLDIyTDAsMjJ6JyBmaWxsPScjZmZjMTA3Jy8+PC9zdmc+);
   }
   .swiper-pagination-bullet-active {
@@ -132,11 +138,11 @@ html {
 // nprogress
 html {
   #nprogress .bar {
-    height: .3rem;
+    height: 0.3rem;
     background: $primary-active-color;
   }
   #nprogress .peg {
-    box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color
+    box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color;
   }
   #nprogress .spinner-icon {
     border-top-color: $primary-color;
@@ -146,7 +152,7 @@ html {
   // notification 移动端适配
   @media (max-width: 767px) {
     #nprogress .bar {
-      height: .5rem;
+      height: 0.5rem;
       background: $primary-active-color;
     }
   }

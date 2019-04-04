@@ -4,14 +4,14 @@ import NProgress from 'nprogress';
 import Router from 'next/router';
 
 // ie11 兼容
-import "@babel/polyfill";
+import '@babel/polyfill';
 
 // react-redux 高阶组件
 import { Provider } from 'react-redux';
 import { updateUserInfo } from '../store/account';
 import { updateNoticeCategory } from '../store/notice';
 import { updateSiteInfo } from '../store/site';
-import withReduxStore from '../util/with-redux-store'
+import withReduxStore from '../util/with-redux-store';
 
 // 全局 css
 import 'normalize.css';
@@ -19,11 +19,11 @@ import 'nprogress/nprogress.css';
 import './_app.scss';
 
 import Error from './_error';
-import api from '../api'
+import api from '../api';
 
 // NProgress 配置
 NProgress.configure({
-  minimum: .35,
+  minimum: 0.35,
   easing: 'ease-in',
   speed: 233,
   trickle: true,
@@ -72,7 +72,7 @@ export default withReduxStore(
               children: item.children.length > 0
                 ? item.children.map((itemChild: any) => ({
                   id: itemChild.c_id,
-                  name: itemChild.cate_title,
+                  name: itemChild.cate_title
                 }))
                 : []
             }));
@@ -106,7 +106,6 @@ export default withReduxStore(
             ctx.store.dispatch(updateSiteInfo(siteInfo));
           }
         }
-
       } catch (e) {
         error = {
           statusCode: 500,

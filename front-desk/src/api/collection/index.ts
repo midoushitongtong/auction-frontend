@@ -7,17 +7,17 @@ import ajax from '../../util/ajax';
  */
 interface Api {
   // 获取热门收藏品列表
-  selectCollectionFavoriteList: () => {};
+  selectCollectionFavoriteList: () => object;
   // 获取收藏品搜索条件
-  selectCollectionSearchCondition: () => {};
+  selectCollectionSearchCondition: () => object;
   // 获取收藏品列表
-  selectCollectionList: (searchCondition: any) => {};
+  selectCollectionList: (searchCondition: any) =>object;
   // 获取收藏品详情
-  selectCollectionDetail: (id: any) => {};
+  selectCollectionDetail: (id: any) => object;
 }
 
 /**
- * 账户相关接口实现
+ * 收藏品相关接口实现
  *
  */
 const api: Api = {

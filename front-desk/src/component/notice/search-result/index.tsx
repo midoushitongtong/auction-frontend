@@ -62,51 +62,55 @@ export default compose<React.ComponentClass>(
 
     public render = (): JSX.Element => {
       const { props } = this;
-      return props.noticeSearchResult.itemList.length > 0
-        ? (
-          <section className="notice-search-result-container">
-            <section>
-              <section className="notice-list-container">
-                {props.noticeSearchResult.itemList.map((item: any, index: number) => (
-                  <section className="notice-list-item" key={index}>
-                    <section className="preview-image-container">
-                      <Link href={`/notice/detail?id=${item.id}`} as={`/notice/detail/${item.id}`}>
-                        <a href={`/notice/detail/${item.id}`}>
-                          <img src={item.previewImage || '/static/image/notice_default_preview.jpg'} alt={item.title}/>
-                        </a>
-                      </Link>
-                    </section>
-                    <section className="description-container">
-                      <p className="description-top">
+      return (
+        <section className="notice-search-result-container">
+          {props.noticeSearchResult.itemList.length > 0
+            ? (
+              <section className="notice-search-result-inner-container">
+                <section className="notice-list-container">
+                  {props.noticeSearchResult.itemList.map((item: any) => (
+                    <section className="notice-list-item" key={item.id}>
+                      <section className="preview-image-container">
                         <Link href={`/notice/detail?id=${item.id}`} as={`/notice/detail/${item.id}`}>
-                          <a href={`/notice/detail/${item.id}`} className="title">{item.title}</a>
+                          <a href={`/notice/detail/${item.id}`}>
+                            <img src={item.previewImage || '/static/image/notice_default_preview.jpg'}
+                                 alt={item.title}/>
+                          </a>
                         </Link>
-                        <span className="created-at">{item.createdAt}</span>
-                      </p>
-                      <p className="description-bottom">
-                        <span className="description">{item.description}</span>
-                      </p>
+                      </section>
+                      <section className="description-container">
+                        <p className="description-top">
+                          <Link href={`/notice/detail?id=${item.id}`} as={`/notice/detail/${item.id}`}>
+                            <a href={`/notice/detail/${item.id}`} className="title">{item.title}</a>
+                          </Link>
+                          <span className="created-at">{item.createdAt}</span>
+                        </p>
+                        <p className="description-bottom">
+                          <span className="description">{item.description}</span>
+                        </p>
+                      </section>
                     </section>
-                  </section>
-                ))}
+                  ))}
+                </section>
+                <section className="notice-pagination-container">
+                  <Pagination
+                    current={parseInt(props.noticeSearchResult.current)}
+                    pageSize={parseInt(props.noticeSearchResult.pageSize)}
+                    total={parseInt(props.noticeSearchResult.total)}
+                    onChange={this.paginationChange}
+                  />
+                </section>
               </section>
-              <section className="notice-pagination-container">
-                <Pagination
-                  current={parseInt(props.noticeSearchResult.current)}
-                  pageSize={parseInt(props.noticeSearchResult.pageSize)}
-                  total={parseInt(props.noticeSearchResult.total)}
-                  onChange={this.paginationChange}
-                />
-              </section>
-            </section>
-          </section>
-        )
-        : (
-          <Alert
-            message="暂无数据！"
-            type="warning"
-          />
-        );
+            )
+            : (
+              <Alert
+                message="暂无数据！"
+                type="warning"
+              />
+            )
+          }
+        </section>
+      );
     };
   }
 );

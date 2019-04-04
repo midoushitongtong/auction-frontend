@@ -45,7 +45,7 @@ export default compose<React.ComponentClass>(
             hiddenHeaderNav={true}
           />
           <Head>
-            <title>个人信息 - 个人中心 - {props.siteInfo.companyName}</title>
+            <title>个人信息 - 个人中心 - {props.siteInfo.title}</title>
           </Head>
           <section className="account-person-info-container">
             <section className="account-person-info-wrapper-container">

@@ -19,7 +19,7 @@ interface ConnectState {
 
 interface ConnectDispatch {
   // 修改公告的搜索详情
-  updateNoticeSearchDetail: any;
+  updateNoticeSearchDetail: (noticeSearchDetail: any) => object;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
@@ -71,7 +71,7 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>{props.noticeSearchDetail.title} - {props.siteInfo.companyName}</title>
+            <title>{props.noticeSearchDetail.title} - {props.siteInfo.title}</title>
           </Head>
           <section className="notice-container">
             <section className="notice-wrapper-container">

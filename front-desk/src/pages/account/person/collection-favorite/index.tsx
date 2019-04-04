@@ -22,9 +22,9 @@ interface ConnectState {
 
 interface ConnectDispatch {
   // 修改当前我的收藏品的搜索条件
-  updateCurrentAccountPersonCollectionFavoriteSearchCondition: any;
+  updateCurrentAccountPersonCollectionFavoriteSearchCondition: (currentAccountPersonCollectionFavoriteSearchCondition: any) => object;
   // 修改我的收藏品搜索的结果集
-  updateAccountPersonCollectionFavoriteSearchResult: any;
+  updateAccountPersonCollectionFavoriteSearchResult: (accountPersonCollectionFavoriteSearchResult: any) => object;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
@@ -75,7 +75,7 @@ export default compose<React.ComponentClass>(
             hiddenHeaderNav={true}
           />
           <Head>
-            <title>我的收藏 - 个人中心 - {props.siteInfo.companyName}</title>
+            <title>我的收藏 - 个人中心 - {props.siteInfo.title}</title>
           </Head>
           <section className="account-person-collection-favorite-container">
             <section className="account-person-collection-favorite-wrapper-container">

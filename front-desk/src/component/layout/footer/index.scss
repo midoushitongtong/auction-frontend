@@ -8,15 +8,16 @@
     .footer-top-inner-container {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       width: 100%;
       max-width: 1200px;
       padding: 3rem 2rem;
       .action-left-container {
+        flex: 1;
         display: flex;
         .action-item-group {
           margin-right: 100px;
           &:last-child {
+            flex: 1;
             margin-right: 0;
           }
           &.contact-action-item-group {

@@ -13,7 +13,7 @@ import LayoutFooter from '../../component/layout/footer';
 import CollectionSearchCondition from '../../component/collection/search-condition';
 import CollectionSearchResult from '../../component/collection/search-result';
 import api from '../../api';
-import './index.scss'
+import './index.scss';
 
 // 当前组件的类型声明
 interface ConnectState {
@@ -23,20 +23,18 @@ interface ConnectState {
 }
 
 interface ConnectDispatch {
-  // 修改收藏品的搜索条件
-  updateCollectionSearchCondition: any;
   // 修改当前收藏品的搜索条件
-  updateCurrentCollectionSearchCondition: any;
+  updateCurrentCollectionSearchCondition: (currentCollectionSearchCondition: any) => object;
+  // 修改收藏品的搜索条件
+  updateCollectionSearchCondition: (collectionSearchCondition: any) => object;
   // 修改当前收藏品的搜索结果集
-  updateCollectionSearchResult: any;
+  updateCollectionSearchResult: (collectionSearchResult: any) => object;
 }
 
 interface Props extends ConnectState, ConnectDispatch {
-
 }
 
 interface State {
-
 }
 
 // 当前组件类
@@ -62,7 +60,6 @@ export default compose<React.ComponentClass>(
         keyword: query.keyword || '',
         current: query.current || '1'
       };
-      store.dispatch(updateCurrentCollectionSearchCondition(currentCollectionSearchCondition));
 
       // 获取收藏品的搜索条件(一个页面只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
       if (store.getState().collection.collectionSearchCondition.isGet === undefined) {
@@ -72,13 +69,15 @@ export default compose<React.ComponentClass>(
           collectionSearchCondition = {
             categoryList: result.data
           };
-          collectionSearchCondition.isGet = true;
+            collectionSearchCondition.isGet = true;
         }
+
         store.dispatch(updateCollectionSearchCondition(collectionSearchCondition));
       }
 
       // 获取收藏品的搜索结果集
       let collectionSearchResult: any = {};
+
       const searchCondition: any = {};
       if (currentCollectionSearchCondition.childrenCategoryId != 0) {
         searchCondition.cate = currentCollectionSearchCondition.childrenCategoryId;
@@ -89,7 +88,9 @@ export default compose<React.ComponentClass>(
       if (currentCollectionSearchCondition.current != '1') {
         searchCondition.page = currentCollectionSearchCondition.current;
       }
-      const result2: any = await api.collection.selectCollectionList(searchCondition);
+      const result2: any = await api.collection.selectCollectionList(
+        searchCondition
+      );
       if (result2.code == '0') {
         collectionSearchResult = {
           itemList: result2.data.map((item: any) => ({
@@ -105,8 +106,10 @@ export default compose<React.ComponentClass>(
           pageSize: result2.page.per_page,
           total: result2.page.total
         };
-        store.dispatch(updateCollectionSearchResult(collectionSearchResult));
       }
+
+      store.dispatch(updateCurrentCollectionSearchCondition(currentCollectionSearchCondition));
+      store.dispatch(updateCollectionSearchResult(collectionSearchResult));
 
       return {};
     };
@@ -126,7 +129,7 @@ export default compose<React.ComponentClass>(
         <section className="app-container">
           <LayoutHeader/>
           <Head>
-            <title>收藏品查询 - {props.siteInfo.companyName}</title>
+            <title>收藏品查询 - {props.siteInfo.title}</title>
           </Head>
           <section className="collection-container">
             <section className="collection-wrapper-container">

@@ -22,7 +22,7 @@ export default class Error extends React.Component<Props, State> {
     const { props } = this;
     const statusCode: any = props.statusCode;
     console.error(props);
-    switch (statusCode ) {
+    switch (statusCode) {
       case 404:
         return (
           <section className="error-container">

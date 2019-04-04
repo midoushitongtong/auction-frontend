@@ -7,11 +7,11 @@ import config from '../../../config';
  */
 interface Api {
   // 获取我的收藏品收藏列表
-  selectAccountPersonCollectionFavoriteList: (searchCondition: any) => {};
+  selectAccountPersonCollectionFavoriteList: (searchCondition: any) => object;
 }
 
 /**
- * 账户相关接口实现
+ * 个人账户相关接口实现
  *
  */
 const api: Api = {

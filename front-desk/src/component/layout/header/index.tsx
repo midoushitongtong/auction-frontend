@@ -130,26 +130,20 @@ export default compose<React.ComponentClass>(
             <meta name="keywords" content={props.siteInfo.seoKeyword}/>
             <link rel="icon" href={props.siteInfo.browserIcon} type="image/x-icon"/>
           </Head>
-          {props.hiddenHeaderAction
-            ? null
-            : (
-              <HeaderAction/>
-            )}
-          {props.hiddenHeaderTop
-            ? null
-            : (
-              <HeaderTop
-                toggleMobileHeaderNavContainer={this.toggleMobileHeaderNavContainer}
-                toggleMobileSearchContainer={this.toggleMobileSearchContainer}
-              />
-            )}
-          {props.hiddenHeaderNav
-            ? null
-            : (
-              <HeaderNav
-                toggleMobileHeaderNavContainer={this.toggleMobileHeaderNavContainer}
-              />
-            )}
+          {!props.hiddenHeaderAction && (
+            <HeaderAction/>
+          )}
+          {!props.hiddenHeaderTop && (
+            <HeaderTop
+              toggleMobileHeaderNavContainer={this.toggleMobileHeaderNavContainer}
+              toggleMobileSearchContainer={this.toggleMobileSearchContainer}
+            />
+          )}
+          {!props.hiddenHeaderNav && (
+            <HeaderNav
+              toggleMobileHeaderNavContainer={this.toggleMobileHeaderNavContainer}
+            />
+          )}
         </section>
       );
     };

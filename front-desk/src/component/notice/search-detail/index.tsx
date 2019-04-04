@@ -1,8 +1,10 @@
 import React from 'react';
+import HTMLParseReact from 'html-react-parser';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../../../store';
-import './index.scss'
+import './index.scss';
+import ImageZoom from 'react-medium-image-zoom';
 
 // 当前组件的类型声明
 interface ConnectState {
@@ -41,8 +43,28 @@ export default compose<React.ComponentClass>(
           </section>
           <section
             className="notice-content"
-            dangerouslySetInnerHTML={{ __html: props.noticeSearchDetail.content }}
-          />
+          >
+            {HTMLParseReact(props.noticeSearchDetail.content, {
+              replace: (domNode: any) => {
+                if (domNode.type === 'tag' && domNode.name == 'img') {
+                  // 如果是图片元素, 替换为 react 节点, 可放大图片
+                  return (
+                    <ImageZoom
+                      image={{
+                        src: domNode.attribs.src,
+                        alt: domNode.attribs.src,
+                        className: 'swiper-lazy',
+                      }}
+                      zoomImage={{
+                        src: domNode.attribs.src,
+                        alt: domNode.attribs.src
+                      }}
+                    />
+                  );
+                }
+              }
+            })}
+          </section>
         </section>
       );
     };

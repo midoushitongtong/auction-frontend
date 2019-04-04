@@ -7,11 +7,11 @@ import ajax from '../../util/ajax';
  */
 interface Api {
   // 获取轮播图
-  selectCarouselList: () => {};
+  selectCarouselList: () => object;
 }
 
 /**
- * 账户相关接口实现
+ * 公共相关接口实现
  *
  */
 const api: Api = {

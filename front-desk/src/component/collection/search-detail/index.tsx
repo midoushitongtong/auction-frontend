@@ -1,7 +1,7 @@
 import React from 'react';
-import ImageGallery from 'react-image-gallery';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import ImageZoom from 'react-medium-image-zoom';
 import './index.scss'
 
 // 当前组件的类型声明
@@ -19,6 +19,8 @@ interface Props extends ConnectState, ConnectDispatch {
 }
 
 interface State {
+  // 轮播图当前选中的索引
+  currentSwiperIndex: number;
 }
 
 
@@ -32,8 +34,47 @@ export default compose<React.ComponentClass>(
   )
 )(
   class CollectionSearchDetail extends React.Component<Props, State> {
+    public swiperInstance: any = null;
+
+    constructor(props: any) {
+      super(props);
+      this.state = {
+        currentSwiperIndex: 0
+      };
+    }
+
+    public componentDidMount = (): void => {
+      try {
+        this.swiperInstance = new (window as any).Swiper('.swiper-container', {
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          },
+          pagination: {
+            el: '.swiper-pagination'
+          },
+          loop: false,
+          lazy: true,
+          on: {
+            slideChangeTransitionStart: () => {
+              if (this.swiperInstance) {
+                this.setState({
+                  // 更新轮播图当前选中的索引
+                  currentSwiperIndex: this.swiperInstance.realIndex
+                });
+                this.swiperInstance.update(true);
+              }
+            }
+          },
+        });
+      } catch (e) {
+        console.log(e);
+        console.error('实例化 swiper 失败, 请检查 swiper 资源文件');
+      }
+    };
+
     public render = (): JSX.Element => {
-      const { props } = this;
+      const { props, state } = this;
       return (
         <section className="collection-search-detail-container">
           <section className="collection-content-container">
@@ -68,15 +109,42 @@ export default compose<React.ComponentClass>(
               </section>
             </section>
             <section className="collection-image-container">
-              <ImageGallery
-                showFullscreenButton={false}
-                showPlayButton={false}
-                showNav={false}
-                items={props.collectionSearchDetail.carouselList.map((carouselListItem: any) => ({
-                  original: carouselListItem,
-                  thumbnail: carouselListItem
-                }))}
-              />
+              <div className="swiper-container">
+                <div className="swiper-wrapper">
+                  {props.collectionSearchDetail.carouselList.map((item: any, index: number) => (
+                    <div className="swiper-slide" key={index}>
+                      <ImageZoom
+                        image={{
+                          src: item,
+                          alt: item,
+                          className: 'swiper-lazy',
+                        }}
+                        zoomImage={{
+                          src: item,
+                          alt: item
+                        }}
+                      />
+                      <div className="swiper-lazy-preloader swiper-lazy-preloader-white"/>
+                    </div>
+                  ))}
+                </div>
+                <div className="swiper-thumb">
+                  {props.collectionSearchDetail.carouselList.map((item: any, index: number) => (
+                    <div
+                      className={state.currentSwiperIndex === index ? 'swiper-thumb-item active' : 'swiper-thumb-item'}
+                      key={index}
+                      onClick={() => {
+                        if (this.swiperInstance) {
+                          // 滑动到指定的轮播图
+                          this.swiperInstance.slideTo(index, 300);
+                        }
+                      }}
+                    >
+                      <img src={item}/>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </section>
           </section>
         </section>

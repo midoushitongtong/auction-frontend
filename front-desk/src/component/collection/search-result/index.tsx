@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Pagination } from 'antd';
+import { Row, Col, Pagination, Alert } from 'antd';
 import Router from 'next/router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -67,28 +67,40 @@ export default compose<React.ComponentClass>(
       const { props } = this;
       return (
         <section className="collection-search-result-container">
-          <Row className="collection-list-container" type="flex">
-            {props.collectionSearchResult.itemList.map((collectionListItem: any) => (
-              <Col
-                className="col"
-                key={collectionListItem.id}
-                span={12}
-                lg={6}
-                md={8}
-                sm={12}
-              >
-                <CommonCollectionItem collection={collectionListItem}/>
-              </Col>
-            ))}
-          </Row>
-          <section className="collection-pagination-container">
-            <Pagination
-              current={parseInt(props.collectionSearchResult.current)}
-              pageSize={parseInt(props.collectionSearchResult.pageSize)}
-              total={parseInt(props.collectionSearchResult.total)}
-              onChange={this.paginationChange}
-            />
-          </section>
+          {props.collectionSearchResult.itemList.length > 0
+            ? (
+              <section className="collection-search-result-inner-container">
+                <Row className="collection-list-container" type="flex">
+                  {props.collectionSearchResult.itemList.map((collectionListItem: any) => (
+                    <Col
+                      className="col"
+                      key={collectionListItem.id}
+                      span={12}
+                      lg={6}
+                      md={8}
+                      sm={12}
+                    >
+                      <CommonCollectionItem collection={collectionListItem}/>
+                    </Col>
+                  ))}
+                </Row>
+                <section className="collection-pagination-container">
+                  <Pagination
+                    current={parseInt(props.collectionSearchResult.current)}
+                    pageSize={parseInt(props.collectionSearchResult.pageSize)}
+                    total={parseInt(props.collectionSearchResult.total)}
+                    onChange={this.paginationChange}
+                  />
+                </section>
+              </section>
+            )
+            : (
+              <Alert
+                message="暂无数据！"
+                type="warning"
+              />
+            )
+          }
         </section>
       );
     };

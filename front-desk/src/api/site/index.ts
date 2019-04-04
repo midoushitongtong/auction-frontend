@@ -7,11 +7,11 @@ import ajax from '../../util/ajax';
  */
 interface Api {
   // 获取站点基本信息
-  getSiteInfo: () => {};
+  getSiteInfo: () => object;
 }
 
 /**
- * 账户相关接口实现
+ * 站点相关接口实现
  *
  */
 const api: Api = {

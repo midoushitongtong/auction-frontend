@@ -1,5 +1,3 @@
-@import "node_modules/react-image-gallery/styles/scss/image-gallery.scss";
-
 .collection-search-detail-container {
   padding: 3rem 3rem 5rem;
   background-color: #fff;
@@ -7,7 +5,6 @@
   .collection-content-container {
     display: flex;
     .collection-base-info-container {
-      flex: 1;
       width: 50%;
       padding-right: 1.5rem;
       border-right: 1px solid #ddd;
@@ -65,16 +62,45 @@
       }
     }
     .collection-image-container {
-      flex: 1;
       width: 50%;
       padding-left: 1.5rem;
-      .image-gallery-thumbnails .image-gallery-thumbnails-container {
-        .image-gallery-thumbnail {
-          &.active {
-            border-color: #eab105;
+      .swiper-container {
+        min-height: 500px;
+        .swiper-wrapper {
+          height: 400px;
+          .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, .2);
+            img {
+              max-width: 100%;
+              max-height: 400px;
+            }
           }
-          img {
+        }
+        .swiper-thumb {
+          min-height: 100px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          .swiper-thumb-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 75px;
             height: 75px;
+            border: 5px solid transparent;
+            transition: border-color .2s;
+            cursor: pointer;
+            &.active {
+              border-color: #eab105;
+            }
+            img {
+              width: 100%;
+              height: 100%;
+            }
           }
         }
       }
@@ -126,6 +152,10 @@
         margin-bottom: 1.9rem;
         padding-bottom: 1.9rem;
         border-bottom: 1px solid #ddd;
+        .swiper-container {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
