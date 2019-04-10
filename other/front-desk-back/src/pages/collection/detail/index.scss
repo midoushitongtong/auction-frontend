@@ -1,0 +1,12 @@
+.collection-detail-container {
+  width: 100%;
+  .collection-detail-wrapper-container {
+    display: flex;
+    justify-content: center;
+    .collection-detail-wrapper-inner-container {
+      width: 100%;
+      max-width: 1200px;
+      margin-top: 1rem;
+    }
+  }
+}

@@ -1,0 +1,81 @@
+.layout-master-system-container {
+  &.collapse {
+    .main-container {
+      .content-container {
+        padding-left: 80px;
+      }
+    }
+  }
+  .main-container {
+    min-height: 100vh;
+    background: #f0f2f5;
+    .content-container {
+      width: 100%;
+      padding-left: 256px;
+      transition: padding-left .3s ease;
+      .main-content-container {
+        padding: 24px;
+        & > section:first-child {
+          padding: 24px;
+          background-color: #fff;
+          // 列表顶部操作容器
+          .data-operation-container {
+            .search-container {
+              margin-bottom: 24px;
+              .search-field-container {
+                .ant-form-item {
+                  display: flex;
+                  .ant-form-item-label {
+                    width: auto;
+                    padding-right: 8px;
+                    line-height: 39.9999px;
+                  }
+                  .ant-form-item-control-wrapper {
+                    flex: 1;
+                  }
+                }
+                .search-action-container {
+                  line-height: 39.9999px;
+                  button {
+                    margin-left: 8px;
+                  }
+                }
+              }
+            }
+            .data-action-container {
+              display: flex;
+              justify-content: flex-end;
+              margin-bottom: 24px;
+            }
+          }
+          // 列表操作容器
+          .data-container {
+            .table-data-action-container {
+              a, span {
+                color: #1890ff;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.system-slide-left-enter {
+  transform: translateX(-3.5vw);
+}
+
+.system-slide-left-enter.system-slide-left-enter-active {
+  transform: translateX(0);
+  transition: transform .2s ease;
+}
+
+.system-slide-left-exit {
+  display: none;
+}
+
+.system-slide-left-exit.system-slide-left-exit-active {
+  display: none;
+}

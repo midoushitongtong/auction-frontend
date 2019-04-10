@@ -1,0 +1,41 @@
+.layout-master-system-sidebar-container {
+  overflow: hidden;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  min-height: 100vh;
+  background-color: #001529;
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  &.collapse {
+    .logo-container {
+      display: none;
+    }
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    height: 64px;
+    padding-left: 25px;
+    padding-right: 25px;
+    background: #002140;
+    a {
+      text-decoration: none;
+      font-size: 20px;
+      font-family: Avenir,Helvetica Neue,Arial,Helvetica,sans-serif;
+      font-weight: 600;
+      color: #fff;
+    }
+  }
+  .ant-menu {
+    width: 256px;
+    transition: width .3s ease;
+    &.ant-menu-inline-collapsed {
+      width: 80px;
+      .logo-container {
+        display: none;
+      }
+    }
+  }
+}
