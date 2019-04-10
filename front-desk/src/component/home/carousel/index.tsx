@@ -7,7 +7,6 @@ interface Props {
 }
 
 interface State {
-
 }
 
 // 当前组件类
@@ -15,7 +14,6 @@ export default class HomeCarousel extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
   }
-
 
   public componentDidMount = (): void => {
     try {

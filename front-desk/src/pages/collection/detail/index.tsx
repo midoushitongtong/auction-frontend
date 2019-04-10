@@ -57,6 +57,9 @@ export default compose<React.ComponentClass>(
           name: data.goods_title
         };
         store.dispatch(updateCollectionSearchDetail(collectionSearchDetail));
+      } else {
+        // 返回数据错误, 显示 404 页面
+        throw new Error('404');
       }
       return {
         collectionSearchDetail

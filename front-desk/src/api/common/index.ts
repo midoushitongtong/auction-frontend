@@ -1,5 +1,5 @@
 import ajax from '../../util/ajax';
-// import config from '../../config';
+import config from '../../config';
 
 /**
  * 公共相关接口
@@ -18,7 +18,7 @@ const api: Api = {
   selectCarouselList: ():object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/Lubotu`
+      `${config.API_ROOT}/Lubotu`
     );
   }
 };

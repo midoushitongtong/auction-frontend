@@ -3,11 +3,9 @@ import './index.scss';
 
 // 当前组件的类型声明
 interface Props {
-
 }
 
 interface State {
-
 }
 
 // 当前组件类

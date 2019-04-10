@@ -23,7 +23,6 @@ interface State {
   currentSwiperIndex: number;
 }
 
-
 // 当前组件类
 export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(

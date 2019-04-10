@@ -1,5 +1,5 @@
 import ajax from '../../util/ajax';
-// import config from '../../config';
+import config from '../../config';
 
 /**
  * 公告相关接口
@@ -22,20 +22,20 @@ const api: Api = {
   selectNoticeCategory: ():object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/ArticleCate`
+      `${config.API_ROOT}/ArticleCate`
     );
   },
   selectNoticeList: (searchCondition: any): object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/ArticleList`,
+      `${config.API_ROOT}/ArticleList`,
       searchCondition
     );
   },
   selectNoticeDetail: (id: any): object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/AeRead/${id}`
+      `${config.API_ROOT}/AeRead/${id}`
     );
   }
 };

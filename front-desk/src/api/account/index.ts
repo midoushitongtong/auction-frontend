@@ -26,35 +26,35 @@ const api: Api = {
   signUp: (data: any): object => {
     return ajax(
       'POST',
-      `${config.API_ROOT}/account/signUp`,
+      `${config.MOCK_API_ROOT}/account/signUp`,
       data
     );
   },
   signIn: (data: any): object => {
     return ajax(
       'POST',
-      `${config.API_ROOT}/account/signIn`,
+      `${config.MOCK_API_ROOT}/account/signIn`,
       data
     );
   },
   signOut: (): object => {
     return ajax(
       'GET',
-      `${config.API_ROOT}/account/signOut`,
+      `${config.MOCK_API_ROOT}/account/signOut`,
       {}
     );
   },
   selectUserInfo: (): object => {
     return ajax(
       'GET',
-      `${config.API_ROOT}/account/userInfo`,
+      `${config.MOCK_API_ROOT}/account/userInfo`,
       {}
     );
   },
   sendCaptcha: (data: any):object => {
     return ajax(
       'POST',
-      `${config.API_ROOT}/account/sendCaptcha`,
+      `${config.MOCK_API_ROOT}/account/sendCaptcha`,
       data
     );
   }

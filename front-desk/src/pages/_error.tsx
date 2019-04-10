@@ -7,7 +7,6 @@ interface Props {
 }
 
 interface State {
-
 }
 
 export default class Error extends React.Component<Props, State> {
@@ -27,7 +26,7 @@ export default class Error extends React.Component<Props, State> {
         return (
           <section className="error-container">
             <h1>404</h1>
-            <h3>当前访问的页面不存在！</h3>
+            <h3>您访问的页面找不回来了！</h3>
           </section>
         );
       case 500:

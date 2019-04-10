@@ -9,7 +9,6 @@ interface Props {
 }
 
 interface State {
-
 }
 
 // 当前组件类

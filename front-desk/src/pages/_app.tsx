@@ -107,10 +107,20 @@ export default withReduxStore(
           }
         }
       } catch (e) {
-        error = {
-          statusCode: 500,
-          detail: e.config
-        };
+        // 处理全部 page 的 getInitialProps 方法抛出的异常
+        switch (e.toString()) {
+          case 'Error: 404':
+            error = {
+              statusCode: 404,
+              detail: '检查 url 参数是否有误'
+            };
+            break;
+          default:
+            error = {
+              statusCode: 500,
+              detail: e.config
+            };
+        }
       }
       return {
         pageProps,
@@ -119,6 +129,7 @@ export default withReduxStore(
     };
 
     public componentDidMount = (): void => {
+      // 监听路由显示顶部加载条
       Router.events.on('routeChangeStart', () => NProgress.start());
       Router.events.on('routeChangeComplete', () => NProgress.done());
       Router.events.on('routeChangeError', () => NProgress.done());

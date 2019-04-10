@@ -58,6 +58,9 @@ export default compose<React.ComponentClass>(
           category: result.data[0].cate + ''
         };
         store.dispatch(updateNoticeSearchDetail(noticeSearchDetail));
+      } else {
+        // 返回数据错误, 显示 404 页面
+        throw new Error('404');
       }
 
       return {

@@ -1,14 +1,12 @@
 import React from 'react';
 import { Button, Form, Input, Icon, notification } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
-import { compose } from 'redux';
 import Router from 'next/router';
 import api from '../../../api';
 import './index.scss';
 
 // 当前组件的类型声明
 interface Props extends FormComponentProps {
-
 }
 
 interface State {
@@ -19,9 +17,7 @@ interface State {
 }
 
 // 当前组件类
-export default compose<React.ComponentClass>(
-  Form.create()
-)(
+export default Form.create()(
   class AccountSignUpDetail extends React.Component<Props, State> {
     constructor(props: any) {
       super(props);

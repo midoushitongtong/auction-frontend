@@ -23,7 +23,6 @@ interface Props extends ConnectState, ConnectDispatch {
 }
 
 interface State {
-
 }
 
 // 当前组件类

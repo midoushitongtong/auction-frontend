@@ -26,7 +26,7 @@ export default class _document extends Document {
             }}
           />
 
-          {/* swiper */}
+          {/* swiper plugin */}
           <link
             rel="stylesheet"
             href="//cdn.staticfile.org/Swiper/4.5.0/css/swiper.min.css"

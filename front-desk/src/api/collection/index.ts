@@ -1,5 +1,5 @@
 import ajax from '../../util/ajax';
-// import config from '../../config';
+import config from '../../config';
 
 /**
  * 收藏品相关接口
@@ -24,26 +24,26 @@ const api: Api = {
   selectCollectionFavoriteList: (): object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/HP`
+      `${config.API_ROOT}/HP`
     );
   },
   selectCollectionSearchCondition: (): object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/CateList`
+      `${config.API_ROOT}/CateList`
     );
   },
   selectCollectionList: (searchCondition: any): object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/PT`,
+      `${config.API_ROOT}/PT`,
       searchCondition
     );
   },
   selectCollectionDetail: (id: any) : object => {
     return ajax(
       'GET',
-      `http://106.13.107.45/PtRead/${id}`
+      `${config.API_ROOT}/PtRead/${id}`
     );
   }
 };

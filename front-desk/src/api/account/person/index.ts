@@ -18,7 +18,7 @@ const api: Api = {
   selectAccountPersonCollectionFavoriteList: (searchCondition: any): object => {
     return ajax(
       'GET',
-      `${config.API_ROOT}/account/person/collection/favorite/list`,
+      `${config.MOCK_API_ROOT}/account/person/collection/favorite/list`,
       searchCondition
     );
   }
