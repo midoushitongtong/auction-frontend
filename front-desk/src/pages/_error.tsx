@@ -1,5 +1,5 @@
 import React from 'react'
-import './_error.scss';
+import './_error.less';
 
 // 当前组件类型声明
 interface Props {

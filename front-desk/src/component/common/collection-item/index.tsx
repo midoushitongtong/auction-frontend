@@ -3,7 +3,7 @@ import { Icon, Tooltip } from 'antd';
 import LazyLoad from 'react-lazyload';
 import { CSSTransition } from 'react-transition-group';
 import Link from 'next/link';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface Props {

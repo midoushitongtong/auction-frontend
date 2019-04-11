@@ -2,7 +2,7 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import ImageZoom from 'react-medium-image-zoom';
-import './index.scss'
+import './index.less'
 
 // 当前组件的类型声明
 interface ConnectState {

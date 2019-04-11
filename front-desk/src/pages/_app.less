@@ -1,5 +1,5 @@
-$primary-color: #ffc107;
-$primary-active-color: #eab105;
+@primary-color: #ffc107;
+@primary-active-color: #eab105;
 
 html {
   font-family: 'OptimaLTStd', 'Arial', 'Microsoft JhengHei';
@@ -23,7 +23,7 @@ html {
       color: rgba(0, 0, 0, 0.65);
       &:hover,
       &:focus {
-        color: $primary-active-color !important;
+        color: @primary-active-color !important;
         text-decoration: none;
       }
     }
@@ -63,7 +63,7 @@ html {
   }
   // input
   .ant-input:focus {
-    box-shadow: 0 0 0 2px $primary-color;
+    box-shadow: 0 0 0 2px @primary-color;
   }
   .ant-form-item-control.has-error {
     .ant-input {
@@ -72,13 +72,13 @@ html {
   }
   // cascader
   .ant-cascader-picker:focus .ant-cascader-input {
-    box-shadow: 0 0 0 2px $primary-color;
+    box-shadow: 0 0 0 2px @primary-color;
   }
   // pagination
   .ant-select-focused .ant-select-selection,
   .ant-select-selection:focus,
   .ant-select-selection:active {
-    box-shadow: 0 0 0 2px $primary-color;
+    box-shadow: 0 0 0 2px @primary-color;
   }
   // form
   .ant-form {
@@ -97,7 +97,7 @@ html {
   // notification
   .ant-notification-notice {
     color: #333;
-    background-color: $primary-active-color;
+    background-color: @primary-active-color;
     .ant-notification-notice-content {
       .ant-notification-notice-message {
         color: inherit;
@@ -131,7 +131,7 @@ html {
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNyA0NCc+PHBhdGggZD0nTTAsMjJMMjIsMGwyLjEsMi4xTDQuMiwyMmwxOS45LDE5LjlMMjIsNDRMMCwyMkwwLDIyTDAsMjJ6JyBmaWxsPScjZmZjMTA3Jy8+PC9zdmc+);
   }
   .swiper-pagination-bullet-active {
-    background-color: $primary-color;
+    background-color: @primary-color;
   }
 }
 
@@ -139,21 +139,21 @@ html {
 html {
   #nprogress .bar {
     height: 0.3rem;
-    background: $primary-active-color;
+    background: @primary-active-color;
   }
   #nprogress .peg {
-    box-shadow: 0 0 10px $primary-color, 0 0 5px $primary-color;
+    box-shadow: 0 0 10px @primary-color, 0 0 5px @primary-color;
   }
   #nprogress .spinner-icon {
-    border-top-color: $primary-color;
-    border-left-color: $primary-color;
+    border-top-color: @primary-color;
+    border-left-color: @primary-color;
   }
 
   // notification 移动端适配
   @media (max-width: 767px) {
     #nprogress .bar {
       height: 0.5rem;
-      background: $primary-active-color;
+      background: @primary-active-color;
     }
   }
 }

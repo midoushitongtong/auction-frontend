@@ -4,7 +4,7 @@ import { withRouter, WithRouterProps } from 'next/router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Link from 'next/link';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 // antd 菜单 model

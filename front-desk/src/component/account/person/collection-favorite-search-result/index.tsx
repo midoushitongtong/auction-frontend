@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.scss';
 import { Row, Col, Pagination } from 'antd';
 import Router from 'next/router';
 import { compose } from 'redux';
@@ -7,6 +6,7 @@ import { connect } from 'react-redux';
 import { AppState } from '../../../../store';
 import BrowserUtil from '../../../../util/browser';
 import CommonCollectionItem from '../../../common/collection-item';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

@@ -13,7 +13,7 @@ import LayoutHeader from '../../../../component/layout/header';
 import LayoutFooter from '../../../../component/layout/footer';
 import AccountPersonCollectionFavoriteSearchResult
   from '../../../../component/account/person/collection-favorite-search-result';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

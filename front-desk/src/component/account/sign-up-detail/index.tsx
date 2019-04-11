@@ -3,7 +3,7 @@ import { Button, Form, Input, Icon, notification } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Router from 'next/router';
 import api from '../../../api';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface Props extends FormComponentProps {

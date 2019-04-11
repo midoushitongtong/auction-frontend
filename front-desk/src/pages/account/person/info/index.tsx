@@ -4,7 +4,7 @@ import AccountPerson from '../../../../component/account/person';
 import LayoutHeader from '../../../../component/layout/header';
 import LayoutFooter from '../../../../component/layout/footer';
 import AccountPersonInfoSearchDetail from '../../../../component/account/person/info-search-detail';
-import './index.scss';
+import './index.less';
 import { AppState } from "../../../../store";
 import { compose } from 'redux';
 import { connect } from 'react-redux';

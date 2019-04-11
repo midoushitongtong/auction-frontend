@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { AppState } from '../../../store';
 import CommonCollectionItem from '../../common/collection-item/index';
 import BrowserUtil from '../../../util/browser';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

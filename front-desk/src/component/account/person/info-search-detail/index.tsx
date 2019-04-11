@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface Props {

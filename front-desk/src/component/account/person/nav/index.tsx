@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Icon } from 'antd';
 import Link from 'next/link';
 import { withRouter, WithRouterProps } from 'next/router';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface Props extends WithRouterProps {

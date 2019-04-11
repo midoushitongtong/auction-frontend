@@ -1,7 +1,6 @@
 const fs = require('fs');
 const path = require('path');
 const withCss = require('@zeit/next-css');
-const withSass = require('@zeit/next-sass');
 const withTypescript = require('@zeit/next-typescript');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const withLess = require('@zeit/next-less');
@@ -26,26 +25,24 @@ const themeVariables = lessToJS(
 
 module.exports = withTypescript(
   withLess(
-    withSass(
-      withCss({
-        lessLoaderOptions: {
-          javascriptEnabled: true,
-          modifyVars: themeVariables // make your antd custom effective
-        },
-        webpack(config, options) {
-          config.plugins.push(
-            // 隐藏样式冲突警告
-            new FilterWarningsPlugin({
-              exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
-            })
-          );
-          return config;
-        },
-        generateBuildId: async () => {
-          return 'v1.3.5.5.5.5.5.5';
-        },
-        distDir: '../.next'
-      })
-    )
+    withCss({
+      lessLoaderOptions: {
+        javascriptEnabled: true,
+        modifyVars: themeVariables // make your antd custom effective
+      },
+      webpack(config, options) {
+        config.plugins.push(
+          // 隐藏样式冲突警告
+          new FilterWarningsPlugin({
+            exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+          })
+        );
+        return config;
+      },
+      generateBuildId: async () => {
+        return 'v1.0.0.0.2';
+      },
+      distDir: '../.next'
+    })
   )
 );

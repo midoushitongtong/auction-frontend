@@ -5,7 +5,7 @@ import HeaderNav from './nav/index';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Head from 'next/head';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

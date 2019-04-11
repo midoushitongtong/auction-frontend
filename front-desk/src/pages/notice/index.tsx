@@ -11,7 +11,7 @@ import LayoutHeader from '../../component/layout/header';
 import LayoutFooter from '../../component/layout/footer';
 import NoticeSearchResult from '../../component/notice/search-result';
 import api from '../../api';
-import './index.scss'
+import './index.less'
 
 // 当前组件的类型声明
 interface ConnectState {

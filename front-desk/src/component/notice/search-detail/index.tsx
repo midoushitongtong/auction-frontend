@@ -3,7 +3,7 @@ import HTMLParseReact from 'html-react-parser';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../../../store';
-import './index.scss';
+import './index.less';
 import ImageZoom from 'react-medium-image-zoom';
 
 // 当前组件的类型声明

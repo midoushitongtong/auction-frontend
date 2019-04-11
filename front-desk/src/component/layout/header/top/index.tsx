@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

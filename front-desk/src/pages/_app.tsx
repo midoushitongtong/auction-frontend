@@ -16,7 +16,7 @@ import withReduxStore from '../util/with-redux-store';
 // 全局 css
 import 'normalize.css';
 import 'nprogress/nprogress.css';
-import './_app.scss';
+import './_app.less';
 
 import Error from './_error';
 import api from '../api';

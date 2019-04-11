@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import CommonCollectionItem from '../../../component/common/collection-item';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface Props {

@@ -13,7 +13,7 @@ import LayoutFooter from '../../component/layout/footer';
 import CollectionSearchCondition from '../../component/collection/search-condition';
 import CollectionSearchResult from '../../component/collection/search-result';
 import api from '../../api';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

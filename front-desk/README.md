@@ -1,6 +1,6 @@
 ## 基本环境
 
-### `TypeScript` + `NEXT.js` + `Koa` + `React` + `Redux`  + `Sass` + `Antd`
+### `TypeScript` + `NEXT.js` + `Koa` + `React` + `Redux`  + `Less` + `Antd`
 
 ## 前台安装流程
 

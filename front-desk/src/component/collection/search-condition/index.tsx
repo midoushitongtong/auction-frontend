@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../../../store';
 import { updateCurrentCollectionSearchCondition } from '../../../store/collection';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface ConnectState {

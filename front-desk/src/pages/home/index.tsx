@@ -4,7 +4,7 @@ import LayoutFooter from '../../component/layout/footer';
 import HomeCarousel from '../../component/home/carousel';
 import HomeCollectionList from '../../component/home/collection-list';
 import api from '../../api';
-import './index.scss';
+import './index.less';
 
 // 当前组件的类型声明
 interface Props {

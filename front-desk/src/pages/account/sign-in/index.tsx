@@ -6,7 +6,7 @@ import { AppState } from '../../../store';
 import LayoutHeader from '../../../component/layout/header';
 import LayoutFooter from '../../../component/layout/footer';
 import AccountSignInDetail from '../../../component/account/sign-in-detail';
-import './index.scss';
+import './index.less';
 
 
 // 当前组件的类型声明

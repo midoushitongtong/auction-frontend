@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { updateCollectionSearchDetail } from '../../../store/collection';
 import CollectionSearchDetail from '../../../component/collection/search-detail';
 import api from '../../../api';
-import './index.scss'
+import './index.less'
 
 // 当前组件的类型声明
 interface ConnectState {
