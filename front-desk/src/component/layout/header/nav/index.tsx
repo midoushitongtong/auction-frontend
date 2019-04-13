@@ -166,11 +166,11 @@ export default compose<React.ComponentClass>(
         // 无二级菜单, 匹配一级菜单
         if (!navItem.children && navItem.path) {
           const navItemPathNameArr = navItem.path.split('/');
-          // 比如 home === home
           // 如果有 ? 去除
           if (currentPathNameArr[1].indexOf('?') > -1) {
             currentPathNameArr[1] = currentPathNameArr[1].split('?')[0];
           }
+          // 比如 home === home
           if (navItemPathNameArr[1] === currentPathNameArr[1]) {
             currentRouteNav = navItem;
           }

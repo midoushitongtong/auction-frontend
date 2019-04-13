@@ -37,7 +37,6 @@ export default withRouter(
       };
     }
 
-
     /**
      * 获取当前的 url 对应的菜单 key
      *
@@ -52,9 +51,13 @@ export default withRouter(
       // 遍历所有菜单, 获取与当前 url 的路径匹配的菜单
       personNavList.forEach(navItem => {
         if (currentRouteNav) return false;
-        // 无二级菜单, 匹配一级菜单
         if (navItem.path) {
           const navItemPathNameArr = navItem.path.split('/');
+          // 如果有 ? 去除
+          if (currentPathNameArr[3].indexOf('?') > -1) {
+            currentPathNameArr[3] = currentPathNameArr[3].split('?')[0];
+          }
+          // 如 info == info
           if (navItemPathNameArr[3] === currentPathNameArr[3]) {
             currentRouteNav = navItem;
           }
@@ -89,7 +92,10 @@ export default withRouter(
             <section className="person-nav-list-container">
               {state.personNavList.map((item, index) => (
                 <Link href={item.path} key={index}>
-                  <a href={item.path} className={this.getPersonNavSelectKey(state.personNavList, props.router && props.router.asPath) === item.key ? 'active' : ''}>
+                  <a
+                    href={item.path}
+                    className={this.getPersonNavSelectKey(state.personNavList, props.router && props.router.asPath) === item.key ? 'active' : ''}
+                  >
                     <span>{item.name}</span>
                   </a>
                 </Link>
