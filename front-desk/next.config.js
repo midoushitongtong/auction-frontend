@@ -26,21 +26,27 @@ const themeVariables = lessToJS(
 module.exports = withTypescript(
   withLess(
     withCss({
-      lessLoaderOptions: {
-        javascriptEnabled: true,
-        modifyVars: themeVariables // make your antd custom effective
-      },
+      // extends webpack config
       webpack(config, options) {
         config.plugins.push(
-          // 隐藏样式冲突警告
+          // hidden style conflict warning
           new FilterWarningsPlugin({
             exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
           })
         );
+        // production environment compress css
+        if (config.mode === 'production' && Array.isArray(config.optimization.minimizer)) {
+          const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+          config.optimization.minimizer.push(new OptimizeCSSAssetsPlugin({}));
+        }
         return config;
       },
+      lessLoaderOptions: {
+        javascriptEnabled: true,
+        modifyVars: themeVariables // make your antd custom effective
+      },
       generateBuildId: async () => {
-        return 'v1.0.0.0.2';
+        return 'v1.0.0.0.4';
       },
       distDir: '../.next'
     })

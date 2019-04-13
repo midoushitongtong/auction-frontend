@@ -167,6 +167,10 @@ export default compose<React.ComponentClass>(
         if (!navItem.children && navItem.path) {
           const navItemPathNameArr = navItem.path.split('/');
           // 比如 home === home
+          // 如果有 ? 去除
+          if (currentPathNameArr[1].indexOf('?') > -1) {
+            currentPathNameArr[1] = currentPathNameArr[1].split('?')[0];
+          }
           if (navItemPathNameArr[1] === currentPathNameArr[1]) {
             currentRouteNav = navItem;
           }
@@ -182,12 +186,15 @@ export default compose<React.ComponentClass>(
                 switch (currentPathNameArr[1]) {
                   // 如果是 公告 单独处理(/notice/1)
                   case 'notice':
-                    // 如果是 公告 详情单独处理(/notice/detail/52)
+                    // 如果是 公告 详情单独处理(/notice/detail/1)
                     if (currentPathNameArr[2] === 'detail') {
+                      // 获取 公告 详情的分类进行匹配
                       if (childrenNavItem.key === props.noticeSearchDetail.category) {
                         currentRouteNav = childrenNavItem;
                       }
                     } else {
+                      // 如果是 公告 单独处理(/notice/1)
+                      // 获取 公告 的分类进行匹配
                       if (childrenNavItem.key === props.currentNoticeSearchCondition.category) {
                         currentRouteNav = childrenNavItem;
                       }

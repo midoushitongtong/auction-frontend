@@ -5,7 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development PORT=3000 node server/index.js",
     "build": "next build ./src",
-    "start-prod": "cross-env NODE_ENV=production PORT=3005 node server/index.js"
+    "start-prod": "cross-env NODE_ENV=production PORT=3000 node server/index.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.3",
@@ -24,6 +24,7 @@
     "next": "^8.0.4",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-lazyload": "^2.5.0",

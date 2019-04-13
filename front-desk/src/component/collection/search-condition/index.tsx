@@ -171,6 +171,7 @@ export default compose<React.ComponentClass>(
         current: 1
       };
       switch (type) {
+        // 如果改变了子分类搜索条件, 也要改变父级分类的搜索条件
         case 'childrenCategoryId':
           searchCondition.parentCategoryId = value.parentCategoryId;
           searchCondition.childrenCategoryId = value.childrenCategoryId;
