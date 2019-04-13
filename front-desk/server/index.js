@@ -27,19 +27,31 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = new Koa();
 
-  // gzip
+  // 开启 gzip 压缩
   server.use(KoaConnect(Compression()));
 
-  // status code
+  // 同一状态码 200
   server.use(async (ctx, next) => {
-    ctx.compress = true;
     ctx.res.statusCode = 200;
     await next();
   });
 
-  // router
+  // 路由配置
   const router = new KoaRouter();
+  // 页面对应的路由
   AppRouter(router, app);
+  if (!dev) {
+    // 生产环境告诉浏览器缓存 css 资源
+    router.get(/^\/_next\/static\/css\//, async ctx => {
+      ctx.set(
+        'Cache-Control',
+        'public, max-age=31536000, immutable'
+      );
+      await handle(ctx.req, ctx.res);
+      ctx.respond = false;
+    });
+  }
+  // 让 next 来处理其余请求
   router.get('*', async ctx => {
     await handle(ctx.req, ctx.res);
     ctx.respond = false;

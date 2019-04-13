@@ -21,7 +21,9 @@ enum ActionType {
 
 // state
 const initState: State = {
-  noticeCategory: {},
+  noticeCategory: {
+    itemList: []
+  },
   currentNoticeSearchCondition: {},
   noticeSearchResult: {},
   noticeSearchDetail: {}
