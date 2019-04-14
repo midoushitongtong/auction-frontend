@@ -20,20 +20,28 @@ interface State {
 // 当前组件类
 export default class Home extends React.Component<Props, State> {
   public static getInitialProps = async () => {
+    // 请求 api =======================
     // 获取轮播图列表
     let carouselList = [];
-    let result: any = await api.common.selectCarouselList();
+    let result1: any = api.common.selectCarouselList();
 
     // 获取热门收藏品列表
     let collectionHotList = [];
-    let result2: any = await api.collection.selectCollectionFavoriteList();
+    let result2: any = api.collection.selectCollectionFavoriteList();
 
-    if (parseInt(result.code) === 0) {
-      carouselList = result.data.map((item: any) => ({
+    // 等待 api 响应完成 =======================
+    result1 = await result1;
+    result2 = await result2;
+
+    // 处理 api 响应数据 =======================
+    // 获取轮播图列表
+    if (parseInt(result1.code) === 0) {
+      carouselList = result1.data.map((item: any) => ({
         imagePath: item
       }));
     }
 
+    // 获取热门收藏品列表
     if (parseInt(result2.code) === 0) {
       collectionHotList = result2.data;
     }

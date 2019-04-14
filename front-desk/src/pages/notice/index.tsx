@@ -65,10 +65,9 @@ export default compose<React.ComponentClass>(
       }
       // 默认搜索的分类根据路由决定
       searchCondition.cate = currentNoticeSearchCondition.category;
-      let noticeSearchResult: any = [];
       const result: any = await api.notice.selectNoticeList(searchCondition);
       if (parseInt(result.code) === 0) {
-        noticeSearchResult = {
+        const noticeSearchResult = {
           itemList: result.data.map((item: any) => ({
             id: item.id,
             title: item.title,
@@ -96,7 +95,7 @@ export default compose<React.ComponentClass>(
       const { props } = this;
       let title = '';
       props.noticeCategory.itemList.find((item: any) => {
-        const currentCategory = item.children.find((itemChildren: any) => itemChildren.id === parseInt(props.category));
+        const currentCategory = item.children.find((itemChildren: any) => parseInt(itemChildren.id) === parseInt(props.category));
         if (currentCategory) {
           title = currentCategory.name;
           return true;

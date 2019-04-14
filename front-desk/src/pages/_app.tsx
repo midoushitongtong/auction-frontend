@@ -48,25 +48,52 @@ export default withReduxStore(
           pageProps = await Component.getInitialProps(ctx);
         }
 
-        // 初始化用户登陆信息(因为每个页面都可能需要用到)
-        // (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+        // 请求 api =======================
+        // 初始化用户登陆信息(因为每个页面都可能需要用到) (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+        let result1: any = null;
+        if (ctx.store.getState().account.userInfo.isGet === undefined) {
+          result1 = api.account.selectUserInfo();
+        }
+
+        // 初始化文章分类, 用于显示到菜单上 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+        let result2: any = null;
+        if (ctx.store.getState().notice.noticeCategory.isGet === undefined) {
+          result2 = api.notice.selectNoticeCategory();
+        }
+
+        // 初始化网站基本信息 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+        let result3: any = null;
+        if (ctx.store.getState().site.siteInfo.isGet === undefined) {
+          result3 = api.site.getSiteInfo();
+        }
+
+        // 等待 api 响应完成 =======================
+        if (ctx.store.getState().account.userInfo.isGet === undefined) {
+          result1 = await result1;
+        }
+        if (ctx.store.getState().notice.noticeCategory.isGet === undefined) {
+          result2 = await result2;
+        }
+        if (ctx.store.getState().site.siteInfo.isGet === undefined) {
+          result3 = await result3;
+        }
+
+        // 处理 api 响应数据 =======================
+        // 初始化用户登陆信息(因为每个页面都可能需要用到) (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
         if (ctx.store.getState().account.userInfo.isGet === undefined) {
           let userInfo: any = {};
-          const result: any = await api.account.selectUserInfo();
-          if (parseInt(result.code) === 0) {
-            userInfo = result.data;
+          if (parseInt(result1.code) === 0) {
+            userInfo = result1.data;
             userInfo.isGet = true;
             ctx.store.dispatch(updateUserInfo(userInfo));
           }
         }
 
-        // 初始化文章分类, 用于显示到菜单上
-        // (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+        // 初始化文章分类, 用于显示到菜单上 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
         if (ctx.store.getState().notice.noticeCategory.isGet === undefined) {
           let noticeCategory: any = {};
-          const result: any = await api.notice.selectNoticeCategory();
-          if (parseInt(result.code) === 0) {
-            noticeCategory.itemList = result.data.map((item: any) => ({
+          if (parseInt(result2.code) === 0) {
+            noticeCategory.itemList = result2.data.map((item: any) => ({
               id: item.c_id + '',
               name: item.cate_title,
               children: item.children.length > 0
@@ -81,26 +108,24 @@ export default withReduxStore(
           }
         }
 
-        // 初始化网站基本信息
-        // (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+        // 初始化网站基本信息 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
         if (ctx.store.getState().site.siteInfo.isGet === undefined) {
           let siteInfo: any = {};
-          const result: any = await api.site.getSiteInfo();
-          if (parseInt(result.code) === 0) {
+          if (parseInt(result3.code) === 0) {
             siteInfo = {
-              title: result.data[0].value,
-              logo: result.data[1].value,
-              qrCode: result.data[2].value,
-              seoKeyword: result.data[3].value,
-              fax: result.data[6].value,
-              copyright: result.data[12].value,
-              companyName: result.data[4].value,
-              contactPhone: result.data[5].value,
-              contactEmail: result.data[7].value,
-              contactWeixin: result.data[8].value,
-              contactAddress: result.data[9].value,
-              browserIcon: result.data[10].value,
-              miitbeian: result.data[11].value
+              title: result3.data[0].value,
+              logo: result3.data[1].value,
+              qrCode: result3.data[2].value,
+              seoKeyword: result3.data[3].value,
+              fax: result3.data[6].value,
+              copyright: result3.data[12].value,
+              companyName: result3.data[4].value,
+              contactPhone: result3.data[5].value,
+              contactEmail: result3.data[7].value,
+              contactWeixin: result3.data[8].value,
+              contactAddress: result3.data[9].value,
+              browserIcon: result3.data[10].value,
+              miitbeian: result3.data[11].value
             };
             siteInfo.isGet = true;
             ctx.store.dispatch(updateSiteInfo(siteInfo));
@@ -122,6 +147,7 @@ export default withReduxStore(
             };
         }
       }
+
       return {
         pageProps,
         error

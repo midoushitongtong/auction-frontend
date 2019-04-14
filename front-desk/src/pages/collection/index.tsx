@@ -60,24 +60,16 @@ export default compose<React.ComponentClass>(
         keyword: query.keyword || '',
         current: query.current || '1'
       };
+      store.dispatch(updateCurrentCollectionSearchCondition(currentCollectionSearchCondition));
 
-      // 获取收藏品的搜索条件(一个页面只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+      // 请求 api =======================
+      // 获取收藏品的搜索条件 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+      let result1: any = null;
       if (store.getState().collection.collectionSearchCondition.isGet === undefined) {
-        let collectionSearchCondition: any = {};
-        const result: any = await api.collection.selectCollectionSearchCondition();
-        if (parseInt(result.code) === 0) {
-          collectionSearchCondition = {
-            categoryList: result.data
-          };
-            collectionSearchCondition.isGet = true;
-        }
-
-        store.dispatch(updateCollectionSearchCondition(collectionSearchCondition));
+        result1 = api.collection.selectCollectionSearchCondition();
       }
 
       // 获取收藏品的搜索结果集
-      let collectionSearchResult: any = {};
-
       const searchCondition: any = {};
       if (currentCollectionSearchCondition.childrenCategoryId != 0) {
         searchCondition.cate = currentCollectionSearchCondition.childrenCategoryId;
@@ -88,11 +80,30 @@ export default compose<React.ComponentClass>(
       if (currentCollectionSearchCondition.current != '1') {
         searchCondition.page = currentCollectionSearchCondition.current;
       }
-      const result2: any = await api.collection.selectCollectionList(
-        searchCondition
-      );
+      let result2: any = api.collection.selectCollectionList(searchCondition);
+
+      // 等待 api 响应完成 =======================
+      if (store.getState().collection.collectionSearchCondition.isGet === undefined) {
+        result1 = await result1;
+      }
+      result2 = await result2;
+
+      // 处理 api 响应数据 =======================
+      // 获取收藏品的搜索条件 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
+      if (store.getState().collection.collectionSearchCondition.isGet === undefined) {
+        let collectionSearchCondition: any = {};
+        if (parseInt(result1.code) === 0) {
+          collectionSearchCondition = {
+            categoryList: result1.data
+          };
+          collectionSearchCondition.isGet = true;
+        }
+        store.dispatch(updateCollectionSearchCondition(collectionSearchCondition));
+      }
+
+      // 获取收藏品的搜索结果集
       if (result2.code == '0') {
-        collectionSearchResult = {
+        const collectionSearchResult = {
           itemList: result2.data.map((item: any) => ({
             id: item.id,
             imagePath: item.goods_logo,
@@ -106,10 +117,8 @@ export default compose<React.ComponentClass>(
           pageSize: result2.page.per_page,
           total: result2.page.total
         };
+        store.dispatch(updateCollectionSearchResult(collectionSearchResult));
       }
-
-      store.dispatch(updateCurrentCollectionSearchCondition(currentCollectionSearchCondition));
-      store.dispatch(updateCollectionSearchResult(collectionSearchResult));
 
       return {};
     };

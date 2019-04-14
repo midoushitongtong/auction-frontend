@@ -2,12 +2,12 @@ import React from 'react';
 import Head from 'next/head';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import api from '../../../../api';
+import { AppState } from '../../../../store';
 import {
   updateCurrentAccountPersonCollectionFavoriteSearchCondition,
   updateAccountPersonCollectionFavoriteSearchResult
 } from '../../../../store/account/person';
-import api from '../../../../api';
-import { AppState } from '../../../../store';
 import AccountPerson from '../../../../component/account/person';
 import LayoutHeader from '../../../../component/layout/header';
 import LayoutFooter from '../../../../component/layout/footer';
@@ -47,14 +47,14 @@ export default compose<React.ComponentClass>(
 )(
   class AccountPersonCollection extends React.Component<Props, State> {
     public static getInitialProps = async ({ query, store }: any) => {
-      // 获取当前公告的搜索条件
+      // 获取当前我的收藏品的搜索条件
       const currentAccountPersonCollectionFavoriteSearchCondition = {
         current: query.current || 1,
         pageSize: query.pageSize || 10
       };
       store.dispatch(updateCurrentAccountPersonCollectionFavoriteSearchCondition(currentAccountPersonCollectionFavoriteSearchCondition));
 
-      // 获取公告的搜索结果集
+      // 获取我的收藏品的搜索结果集
       let accountPersonCollectionFavoriteSearchResult: any = [];
       const result: any = await api.accountPerson.selectAccountPersonCollectionFavoriteList(currentAccountPersonCollectionFavoriteSearchCondition);
       if (parseInt(result.code) === 0) {

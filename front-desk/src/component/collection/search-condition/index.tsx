@@ -272,7 +272,7 @@ export default compose<React.ComponentClass>(
                         'keyword': value
                       });
                     }}
-                    onSearch={value => this.changeSearchCondition('keyword', value)}
+                    onSearch={(value) => this.changeSearchCondition('keyword', value)}
                   />
                 </div>
               </section>

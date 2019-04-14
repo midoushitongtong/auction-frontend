@@ -42,6 +42,7 @@ export default compose<React.ComponentClass>(
     public static getInitialProps = async ({ store, query }: any) => {
       // 获取当前收藏品的搜索条件
       const id: string = query.id;
+
       // 获取收藏品详情
       const result: any = await api.collection.selectCollectionDetail(id);
       let collectionSearchDetail: any = {};
@@ -61,6 +62,7 @@ export default compose<React.ComponentClass>(
         // 返回数据错误, 显示 404 页面
         throw new Error('404');
       }
+
       return {
         collectionSearchDetail
       };
