@@ -16,6 +16,8 @@ interface Api {
   selectUserInfo: () => object;
   // 发送短信验证码
   sendCaptcha: (data: any) => object;
+  // 修改用户信息
+  updateUserInfo: (data: any) => object;
 }
 
 /**
@@ -26,35 +28,42 @@ const api: Api = {
   signUp: (data: any): object => {
     return ajax(
       'POST',
-      `${config.MOCK_API_ROOT}/account/signUp`,
+      `${config.API_ROOT}/code`,
       data
     );
   },
   signIn: (data: any): object => {
     return ajax(
       'POST',
-      `${config.MOCK_API_ROOT}/account/signIn`,
+      `${config.API_ROOT}/code`,
       data
     );
   },
   signOut: (): object => {
     return ajax(
       'GET',
-      `${config.MOCK_API_ROOT}/account/signOut`,
+      `${config.API_ROOT}/check`,
       {}
     );
   },
   selectUserInfo: (): object => {
     return ajax(
       'GET',
-      `${config.MOCK_API_ROOT}/account/userInfo`,
+      `${config.API_ROOT}/decide`,
       {}
     );
   },
-  sendCaptcha: (data: any):object => {
+  sendCaptcha: (data: any): object => {
     return ajax(
       'POST',
       `${config.MOCK_API_ROOT}/account/sendCaptcha`,
+      data
+    );
+  },
+  updateUserInfo: (data: any): object => {
+    return ajax(
+      'POST',
+      `${config.API_ROOT}/set`,
       data
     );
   }

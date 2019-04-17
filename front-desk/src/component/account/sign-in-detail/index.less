@@ -23,15 +23,16 @@
     .anticon {
       color: rgba(0, 0, 0, .25);
     }
-    .captcha {
+    .captcha-form-item {
+      .ant-input {
+        height: 50px;
+      }
       .ant-input-group-addon {
+        width: 50%;
         padding: 0;
-        border: 0;
-        .ant-btn {
-          width: 123px;
-          margin-left: -1px;
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
+        .captcha {
+          width: 100%;
+          cursor: pointer;
         }
       }
     }

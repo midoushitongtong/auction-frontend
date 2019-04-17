@@ -2,24 +2,51 @@ import React from 'react';
 import { Button, Form, Input, Icon, notification } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Router from 'next/router';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { updateUserInfo } from '../../../store/account';
 import api from '../../../api';
 import './index.less';
 
 // 当前组件的类型声明
-interface Props extends FormComponentProps {
+interface ConnectState {
+
+}
+
+interface ConnectDispatch {
+  // 修改用户登陆状态
+  updateUserInfo: (data: any) => object;
+}
+
+interface Props extends FormComponentProps, ConnectState, ConnectDispatch {
 }
 
 interface State {
+  // 验证码地址
+  captchaSrc: string;
+  // 验证码地址, 用于刷新验证码
+  originCaptchaSrc: string;
   // 登陆加载状态
   signInLoading: boolean;
 }
 
 // 当前组件类
-export default Form.create()(
+
+export default compose<React.ComponentClass>(
+  connect<ConnectState, ConnectDispatch, Props>(
+    () => ({}),
+    {
+      updateUserInfo
+    }
+  ),
+  Form.create()
+)(
   class AccountSignInDetail extends React.Component<Props, State> {
     constructor(props: any) {
       super(props);
       this.state = {
+        captchaSrc: 'http://106.13.107.45/captcha.html',
+        originCaptchaSrc: 'http://106.13.107.45/captcha.html',
         signInLoading: false
       };
     }
@@ -38,11 +65,28 @@ export default Form.create()(
           this.setState({
             signInLoading: true
           });
-          const result: any = await api.account.signIn(valueList);
+          const result1: any = await api.account.signIn({
+            status: 1,
+            v: valueList.captcha,
+            username: valueList.username,
+            password: valueList.password
+          });
           this.setState({
             signInLoading: false
           });
-          if (parseInt(result.code) === 0) {
+          if (parseInt(result1.code) === 0) {
+            // 获取用户信息
+            let result1: any = await api.account.selectUserInfo();
+            let userInfo: any = {
+              username: result1.data.username,
+              email: result1.data.mail,
+              phoneNumber: result1.data.phone,
+              // 无论用户是否登陆, 标记为获取用户信息完成
+              isGet: true
+            };
+            // 保存登陆状态到 redux
+            props.updateUserInfo(userInfo);
+            // 提示登陆成功
             notification.open({
               placement: 'bottomLeft',
               message: '登陆成功',
@@ -53,14 +97,39 @@ export default Form.create()(
               pathname: '/home'
             });
           } else {
-            notification.open({
-              placement: 'bottomLeft',
-              message: '登陆失败',
-              duration: 5
-            });
+            if (parseInt(result1.code) === 1) {
+              notification.open({
+                placement: 'bottomLeft',
+                message: '验证码输入有误',
+                duration: 5
+              });
+            } else if (parseInt(result1.code) === 2) {
+              this.refreshCaptcha();
+              notification.open({
+                placement: 'bottomLeft',
+                message: '用户名或密码不正确',
+                duration: 5
+              });
+            } else {
+              notification.open({
+                placement: 'bottomLeft',
+                message: '登陆失败, 未知原因',
+                duration: 5
+              });
+            }
           }
         }
       });
+    };
+
+    /**
+     * 刷新验证码
+     *
+     */
+    public refreshCaptcha = (): void => {
+      this.setState((state) => ({
+        captchaSrc: `${state.originCaptchaSrc}?r=${Math.random()}`
+      }));
     };
 
     public render = (): JSX.Element => {
@@ -72,20 +141,38 @@ export default Form.create()(
           </section>
           <Form onSubmit={this.handleSubmit} className="form-container">
             <Form.Item>
-              {props.form.getFieldDecorator('phoneNumber', {
+              {props.form.getFieldDecorator('username', {
+                validateTrigger: 'onBlur',
                 rules: [
-                  { required: true, message: '请输入手机号!' }
-                ]
+                  { required: true, message: '用户名由2~20个字符组成' },
+                  { min: 2, message: '用户名由2~20个字符组成' },
+                  { max: 20, message: '用户名由2~20个字符组成' }
+                ],
               })(
                 <Input
-                  prefix={<Icon type="phone"/>}
-                  placeholder="手机号"
+                  type="password"
+                  prefix={<Icon type="user"/>}
+                  placeholder="用户名"
                 />
               )}
             </Form.Item>
             <Form.Item>
               {props.form.getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码' }],
+                validateTrigger: 'onBlur',
+                rules: [
+                  {
+                    required: true,
+                    message: '密码由5~30个字符组成'
+                  },
+                  {
+                    min: 5,
+                    message: '密码由5~30个字符组成'
+                  },
+                  {
+                    max: 30,
+                    message: '密码由5~30个字符组成'
+                  }
+                ],
               })(
                 <Input
                   type="password"
@@ -94,11 +181,32 @@ export default Form.create()(
                 />
               )}
             </Form.Item>
+            <Form.Item className="captcha-form-item">
+              {props.form.getFieldDecorator('captcha', {
+                validateTrigger: 'onBlur',
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入验证码!'
+                  }
+                ]
+              })(
+                <Input
+                  addonAfter={<img
+                    src={state.captchaSrc}
+                    className="captcha"
+                    onClick={this.refreshCaptcha}
+                  />}
+                  placeholder="验证码"
+                />
+              )}
+            </Form.Item>
             <Form.Item>
               <Button
                 loading={state.signInLoading}
                 type="primary"
-                className="sign-up"
+                htmlType="submit"
+                className="sign-in"
                 style={{ width: '100%' }}
               >
                 登陆

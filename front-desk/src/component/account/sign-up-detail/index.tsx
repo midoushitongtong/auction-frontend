@@ -10,8 +10,10 @@ interface Props extends FormComponentProps {
 }
 
 interface State {
-  // 发送验证码冷却时间
-  sendCaptchaNumber: number;
+  // 验证码地址
+  captchaSrc: string;
+  // 验证码地址, 用于刷新验证码
+  originCaptchaSrc: string;
   // 注册加载状态
   signUpLoading: boolean;
 }
@@ -22,76 +24,11 @@ export default Form.create()(
     constructor(props: any) {
       super(props);
       this.state = {
-        sendCaptchaNumber: 0,
+        captchaSrc: 'http://106.13.107.45/captcha.html',
+        originCaptchaSrc: 'http://106.13.107.45/captcha.html',
         signUpLoading: false
       };
     }
-
-
-    /**
-     * 发送验证码倒计时定时器
-     *
-     */
-    public sendCaptchaNumberInterval: any;
-
-    public componentWillUnmount = (): void => {
-      if (this.sendCaptchaNumberInterval != null) {
-        clearInterval(this.sendCaptchaNumberInterval);
-      }
-    };
-
-    /**
-     * 发送验证码
-     *
-     */
-    public sendCaptcha = (): void => {
-      const { props } = this;
-      props.form.validateFields(['phoneNumber'], async (error, valueList) => {
-        if (!error) {
-          this.setState({
-            sendCaptchaNumber: 10
-          });
-
-          // 启动发送验证码倒计时定时器
-          this.sendCaptchaNumberInterval = setInterval(() => {
-            this.setState((state) => {
-              if (state.sendCaptchaNumber === 0) {
-                clearInterval(this.sendCaptchaNumberInterval);
-                return {
-                  ...state
-                };
-              } else {
-                return {
-                  sendCaptchaNumber: state.sendCaptchaNumber - 1
-                }
-              }
-            });
-          }, 1000);
-
-          const result: any = await api.account.sendCaptcha({
-            phoneNumber: valueList['phoneNumber']
-          });
-
-          if (parseInt(result.code) === 0) {
-            notification.open({
-              placement: 'bottomLeft',
-              message: '验证码已发送, 请注意查收',
-              duration: 5
-            });
-          } else {
-            notification.open({
-              placement: 'bottomLeft',
-              message: '验证码发送失败',
-              duration: 5,
-              style: {
-                backgroundColor: '#ff5555b3',
-                color: '#fff'
-              }
-            });
-          }
-        }
-      });
-    };
 
     /**
      * 处理表单提交
@@ -106,29 +43,65 @@ export default Form.create()(
           this.setState({
             signUpLoading: true
           });
-          const result: any = await api.account.signUp(valueList);
-          this.setState({
-            signUpLoading: false
+          const result1: any = await api.account.signUp({
+            status: 0,
+            v: valueList.captcha,
+            username: valueList.username,
+            password: valueList.password,
+            mail: valueList.email,
+            phone: valueList.phoneNumber
           });
-          if (parseInt(result.code) === 0) {
+          if (parseInt(result1.code) === 0) {
             notification.open({
               placement: 'bottomLeft',
               message: '注册成功',
               duration: 5
             });
-            // 跳转至首页
+            this.setState({
+              signUpLoading: false
+            });
+            // 跳转至登陆页
             Router.push({
-              pathname: '/home'
+              pathname: '/account/sign-in'
             });
           } else {
-            notification.open({
-              placement: 'bottomLeft',
-              message: '注册失败',
-              duration: 5
+            this.setState({
+              signUpLoading: false
             });
+            if (parseInt(result1.code) === 1) {
+              notification.open({
+                placement: 'bottomLeft',
+                message: '验证码输入有误',
+                duration: 5
+              });
+            } else if (parseInt(result1.code) === 3) {
+              this.refreshCaptcha();
+              notification.open({
+                placement: 'bottomLeft',
+                message: '用户名已被占用',
+                duration: 5
+              });
+            } else {
+              this.refreshCaptcha();
+              notification.open({
+                placement: 'bottomLeft',
+                message: `注册失败: ${JSON.stringify(result1)}`,
+                duration: 5
+              });
+            }
           }
         }
       });
+    };
+
+    /**
+     * 刷新验证码
+     *
+     */
+    public refreshCaptcha = (): void => {
+      this.setState((state) => ({
+        captchaSrc: `${state.originCaptchaSrc}?r=${Math.random()}`
+      }));
     };
 
     public render = (): JSX.Element => {
@@ -140,20 +113,38 @@ export default Form.create()(
           </section>
           <Form onSubmit={this.handleSubmit} className="form-container">
             <Form.Item>
-              {props.form.getFieldDecorator('phoneNumber', {
+              {props.form.getFieldDecorator('username', {
+                validateTrigger: 'onBlur',
                 rules: [
-                  { required: true, message: '请输入手机号!' }
-                ]
+                  { required: true, message: '用户名由2~20个字符组成' },
+                  { min: 2, message: '用户名由2~20个字符组成' },
+                  { max: 20, message: '用户名由2~20个字符组成' }
+                ],
               })(
                 <Input
-                  prefix={<Icon type="phone"/>}
-                  placeholder="手机号"
+                  type="password"
+                  prefix={<Icon type="user"/>}
+                  placeholder="用户名"
                 />
               )}
             </Form.Item>
             <Form.Item>
               {props.form.getFieldDecorator('password', {
-                rules: [{ required: true, message: '请输入密码' }],
+                validateTrigger: 'onBlur',
+                rules: [
+                  {
+                    required: true,
+                    message: '密码由5~30个字符组成'
+                  },
+                  {
+                    min: 5,
+                    message: '密码由5~30个字符组成'
+                  },
+                  {
+                    max: 30,
+                    message: '密码由5~30个字符组成'
+                  }
+                ],
               })(
                 <Input
                   type="password"
@@ -162,20 +153,63 @@ export default Form.create()(
                 />
               )}
             </Form.Item>
-            <Form.Item className="captcha">
-              {props.form.getFieldDecorator('captcha', {
+            <Form.Item>
+              {props.form.getFieldDecorator('email', {
+                validateTrigger: 'onBlur',
                 rules: [
-                  { required: true, message: '请输入短信验证码!' }
+                  {
+                    required: true,
+                    message: '请输入正确的邮箱地址!'
+                  },
+                  {
+                    pattern: new RegExp(/^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/),
+                    message: '请输入正确的邮箱地址!'
+                  }
                 ]
               })(
                 <Input
-                  placeholder="短信验证码"
-                  addonAfter={(
-                    <Button
-                      onClick={this.sendCaptcha}
-                      disabled={state.sendCaptchaNumber > 0}
-                    >{state.sendCaptchaNumber > 0 ? `重新获取 (${state.sendCaptchaNumber})` : '获取验证码'}</Button>
-                  )}
+                  prefix={<Icon type="mail"/>}
+                  placeholder="邮箱地址"
+                />
+              )}
+            </Form.Item>
+            <Form.Item>
+              {props.form.getFieldDecorator('phoneNumber', {
+                validateTrigger: 'onBlur',
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入正确的手机号码!'
+                  },
+                  {
+                    pattern: new RegExp(/^1[34578]\d{9}$/),
+                    message: '请输入正确的手机号码!'
+                  }
+                ]
+              })(
+                <Input
+                  prefix={<Icon type="phone"/>}
+                  placeholder="手机号"
+                />
+              )}
+            </Form.Item>
+            <Form.Item className="captcha-form-item">
+              {props.form.getFieldDecorator('captcha', {
+                validateTrigger: 'onBlur',
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入验证码!'
+                  }
+                ]
+              })(
+                <Input
+                  addonAfter={<img
+                    src={state.captchaSrc}
+                    className="captcha"
+                    onClick={this.refreshCaptcha}
+                  />}
+                  placeholder="验证码"
                 />
               )}
             </Form.Item>

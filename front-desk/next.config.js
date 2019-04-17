@@ -46,7 +46,7 @@ module.exports = withTypescript(
         modifyVars: themeVariables // make your antd custom effective
       },
       generateBuildId: async () => {
-        return 'v1.0.0.0.5';
+        return 'v1.0.0.0.6';
       },
       distDir: '../.next'
     })
