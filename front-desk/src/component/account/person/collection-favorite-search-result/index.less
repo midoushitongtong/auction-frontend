@@ -1,14 +1,27 @@
 .account-person-collection-favorite-search-result-container {
   padding: 1.2rem .6rem;
+  .ant-alert {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    font-size: 1.3rem;
+    text-align: center;
+  }
   .collection-list-container {
     .col {
       margin-bottom: 1.2rem;
     }
   }
-
   .collection-pagination-container {
     display: flex;
     justify-content: center;
     padding: 2rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .account-person-collection-favorite-search-result-container {
+    .ant-alert {
+      font-size: 1rem;
+    }
   }
 }

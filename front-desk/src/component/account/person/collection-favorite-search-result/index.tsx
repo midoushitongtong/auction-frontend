@@ -1,47 +1,82 @@
 import React from 'react';
-import { Row, Col, Pagination } from 'antd';
+import { Row, notification, Col, Pagination, Alert } from 'antd';
 import Router from 'next/router';
+import { withRouter, WithRouterProps } from 'next/router';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { AppState } from '../../../../store';
 import BrowserUtil from '../../../../util/browser';
 import CommonCollectionItem from '../../../common/collection-item';
+import api from '../../../../api';
 import './index.less';
 
 // 当前组件的类型声明
-interface ConnectState {
-  // 当前我的收藏品的搜索条件
-  currentAccountPersonCollectionFavoriteSearchCondition: any;
-  // 我的收藏品搜索的结果集
-  accountPersonCollectionFavoriteSearchResult: any;
-}
-
-interface ConnectDispatch {
-}
-
-interface Props extends ConnectState, ConnectDispatch {
+interface Props extends WithRouterProps {
 }
 
 interface State {
+  // 当前我的收藏品的搜索条件
+  currentCollectionFavoriteSearchCondition: any;
+  // 我的收藏品搜索的结果集
+  collectionFavoriteSearchResult: any;
 }
 
 // 当前组件类
 export default compose<React.ComponentClass>(
-  connect<ConnectState, ConnectDispatch, Props>(
-    (state: any | AppState) => ({
-      currentAccountPersonCollectionFavoriteSearchCondition: state.accountPerson.currentAccountPersonCollectionFavoriteSearchCondition,
-      accountPersonCollectionFavoriteSearchResult: state.accountPerson.accountPersonCollectionFavoriteSearchResult
-    })
-  )
+  withRouter
 )(
-  class AccountPersonCollectionDetail extends React.Component<Props, State> {
-    public shouldComponentUpdate = (nextProps: any): boolean => {
+  class AccountPersonCollectionFavoriteSearchResult extends React.Component<Props, State> {
+    constructor(props: any) {
+      super(props);
+      this.state = {
+        currentCollectionFavoriteSearchCondition: {},
+        collectionFavoriteSearchResult: {
+          itemList: []
+        }
+      };
+    }
+
+    public shouldComponentUpdate = (nextProps: Props): boolean => {
       const { props } = this;
-      if (props.accountPersonCollectionFavoriteSearchResult === nextProps.accountPersonCollectionFavoriteSearchResult) {
-        // 如果当前我的收藏品搜索的结果集相同, 不更新 dom
-        return false;
+      // 路由发送改变, 查询获取数据
+      if ((props.router && props.router.query) !== (nextProps.router && nextProps.router.query)) {
+        this.refreshData(nextProps);
       }
       return true;
+    };
+
+    public componentDidMount = () => {
+      const { props } = this;
+      // 查询获取数据
+      this.refreshData(props);
+    };
+
+    public refreshData = async (props: Props) => {
+      // 获取当前我的收藏品的搜索条件
+      const currentCollectionFavoriteSearchCondition = {
+        current: props.router && props.router.query && props.router.query.current || 1,
+        pageSize: props.router && props.router.query && props.router.query.pageSize || 10
+      };
+
+      // 获取我的收藏品的搜索结果集
+      let collectionFavoriteSearchResult: any = {
+        itemList: []
+      };
+      const result: any = await api.accountPerson.selectCollectionFavoriteList(currentCollectionFavoriteSearchCondition);
+      if (parseInt(result.code) === 0) {
+        collectionFavoriteSearchResult = result.data;
+      } else {
+        console.error(result);
+        notification.open({
+          placement: 'bottomLeft',
+          message: `获取数据失败, 请刷新页面重试`,
+          duration: 5
+        });
+      }
+
+      // 更新数据
+      this.setState({
+        currentCollectionFavoriteSearchCondition,
+        collectionFavoriteSearchResult
+      });
     };
 
     /**
@@ -51,12 +86,12 @@ export default compose<React.ComponentClass>(
      * @param pageSize
      */
     public paginationChange = (current: any, pageSize: any): void => {
-      const { props } = this;
+      const { state } = this;
       setTimeout(() => BrowserUtil.scrollToTop(233), 100);
       Router.push({
         pathname: '/account/person/collection-favorite',
         query: {
-          ...props.currentAccountPersonCollectionFavoriteSearchCondition,
+          ...state.currentCollectionFavoriteSearchCondition,
           current,
           pageSize
         }
@@ -64,33 +99,44 @@ export default compose<React.ComponentClass>(
     };
 
     public render = (): JSX.Element => {
-      const { props } = this;
+      const { state } = this;
       return (
         <section className="account-person-collection-favorite-search-result-container">
-          <Row className="collection-list-container" type="flex">
-            {props.accountPersonCollectionFavoriteSearchResult.itemList.map((collectionListItem: any) => (
-              <Col
-                className="col"
-                key={collectionListItem.id}
-                span={12}
-                lg={6}
-                md={8}
-                sm={12}
-              >
-                <CommonCollectionItem collection={collectionListItem}/>
-              </Col>
-            ))}
-          </Row>
-          <section className="collection-pagination-container">
-            <Pagination
-              showSizeChanger
-              current={parseInt(props.currentAccountPersonCollectionFavoriteSearchCondition.current)}
-              pageSize={parseInt(props.currentAccountPersonCollectionFavoriteSearchCondition.pageSize)}
-              total={parseInt(props.accountPersonCollectionFavoriteSearchResult.total)}
-              onChange={this.paginationChange}
-              onShowSizeChange={this.paginationChange}
-            />
-          </section>
+          {state.collectionFavoriteSearchResult.itemList.length >= 1
+            ? (
+              <section>
+                <Row className="collection-list-container" type="flex">
+                  {state.collectionFavoriteSearchResult.itemList.map((collectionListItem: any) => (
+                    <Col
+                      className="col"
+                      key={collectionListItem.id}
+                      span={12}
+                      lg={6}
+                      md={8}
+                      sm={12}
+                    >
+                      <CommonCollectionItem collection={collectionListItem}/>
+                    </Col>
+                  ))}
+                </Row>
+                <section className="collection-pagination-container">
+                  <Pagination
+                    showSizeChanger
+                    current={parseInt(state.currentCollectionFavoriteSearchCondition.current)}
+                    pageSize={parseInt(state.currentCollectionFavoriteSearchCondition.pageSize)}
+                    total={parseInt(state.collectionFavoriteSearchResult.total)}
+                    onChange={this.paginationChange}
+                    onShowSizeChange={this.paginationChange}
+                  />
+                </section>
+              </section>
+            )
+            : (
+              <Alert
+                message="暂无已收藏的收藏品"
+                type="warning"
+              />
+            )}
         </section>
       );
     };

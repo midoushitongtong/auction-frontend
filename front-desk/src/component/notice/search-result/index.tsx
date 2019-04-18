@@ -37,7 +37,7 @@ export default compose<React.ComponentClass>(
   )
 )(
   class NoticeSearchResult extends React.Component<Props, State> {
-    public shouldComponentUpdate = (nextProps: any): boolean => {
+    public shouldComponentUpdate = (nextProps: Props): boolean => {
       const { props } = this;
       if (props.noticeSearchResult === nextProps.noticeSearchResult) {
         // 如果当前公告搜索的结果集相同, 不更新 dom

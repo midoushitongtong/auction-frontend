@@ -6,8 +6,12 @@ import config from '../../../config';
  *
  */
 interface Api {
+  // 添加/删除已收藏的收藏品
+  updateCollectionFavorite: (data: any) => object;
+  // 获取我的已收藏的收藏品 id
+  selectCollectionFavoriteIdList: () => object;
   // 获取我的收藏品收藏列表
-  selectAccountPersonCollectionFavoriteList: (searchCondition: any) => object;
+  selectCollectionFavoriteList: (searchCondition: any) => object;
 }
 
 /**
@@ -15,7 +19,21 @@ interface Api {
  *
  */
 const api: Api = {
-  selectAccountPersonCollectionFavoriteList: (searchCondition: any): object => {
+  updateCollectionFavorite: (data: any) : object => {
+    return ajax(
+      'POST',
+      `${config.MOCK_API_ROOT}/cli`,
+      data
+    );
+  },
+  selectCollectionFavoriteIdList: (): object => {
+    return ajax(
+      'GET',
+      `${config.MOCK_API_ROOT}/user_cli`,
+      {}
+    );
+  },
+  selectCollectionFavoriteList: (searchCondition: any): object => {
     return ajax(
       'GET',
       `${config.MOCK_API_ROOT}/account/person/collection/favorite/list`,

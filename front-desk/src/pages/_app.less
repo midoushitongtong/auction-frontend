@@ -39,6 +39,23 @@ html {
   }
 }
 
+// 公共样式库
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  .ant-spin-dot {
+    width: 35px;
+    height: 35px;
+    .ant-spin-dot-item {
+      width: 11px;
+      height: 11px;
+    }
+  }
+}
+
 // 重写库样式==============================================================
 // antd
 html {
@@ -53,11 +70,11 @@ html {
   }
   // radio
   .ant-radio-group-solid
-    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
     color: rgba(0, 0, 0, 0.65);
   }
   .ant-radio-group-solid
-    .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
   .ant-radio-button-wrapper-checked:hover {
     color: #000;
   }

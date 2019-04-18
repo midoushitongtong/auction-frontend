@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { AppState } from '../../../../store';
 import { updateUserInfo } from '../../../../store/account';
+import { updateCollectionFavoriteIdList } from '../../../../store/account/person';
 import api from '../../../../api';
 import './index.less';
 
@@ -19,8 +20,9 @@ interface ConnectState {
 interface ConnectDispatch {
   // 修改用户状态
   updateUserInfo: (data: any) => object;
+  // 修改我收藏的收藏品id
+  updateCollectionFavoriteIdList: (data: any) => object;
 }
-
 
 interface Props extends ConnectState, ConnectDispatch {
 }
@@ -36,7 +38,8 @@ export default compose<React.ComponentClass>(
       siteInfo: state.site.siteInfo
     }),
     {
-      updateUserInfo
+      updateUserInfo,
+      updateCollectionFavoriteIdList
     }
   )
 )(
@@ -52,6 +55,9 @@ export default compose<React.ComponentClass>(
       props.updateUserInfo({
         isGet: true
       });
+      // 清空我收藏的收藏品id
+      props.updateCollectionFavoriteIdList([]);
+      // 跳转到登录页
       Router.push({
         pathname: '/account/sign-in'
       });

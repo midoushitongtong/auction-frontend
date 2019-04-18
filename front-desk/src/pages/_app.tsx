@@ -11,6 +11,7 @@ import '@babel/polyfill';
 // react-redux 高阶组件
 import { Provider } from 'react-redux';
 import { updateUserInfo } from '../store/account';
+import { updateCollectionFavoriteIdList } from '../store/account/person';
 import { updateNoticeCategory } from '../store/notice';
 import { updateSiteInfo } from '../store/site';
 import withReduxStore from '../util/with-redux-store';
@@ -51,6 +52,7 @@ export default withRouter(
             pageProps = await Component.getInitialProps(ctx);
           }
 
+          // 请求 api =======================
           // 初始化文章分类, 用于显示到菜单上 (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
           let result1: any = null;
           if (ctx.store.getState().notice.noticeCategory.isGet === undefined) {
@@ -141,6 +143,7 @@ export default withRouter(
 
       public componentDidMount = async () => {
         const { props } = this;
+
         // 初始化用户登陆信息(因为每个页面都可能需要用到) (全局只需获取一次, 从 redux 中获取, 如果获取了就无需再次获取)
         if (props.store.getState().account.userInfo.isGet === undefined) {
           let result1: any = await api.account.selectUserInfo();
@@ -157,21 +160,26 @@ export default withRouter(
           props.store.dispatch(updateUserInfo(userInfo));
         }
 
-        // 路由是否登陆才能访问
+        // 判断此页面是否需要登陆才能访问
         props.router.asPath && this.checkSignIn(props.router.asPath);
 
         // 监听路由显示顶部加载条
         Router.events.on('routeChangeStart', (url: string) => {
           NProgress.start();
-          // 判断路由是否需要登陆
+          // 判断页面是否需要登陆才能访问
           this.checkSignIn(url);
         });
         Router.events.on('routeChangeComplete', () => NProgress.done());
         Router.events.on('routeChangeError', () => NProgress.done());
+
+        // 如果已登录初始化用户数据[我收藏的收藏品id等]
+        if (props.store.getState().account.userInfo.username) {
+          this.initSignInUserData();
+        }
       };
 
       /**
-       * 验证路由需要需要登陆
+       * 验证路由是否需要登陆
        *
        * @param url 当前的url地址
        */
@@ -185,11 +193,23 @@ export default withRouter(
               message: '登陆信息已失效, 请重新登陆!',
               duration: 5
             });
-            console.log(props.router);
             setTimeout(() => {
               Router.replace('/account/sign-in');
             }, 1111);
           }
+        }
+      };
+
+      /**
+       * 初始化已登录的用户数据
+       *
+       */
+      public initSignInUserData = async () => {
+        const { props } = this;
+        // 初始化我收藏的收藏品
+        const result1: any = await api.accountPerson.selectCollectionFavoriteIdList();
+        if (parseInt(result1.code) === 0) {
+          props.store.dispatch(updateCollectionFavoriteIdList(result1.data));
         }
       };
 

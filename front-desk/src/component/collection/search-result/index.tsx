@@ -36,7 +36,7 @@ export default compose<React.ComponentClass>(
   )
 )(
   class CollectionSearchResult extends React.Component<Props, State> {
-    public shouldComponentUpdate = (nextProps: any): boolean => {
+    public shouldComponentUpdate = (nextProps: Props): boolean => {
       const { props } = this;
       if (props.collectionSearchResult === nextProps.collectionSearchResult) {
         // 如果当前收藏品搜索的结果集相同, 不更新 dom

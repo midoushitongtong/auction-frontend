@@ -63,28 +63,19 @@ export default compose<React.ComponentClass>(
           this.setState({
             updatePersonInfoLoading: false
           });
-          if (parseInt(result.code) === 0) {
+          if (parseInt(result.code) === 0 || parseInt(result.code) === 1) {
             notification.open({
               placement: 'bottomLeft',
               message: '修改成功',
               duration: 5
             });
           } else {
-            if (parseInt(result.code) === 1) {
-              notification.open({
-                placement: 'bottomLeft',
-                message: '修改成功',
-                duration: 5
-              });
-            } else if (parseInt(result.code) === 2) {
-
-            } else {
-              notification.open({
-                placement: 'bottomLeft',
-                message: `修改失败: ${JSON.stringify(result)}`,
-                duration: 5
-              });
-            }
+            console.error(result);
+            notification.open({
+              placement: 'bottomLeft',
+              message: `修改失败, 请刷新页面重试`,
+              duration: 5
+            });
           }
         }
       });

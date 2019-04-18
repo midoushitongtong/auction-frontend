@@ -1,40 +1,27 @@
 // 当前模块的类型声明
 export interface State {
-  // 当前我的收藏品的搜索条件
-  currentAccountPersonCollectionFavoriteSearchCondition: any;
-  // 我的收藏品的搜索结果集
-  accountPersonCollectionFavoriteSearchResult: any;
+  // 我的已收藏的收藏品id
+  collectionFavoriteIdList: any;
 }
 
 // action type
 enum ActionType {
-  UPDATE_CURRENT_ACCOUNT_PERSON_COLLECTION_FAVORITE_SEARCH_CONDITION = 'updateCurrentAccountPersonCollectionFavoriteSearchCondition',
-  UPDATE_ACCOUNT_PERSON_COLLECTION_FAVORITE_SEARCH_RESULT = 'updateAccountPersonCollectionFavoriteSearchResult',
+  UPDATE_COLLECTION_FAVORITE_ID_LIST = 'updateCollectionFavoriteIdList',
   CLEAR_ACCOUNT_PERSON_STATE = 'clearAccountPersonState'
 }
 
 // state
 const initState: State = {
-  currentAccountPersonCollectionFavoriteSearchCondition: {},
-  accountPersonCollectionFavoriteSearchResult: {}
+  collectionFavoriteIdList: []
 };
 
 // action
-// 修改当前我的收藏品的搜索条件
-export const updateCurrentAccountPersonCollectionFavoriteSearchCondition = (currentAccountPersonCollectionFavoriteSearchCondition: any): object => {
+// 修改我的已收藏的收藏品id
+export const updateCollectionFavoriteIdList = (collectionFavoriteIdList: any) => {
   return {
-    type: ActionType.UPDATE_CURRENT_ACCOUNT_PERSON_COLLECTION_FAVORITE_SEARCH_CONDITION,
+    type: ActionType.UPDATE_COLLECTION_FAVORITE_ID_LIST,
     data: {
-      currentAccountPersonCollectionFavoriteSearchCondition
-    }
-  };
-};
-// 修改我的收藏品搜索的结果集
-export const updateAccountPersonCollectionFavoriteSearchResult = (accountPersonCollectionFavoriteSearchResult: any): object => {
-  return {
-    type: ActionType.UPDATE_ACCOUNT_PERSON_COLLECTION_FAVORITE_SEARCH_RESULT,
-    data: {
-      accountPersonCollectionFavoriteSearchResult
+      collectionFavoriteIdList
     }
   };
 };
@@ -48,12 +35,7 @@ export const clearAccountPersonState = (): object => {
 // reducer
 export default (state = initState, action: any): any => {
   switch (action.type) {
-    case ActionType.UPDATE_CURRENT_ACCOUNT_PERSON_COLLECTION_FAVORITE_SEARCH_CONDITION:
-      return {
-        ...state,
-        ...action.data
-      };
-    case ActionType.UPDATE_ACCOUNT_PERSON_COLLECTION_FAVORITE_SEARCH_RESULT:
+    case ActionType.UPDATE_COLLECTION_FAVORITE_ID_LIST:
       return {
         ...state,
         ...action.data

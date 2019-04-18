@@ -23,15 +23,15 @@ export default withRouter(
         personNavList: [
           {
             key: '1',
-            icon: 'heart',
-            name: '我的收藏',
-            path: '/account/person/collection-favorite'
-          },
-          {
-            key: '2',
             icon: 'user',
             name: '我的信息',
             path: '/account/person/info'
+          },
+          {
+            key: '2',
+            icon: 'heart',
+            name: '我的收藏',
+            path: '/account/person/collection-favorite'
           }
         ]
       };

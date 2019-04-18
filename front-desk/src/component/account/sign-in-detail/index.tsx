@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { updateUserInfo } from '../../../store/account';
+import { updateCollectionFavoriteIdList } from '../../../store/account/person';
 import api from '../../../api';
 import './index.less';
 
@@ -16,6 +17,8 @@ interface ConnectState {
 interface ConnectDispatch {
   // 修改用户登陆状态
   updateUserInfo: (data: any) => object;
+  // 修改我收藏的收藏品id
+  updateCollectionFavoriteIdList: (data: any) => object;
 }
 
 interface Props extends FormComponentProps, ConnectState, ConnectDispatch {
@@ -36,7 +39,8 @@ export default compose<React.ComponentClass>(
   connect<ConnectState, ConnectDispatch, Props>(
     () => ({}),
     {
-      updateUserInfo
+      updateUserInfo,
+      updateCollectionFavoriteIdList
     }
   ),
   Form.create()
@@ -86,6 +90,11 @@ export default compose<React.ComponentClass>(
             };
             // 保存登陆状态到 redux
             props.updateUserInfo(userInfo);
+            // 初始化我收藏的收藏品
+            const result2: any = await api.accountPerson.selectCollectionFavoriteIdList();
+            if (parseInt(result2.code) === 0) {
+              props.updateCollectionFavoriteIdList(result2.data);
+            }
             // 提示登陆成功
             notification.open({
               placement: 'bottomLeft',
@@ -150,7 +159,7 @@ export default compose<React.ComponentClass>(
                 ],
               })(
                 <Input
-                  type="password"
+                  type="text"
                   prefix={<Icon type="user"/>}
                   placeholder="用户名"
                 />
