@@ -110,7 +110,8 @@ export default withRouter(
                 contactWeixin: result2.data[8].value,
                 contactAddress: result2.data[9].value,
                 browserIcon: result2.data[10].value,
-                miitbeian: result2.data[11].value
+                miitbeian: result2.data[11].value,
+                friendLink: result2.url
               };
               siteInfo.isGet = true;
               ctx.store.dispatch(updateSiteInfo(siteInfo));

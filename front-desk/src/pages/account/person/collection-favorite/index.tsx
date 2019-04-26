@@ -46,33 +46,35 @@ export default compose<React.ComponentClass>(
 
     public render = (): JSX.Element => {
       const { props } = this;
-      return props.userInfo.username
-        ? (
-          <section className="app-container">
-            <LayoutHeader
-              hiddenHeaderTop={true}
-              hiddenHeaderNav={true}
-            />
-            <Head>
-              <title>我的收藏 - 个人中心 - {props.siteInfo.title}</title>
-            </Head>
-            <section className="account-person-collection-favorite-container">
-              <section className="account-person-collection-favorite-wrapper-container">
-                <section className="account-person-collection-favorite-wrapper-inner-container">
-                  <AccountPerson>
-                    <AccountPersonCollectionFavoriteSearchResult/>
-                  </AccountPerson>
+      return (
+        <section className="app-container">
+          <LayoutHeader
+            hiddenHeaderTop={true}
+            hiddenHeaderNav={true}
+          />
+          <Head>
+            <title>我的收藏 - 个人中心 - {props.siteInfo.title}</title>
+          </Head>
+          {props.userInfo.username
+            ? (
+              <section className="account-person-collection-favorite-container">
+                <section className="account-person-collection-favorite-wrapper-container">
+                  <section className="account-person-collection-favorite-wrapper-inner-container">
+                    <AccountPerson>
+                      <AccountPersonCollectionFavoriteSearchResult/>
+                    </AccountPerson>
+                  </section>
                 </section>
               </section>
-            </section>
-            <LayoutFooter/>
-          </section>
-        )
-        : (
-          <section className="loading-container">
-            <Spin/>
-          </section>
-        );
+            )
+            : (
+              <section className="loading-container">
+                <Spin/>
+              </section>
+            )}
+          <LayoutFooter/>
+        </section>
+      );
     }
   }
 );

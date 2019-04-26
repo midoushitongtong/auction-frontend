@@ -57,14 +57,15 @@ export default compose<React.ComponentClass>(
      * 修改收藏的收藏品状态
      *
      */
-    public toggleCollectionFavorite = async (id: number, flag: boolean) => {
+    public toggleCollectionFavorite = async (id: string, flag: boolean) => {
       const { props } = this;
       // 判断是否登陆
       if (props.userInfo.username) {
         // 请求 api
         const result1: any = await api.accountPerson.updateCollectionFavorite({
           id,
-          state: flag ? 1 : 0
+          // 1 为添加收藏, 2 为取消收藏
+          state: flag ? '1' : '0'
         });
         if (parseInt(result1.code) === 0) {
           let newCollectionFavoriteIdList = [];
@@ -127,32 +128,30 @@ export default compose<React.ComponentClass>(
                   <span>Lot</span>
                   <span className="collection-lot-number">{state.collection.lot}</span>
                 </p>
-                <p className="collection-author">{state.collection.author}</p>
                 <p className="collection-name">{state.collection.name}</p>
               </a>
             </Link>
             <p className="collection-expect-price">
-              <span>估价: </span>
-              {state.collection.expectPrice}
+              <span>估价: 咨询价</span>
             </p>
             <p className="collection-favorite">
               <Tooltip
                 placement="bottom"
-                title={props.collectionFavoriteIdList.indexOf(parseInt(state.collection.id)) > -1 ? '取消收藏' : '添加收藏'}
+                title={props.collectionFavoriteIdList.indexOf(state.collection.id + '') > -1 ? '取消收藏' : '添加收藏'}
               >
-                {props.collectionFavoriteIdList.indexOf(parseInt(state.collection.id)) > -1
+                {props.collectionFavoriteIdList.indexOf(state.collection.id + '') > -1
                   ? (
                     <Icon
                       type="heart"
                       theme="filled"
-                      onClick={() => this.toggleCollectionFavorite(parseInt(state.collection.id), false)}
+                      onClick={() => this.toggleCollectionFavorite(state.collection.id + '', false)}
                       className="ok"
                     />
                   )
                   : (
                     <Icon
                       type="heart"
-                      onClick={() => this.toggleCollectionFavorite(parseInt(state.collection.id), true)}
+                      onClick={() => this.toggleCollectionFavorite(state.collection.id + '', true)}
                     />
                   )}
               </Tooltip>

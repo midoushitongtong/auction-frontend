@@ -38,33 +38,35 @@ export default compose<React.ComponentClass>(
   class AccountPersonCollection extends React.Component<Props, State> {
     public render = (): JSX.Element => {
       const { props } = this;
-      return props.userInfo.username
-        ? (
-          <section className="app-container">
-            <LayoutHeader
-              hiddenHeaderTop={true}
-              hiddenHeaderNav={true}
-            />
-            <Head>
-              <title>个人信息 - 个人中心 - {props.siteInfo.title}</title>
-            </Head>
-            <section className="account-person-info-container">
-              <section className="account-person-info-wrapper-container">
-                <section className="account-person-info-wrapper-inner-container">
-                  <AccountPerson>
-                    <AccountPersonInfoSearchDetail/>
-                  </AccountPerson>
+      return (
+        <section className="app-container">
+          <LayoutHeader
+            hiddenHeaderTop={true}
+            hiddenHeaderNav={true}
+          />
+          <Head>
+            <title>个人信息 - 个人中心 - {props.siteInfo.title}</title>
+          </Head>
+          {props.userInfo.username
+            ? (
+              <section className="account-person-info-container">
+                <section className="account-person-info-wrapper-container">
+                  <section className="account-person-info-wrapper-inner-container">
+                    <AccountPerson>
+                      <AccountPersonInfoSearchDetail/>
+                    </AccountPerson>
+                  </section>
                 </section>
               </section>
-            </section>
-            <LayoutFooter/>
-          </section>
-        )
-        : (
-          <section className="loading-container">
-            <Spin/>
-          </section>
-        );
+            )
+            : (
+              <section className="loading-container">
+                <Spin/>
+              </section>
+            )}
+          <LayoutFooter/>
+        </section>
+      )
     }
   }
 );

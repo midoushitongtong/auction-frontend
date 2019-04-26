@@ -77,40 +77,39 @@ export default compose<React.ComponentClass>(
             </section>
             <section className="action-tooltip">
               {props.userInfo.isGet && props.userInfo.username && (
-                <section>
-                  <Dropdown
-                    placement="bottomRight"
-                    overlay={
-                      <Menu>
-                        <Menu.Item key="1">
-                          <Link href="/account/person/info">
-                            <a href="/account/person/info" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
-                              <span>个人中心</span>
-                            </a>
-                          </Link>
-                        </Menu.Item>
-                        <Menu.Item key="2" onClick={this.signOut}>
-                          <a href="javascript:void(0)" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
-                            <span>退出</span>
+                <Dropdown
+                  trigger={['click', 'hover']}
+                  placement="bottomRight"
+                  overlay={
+                    <Menu>
+                      <Menu.Item key="1">
+                        <Link href="/account/person/info">
+                          <a href="/account/person/info" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
+                            <span>个人中心</span>
                           </a>
-                        </Menu.Item>
-                      </Menu>
-                    }
-                  >
-                    <a href="javascript:void(0)">{props.userInfo.username} <Icon type="down"/></a>
-                  </Dropdown>
-                </section>
+                        </Link>
+                      </Menu.Item>
+                      <Menu.Item key="2" onClick={this.signOut}>
+                        <a href="javascript:void(0)" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
+                          <span>退出</span>
+                        </a>
+                      </Menu.Item>
+                    </Menu>
+                  }
+                >
+                  <span className="menu-text">{props.userInfo.username} <Icon type="down"/></span>
+                </Dropdown>
               )}
               {props.userInfo.isGet && !props.userInfo.username && (
-                <section>
+                <section className="account-action-container">
                   <Link href="/account/sign-in">
                     <a href="/account/sign-in" className="separation" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
-                      <span>登陆</span>
+                      登陆
                     </a>
                   </Link>
                   <Link href="/account/sign-up">
                     <a href="/account/sign-up" style={{ color: 'rgba(0, 0, 0, 0.65)' }}>
-                      <span>注册</span>
+                      注册
                     </a>
                   </Link>
                 </section>

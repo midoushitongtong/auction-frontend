@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { updateUserInfo } from '../../../store/account';
 import { updateCollectionFavoriteIdList } from '../../../store/account/person';
 import api from '../../../api';
+import config from '../../../config';
 import './index.less';
 
 // 当前组件的类型声明
@@ -49,12 +50,11 @@ export default compose<React.ComponentClass>(
     constructor(props: any) {
       super(props);
       this.state = {
-        captchaSrc: 'http://106.13.107.45/captcha.html',
-        originCaptchaSrc: 'http://106.13.107.45/captcha.html',
+        captchaSrc: `${config.API_ROOT}/captcha.html?r=${Math.random()}`,
+        originCaptchaSrc: `${config.API_ROOT}/captcha.html`,
         signInLoading: false
       };
     }
-
 
     /**
      * 处理表单提交

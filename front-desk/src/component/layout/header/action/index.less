@@ -9,27 +9,45 @@
     justify-content: space-between;
     align-items: center;
     width: 1200px;
-    .hello a {
-      color: #555;
-      &:hover {
-        color: #eab105;
+    font-size: 1rem;
+    // 欢迎
+    .hello {
+      height: 100%;
+      a {
+        display: flex;
+        align-items: center;
+        color: #555;
+        height: 100%;
+        &:hover {
+          color: #eab105;
+        }
       }
     }
     // 登陆 注册 提示
     .action-tooltip {
+      height: 100%;
       padding-right: .1rem;
-      a {
+      .account-action-container {
+        display: flex;
+        height: 100%;
+      }
+      a, span {
+        display: flex;
+        align-items: center;
         position: relative;
-        cursor: pointer;
+        height: 100%;
+        margin-left: 1.5rem;
         color: #555;
+        cursor: pointer;
         &.separation {
           &::after {
             content: '';
             position: absolute;
-            top: 5px;
-            bottom: 2px;
+            top: 15px;
+            bottom: 0;
+            height: 11px;
             left: 100%;
-            margin-left: 10px;
+            margin-left: .8rem;
             border-right: 1px solid #ccc;
           }
         }
@@ -37,8 +55,15 @@
           color: #eab105;
         }
       }
-      span:last-child {
-        margin-left: 1.5rem;
+      .menu-text {
+        &:hover {
+          color: #eab105;
+          cursor: pointer;
+        }
+        .anticon {
+          margin-top: 3px;
+          margin-left: 5px;
+        }
       }
     }
   }

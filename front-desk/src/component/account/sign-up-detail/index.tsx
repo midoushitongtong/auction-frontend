@@ -3,6 +3,7 @@ import { Button, Form, Input, Icon, notification } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import Router from 'next/router';
 import api from '../../../api';
+import config from '../../../config';
 import './index.less';
 
 // 当前组件的类型声明
@@ -24,8 +25,8 @@ export default Form.create()(
     constructor(props: any) {
       super(props);
       this.state = {
-        captchaSrc: 'http://106.13.107.45/captcha.html',
-        originCaptchaSrc: 'http://106.13.107.45/captcha.html',
+        captchaSrc: `${config.API_ROOT}/captcha.html?r=${Math.random()}`,
+        originCaptchaSrc: `${config.API_ROOT}/captcha.html`,
         signUpLoading: false
       };
     }
@@ -122,7 +123,7 @@ export default Form.create()(
                 ],
               })(
                 <Input
-                  type="password"
+                  type="text"
                   prefix={<Icon type="user"/>}
                   placeholder="用户名"
                 />

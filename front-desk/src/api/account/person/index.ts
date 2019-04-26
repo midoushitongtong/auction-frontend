@@ -22,21 +22,21 @@ const api: Api = {
   updateCollectionFavorite: (data: any) : object => {
     return ajax(
       'POST',
-      `${config.MOCK_API_ROOT}/cli`,
+      `${config.API_ROOT}/cli`,
       data
     );
   },
   selectCollectionFavoriteIdList: (): object => {
     return ajax(
       'GET',
-      `${config.MOCK_API_ROOT}/user_cli`,
+      `${config.API_ROOT}/user_cli`,
       {}
     );
   },
   selectCollectionFavoriteList: (searchCondition: any): object => {
     return ajax(
       'GET',
-      `${config.MOCK_API_ROOT}/account/person/collection/favorite/list`,
+      `${config.API_ROOT}/user_cli_list`,
       searchCondition
     );
   }

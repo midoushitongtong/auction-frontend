@@ -86,9 +86,9 @@ export default compose<React.ComponentClass>(
                 <span className="title">名称</span>
                 <span className="detail">{props.collectionSearchDetail.name}</span>
               </section>
-              <section className="collection-base-info-item">
-                <span className="title">参考价</span>
-                <span className="detail">{props.collectionSearchDetail.price}</span>
+              <section className="collection-base-info-item expect-price">
+                <span className="title">估价</span>
+                <span className="detail">咨询价</span>
               </section>
               {props.collectionSearchDetail.descriptionList.map((description: any, index: number) => {
                 const descriptionArr = description.split(':');
@@ -122,6 +122,7 @@ export default compose<React.ComponentClass>(
                           src: item,
                           alt: item
                         }}
+                        zoomMargin={5}
                       />
                       <div className="swiper-lazy-preloader swiper-lazy-preloader-white"/>
                     </div>

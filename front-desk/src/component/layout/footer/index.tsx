@@ -35,7 +35,7 @@ export default compose<React.ComponentClass>(
           <section className="footer-top-container">
             <section className="footer-top-inner-container">
               <section className="action-left-container">
-                <section className="action-item-group contact-action-item-group">
+                <section className="action-left-item-group contact">
                   <p>联系我们</p>
                   <ul>
                     <li>
@@ -50,10 +50,16 @@ export default compose<React.ComponentClass>(
                       <span>邮箱</span>
                       <span>{props.siteInfo.contactEmail}</span>
                     </li>
-                    <li>
-                      <span>传真</span>
-                      <span>{props.siteInfo.fax}</span>
-                    </li>
+                  </ul>
+                </section>
+                <section className="action-left-item-group friend-link">
+                  <p>友情链接</p>
+                  <ul>
+                    {props.siteInfo.friendLink.map((friendLink: any, index: number) => (
+                      <li key={index}>
+                        <a href={friendLink.url} target="_blank">{friendLink.name}</a>
+                      </li>
+                    ))}
                   </ul>
                 </section>
               </section>
@@ -61,7 +67,8 @@ export default compose<React.ComponentClass>(
                 <p>微信公众号</p>
                 <img
                   src={props.siteInfo.qrCode}
-                  alt="微信公众号"/>
+                  alt="微信公众号"
+                />
               </section>
             </section>
           </section>

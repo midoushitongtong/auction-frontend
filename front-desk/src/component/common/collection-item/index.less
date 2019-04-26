@@ -3,15 +3,16 @@
   height: 100%;
   margin-right: .6rem;
   margin-left: .6rem;
-  box-shadow: 0 0 3px #ccc;
+  border: 1px solid rgb(255, 200 ,0);
   text-decoration: none;
+  font-size: 1rem;
   color: inherit;
   transition: box-shadow .2s ease;
   &:hover {
     text-decoration: none;
-    box-shadow: 0 0 10px #999;
+    box-shadow: 0 0 0 3px rgb(255, 200 ,0);
     .collection-image {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
   }
   .collection-image {
@@ -21,25 +22,28 @@
     flex-direction: column;
     width: 100%;
     height: 235px;
-    padding: 1.15rem;
+    padding: 1rem;
     transition: transform .3s ease;
-      img {
-        max-width: 100%;
-        max-height: 200px;
-        &.image-fade-appear {
-          opacity: 0;
-        }
-        &.image-fade-appear-active {
-          opacity: 1;
-          transition: opacity 1s;
-        }
+    img {
+      max-width: 100%;
+      max-height: 200px;
+      &.image-fade-appear {
+        opacity: 0;
       }
+      &.image-fade-appear-active {
+        opacity: 1;
+        transition: opacity 1s;
+      }
+    }
   }
   .collection-description {
     padding-left: 1.3rem;
     padding-right: 1.3rem;
     p {
       margin-bottom: .5rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
       color: rgba(0, 0, 0, .65);
     }
     .collection-lot-and-author-and-name {
@@ -50,18 +54,14 @@
           color: #eab105;
         }
       }
-      p {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
       .collection-lot {
         .collection-lot-number {
+          color: #ff7f50;
           margin-left: .5rem;
         }
       }
-      .collection-author {
-        font-size: 1.2rem;
+      .collection-name {
+        font-size: 1.1rem;
       }
     }
     .collection-favorite {
@@ -82,17 +82,23 @@
   .collection-item-container {
     margin-right: .5rem;
     margin-left: .5rem;
+    font-size: 1rem;
     .collection-image {
-      height: 130px;
+      height: 200px;
       padding: 13px;
       img {
         max-width: 100%;
-        max-height: 100px;
+        max-height: 175px;
       }
     }
     .collection-description {
       padding-left: 1rem;
       padding-right: 1rem;
+      .collection-lot-and-author-and-name {
+        .collection-name {
+          font-size: 1.1rem;
+        }
+      }
     }
   }
 }
