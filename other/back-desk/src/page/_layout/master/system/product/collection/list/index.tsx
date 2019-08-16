@@ -11,15 +11,15 @@ interface Props extends FormComponentProps {
 
 interface State {
   // 表格的适配信息
-  columns: any,
+  columns: any;
   // 表格的数据
-  dataSource: any,
+  dataSource: any;
   // 表格的分页
-  pagination: any,
+  pagination: any;
   // 获取表格数据的条件
-  searchCondition: any,
+  searchCondition: any;
   // 表格加载状态
-  loading: boolean
+  loading: boolean;
 }
 
 // 当前组件类

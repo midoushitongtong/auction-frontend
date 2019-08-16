@@ -12,11 +12,11 @@ interface Props extends FormComponentProps, RouteConfigComponentProps {
 
 interface State {
   // 按钮的加载
-  submitButtonLoading: boolean,
+  submitButtonLoading: boolean;
   // 操作类型[添加, 修改]
-  actionType: string,
+  actionType: string;
   // 表单默认值[操作类型为修改异步获取]
-  formInitialValue: any
+  formInitialValue: any;
 }
 
 // 当前组件类

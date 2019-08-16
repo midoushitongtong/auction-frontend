@@ -15,15 +15,15 @@ interface Props extends FormComponentProps, RouteConfigComponentProps {
 
 interface State {
   // 按钮的加载
-  submitButtonLoading: boolean,
+  submitButtonLoading: boolean;
   // 操作类型[添加, 修改]
-  actionType: string,
+  actionType: string;
   // 表单默认值[操作类型为修改异步获取]
-  formInitialValue: any,
+  formInitialValue: any;
   // 收藏品预览图可上传的类型
-  previewImageUploadFileType: string,
+  previewImageUploadFileType: string;
   // 收藏品预览图上传 loading
-  previewImageUploadLoading: boolean
+  previewImageUploadLoading: boolean;
 }
 
 // 当前组件类
